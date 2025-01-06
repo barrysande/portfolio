@@ -1,6 +1,8 @@
 <script lang="ts">
-	// Supports weights 200-900
-	import '@fontsource-variable/source-code-pro';
+	// Supports weights 100-900
+	import '@fontsource-variable/inter';
+	// Supports weights 200-800
+	import '@fontsource-variable/sono';
 	import { i18n } from '$lib/i18n';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import '../app.css';

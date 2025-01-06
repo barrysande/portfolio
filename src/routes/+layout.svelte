@@ -11,6 +11,7 @@
 	import Moon from 'lucide-svelte/icons/moon';
 	import { toggleMode } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
 </script>
@@ -30,3 +31,5 @@
 </Button>
 
 {@render children?.()}
+
+<Footer />

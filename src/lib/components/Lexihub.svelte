@@ -19,7 +19,7 @@
 <!-- @snippet audiophile ends -->
 
 <section>
-	<div class="flex flex-col items-center gap-10 font-sans md:flex-row">
+	<div class="flex flex-col items-center gap-10 font-sans md:flex-row p-6">
 		<img
 			src="/src/lib/assets/lexihub.jpg"
 			alt="audiophile homepage screenshot"

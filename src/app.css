@@ -71,6 +71,6 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-		@apply font-mono;
+		@apply font-inter;
 	}
 }

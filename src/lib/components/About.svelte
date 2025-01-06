@@ -1,7 +1,7 @@
 <section>
 	<div class="flex items-center justify-center gap-2 pb-5 md:pb-10">
 		<!-- <hr class="w-32 md:w-80 border-green-100" /> -->
-		<h3 class="text-nowrap font-mono text-2xl font-bold uppercase md:text-3xl">About</h3>
+		<h3 class="text-nowrap font-mono text-2xl font-bold uppercase md:text-3xl underline underline-offset-8">About</h3>
 		<!-- <hr class="w-32 md:w-80 border-green-100" /> -->
 	</div>
 	<div class="flex flex-col-reverse items-center justify-center gap-9 lg:gap-16 md:flex-row">

@@ -1,28 +1,27 @@
-<section>
-	<div class="flex items-center justify-center gap-2 pb-5 md:pb-10">
-		<!-- <hr class="w-32 md:w-80 border-green-100" /> -->
-		<h3 class="text-nowrap font-mono text-2xl font-bold uppercase md:text-3xl underline underline-offset-8">About</h3>
-		<!-- <hr class="w-32 md:w-80 border-green-100" /> -->
-	</div>
-	<div class="flex flex-col-reverse items-center justify-center gap-9 lg:gap-16 md:flex-row">
-		<enhanced:img
-			src="/src/lib/assets/AboutPic.svg"
-			alt="about illustration"
-			class="w-64 md:w-80 lg:w-96"
-		/>
-		<div class="flex flex-col items-center justify-center">
-			<p class="text-balance pb-4 font-sans font-medium leading-8 text-zinc-600 dark:text-zinc-300">
-				I like using web applications that are not only sleek but also accessible to everyone, a
-				passion that drove me into web development. I leverage my keen eye for detail to craft
-				creating accessible and delightful digital experiences for people using the web. I am a
-				Front End Developer at <a
-					href={'#'}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="font-semibold text-zinc-400 underline underline-offset-4 hover:text-green-500"
-					>Kade Inc</a
-				> currently. I am also a licenced lawyer/attorney/advocate in Kenya.
-			</p>
-		</div>
+<section class="flex flex-col items-center justify-center gap-9 md:flex-row">
+	<enhanced:img
+		src="/src/lib/assets/AboutPic.svg"
+		alt="about illustration"
+		class="w-64 md:w-80 lg:w-96"
+	/>
+
+	<div class=" flex flex-col items-center gap-6">
+		<h3
+			class="text-nowrap font-mono text-2xl font-bold uppercase underline underline-offset-8 md:text-3xl"
+		>
+			About
+		</h3>
+		<p class="text-balance pb-4 font-sans font-medium leading-8 text-zinc-600 dark:text-zinc-300">
+			I like using web applications that are not only sleek but also accessible to everyone, a
+			passion that drove me into web development. I leverage my keen eye for detail to craft
+			accessible and delightful digital experiences for people using the web. I am currently a Front
+			End Developer at <a
+				href={'#'}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="font-semibold text-zinc-400 underline underline-offset-4 hover:text-green-500"
+				>Kade Inc</a
+			> currently. I am also a licenced lawyer/attorney/advocate in Kenya.
+		</p>
 	</div>
 </section>

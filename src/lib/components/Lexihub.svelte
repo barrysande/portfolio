@@ -19,7 +19,7 @@
 <!-- @snippet audiophile ends -->
 
 <section>
-	<div class="flex flex-col items-center gap-10 font-sans md:flex-row p-6">
+	<div class="flex flex-col items-center gap-10 p-6 font-sans md:flex-row">
 		<img
 			src="/src/lib/assets/lexihub.jpg"
 			alt="audiophile homepage screenshot"
@@ -28,6 +28,8 @@
 		<div class="flex flex-col justify-center gap-4">
 			<a
 				href="https://fem-dictionary-app-opal.vercel.app/"
+				target="_blank"
+				rel="noopener noreferrer"
 				class="flex items-center gap-1 hover:text-green-400"
 			>
 				<h3 class="font-bold tracking-widest md:text-xl">Lexihub Web Dictionary</h3>

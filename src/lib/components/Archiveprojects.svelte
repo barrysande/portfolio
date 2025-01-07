@@ -40,7 +40,12 @@
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500">
-				<a href="https://fylo-landing-page-pi-mauve.vercel.app/">Check out the live page </a>
+				<a
+					href="https://fylo-landing-page-pi-mauve.vercel.app/"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Check out the live page
+				</a>
 				<Right />
 			</div>
 		</Card.Content>
@@ -58,7 +63,7 @@
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500">
-				<a href="https://workit-jet.vercel.app/"
+				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
 					>Check out the live product page here and try it out.</a
 				>
 				<Right />
@@ -76,7 +81,9 @@
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500">
-				<a href="https://workit-jet.vercel.app/">Check out the live page </a>
+				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
+					>Check out the live page
+				</a>
 				<Right />
 			</div>
 		</Card.Content>

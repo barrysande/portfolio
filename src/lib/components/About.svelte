@@ -1,3 +1,6 @@
+<script lang="ts">
+	import {fade, fly} from 'svelte/transition';
+</script>
 <section class="flex flex-col items-center justify-center gap-9 md:flex-row">
 	<img
 		src="/assets/AboutPic.svg"
@@ -7,7 +10,7 @@
 
 	<div class=" flex flex-col items-center gap-6">
 		<h3
-			class="text-nowrap font-mono text-2xl font-bold uppercase underline underline-offset-8 md:text-3xl"
+			class="text-nowrap font-mono text-2xl font-bold uppercase underline underline-offset-8 md:text-3xl" in:fly={{x:-200, duration: 2000}} out:fade
 		>
 			About
 		</h3>

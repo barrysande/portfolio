@@ -8,7 +8,7 @@
 
 <section class="pt-8 md:pt-10" >
 	<h3
-		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase underline underline-offset-8 md:pb-10 md:text-3xl" transition:fly={{x:-200, duration: 1000}}
+		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase underline underline-offset-8 md:pb-10 md:text-3xl" in:fly={{x:-200, duration: 2000}} out:fade
 	>
 		Projects
 	</h3>

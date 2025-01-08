@@ -21,7 +21,7 @@
 <section>
 	<div class="flex flex-col items-center gap-10 p-6 font-sans md:flex-row">
 		<img
-			src="/src/lib/assets/lexihub.jpg"
+			src="/assets/lexihub.jpg"
 			alt="audiophile homepage screenshot"
 			class="w-64 rounded-2xl"
 		/>

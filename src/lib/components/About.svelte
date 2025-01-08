@@ -1,6 +1,6 @@
 <section class="flex flex-col items-center justify-center gap-9 md:flex-row">
-	<enhanced:img
-		src="/src/lib/assets/AboutPic.svg"
+	<img
+		src="/assets/AboutPic.svg"
 		alt="about illustration"
 		class="w-64 md:w-80 lg:w-96"
 	/>

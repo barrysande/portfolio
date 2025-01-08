@@ -18,7 +18,7 @@
 			technologies and tools.
 		</p>
 	</div>
-	<enhanced:img src="/src/lib/assets/hero.svg" alt="hero illustration" class="w-80 md:w-1/2" />
+	<img src="/assets/hero.svg" alt="hero illustration" class="w-80 md:w-1/2" />
 </section>
 
 <section class="mx-6 flex flex-col items-center justify-center gap-3 p-8">

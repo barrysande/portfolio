@@ -3,11 +3,12 @@
 	import Lexihub from './Lexihub.svelte';
 	import Archiveprojects from './Archiveprojects.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
+	import {fade, fly} from 'svelte/transition';
 </script>
 
-<section class="pt-8 md:pt-10">
+<section class="pt-8 md:pt-10" >
 	<h3
-		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase underline underline-offset-8 md:pb-10 md:text-3xl"
+		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase underline underline-offset-8 md:pb-10 md:text-3xl" transition:fly={{x:-200, duration: 1000}}
 	>
 		Projects
 	</h3>

@@ -15,6 +15,10 @@ const config: Config = {
 			}
 		},
 		extend: {
+			backgroundImage: {
+				'spiral-pattern': "url('/assets/pattern-rings.svg')",
+				'circular-pattern': "url('assets/pattern-circle.svg')"
+			},
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',
@@ -69,7 +73,7 @@ const config: Config = {
 			fontFamily: {
 				sans: [...fontFamily.sans],
 				inter: ['Inter Variable'],
-				mono:['Sono Variable']
+				mono: ['Sono Variable']
 			},
 			keyframes: {
 				'accordion-down': {

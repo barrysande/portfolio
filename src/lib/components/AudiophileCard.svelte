@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Right from './Right.svelte';
-	const audiophileTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Superforms'];
+	const audiophileTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Node.js', 'Superforms'];
 </script>
 
 <!-- @snippet audiophile starts -->
@@ -8,7 +8,7 @@
 	<ul class="flex flex-wrap items-center justify-start gap-2">
 		{#each audiophileTools as audiophileTool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
 			>
 				{audiophileTool}
 			</li>

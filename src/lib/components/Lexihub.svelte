@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Right from './Right.svelte';
-	const lexihubTools = ['Sveltekit', 'Tailwind', 'Typescript', 'RESTful API'];
+	const lexihubTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Node.js', 'RESTful API'];
 </script>
 
 <!-- @snippet audiophile starts -->
@@ -8,7 +8,7 @@
 	<ul class="flex flex-wrap items-center justify-start gap-2">
 		{#each lexihubTools as lexihubTool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
 			>
 				{lexihubTool}
 			</li>

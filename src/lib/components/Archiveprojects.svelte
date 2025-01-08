@@ -10,7 +10,7 @@
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools as tool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
 			>
 				{tool}
 			</li>
@@ -22,7 +22,7 @@
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools2 as tool2}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
 			>
 				{tool2}
 			</li>

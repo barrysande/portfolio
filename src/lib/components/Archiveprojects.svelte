@@ -63,7 +63,7 @@
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500">
-				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
+				<a href="https://age-calculator-app-phi-six.vercel.app/" target="_blank" rel="noopener noreferrer"
 					>Check out the live product page here and try it out.</a
 				>
 				<Right />

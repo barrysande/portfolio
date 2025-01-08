@@ -11,7 +11,7 @@
 		>
 			About
 		</h3>
-		<p class="text-balance pb-4 font-sans font-medium leading-8 text-zinc-600 dark:text-zinc-300">
+		<p class="text-balance pb-4 leading-8 text-zinc-600 dark:text-zinc-300">
 			I like using web applications that are not only sleek but also accessible to everyone, a
 			passion that drove me into web development. I leverage my keen eye for detail to craft
 			accessible and delightful digital experiences for people using the web. I am currently a Front

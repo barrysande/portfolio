@@ -3,8 +3,6 @@
 	import '@fontsource-variable/inter';
 	// Supports weights 200-800
 	import '@fontsource-variable/sono';
-	import { i18n } from '$lib/i18n';
-	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import Sun from 'lucide-svelte/icons/sun';
@@ -23,7 +21,7 @@
 	<title>Barry Sande</title>
 	<meta name="description" content={details} />
 </svelte:head>
-<ParaglideJS {i18n} />
+
 
 <ModeWatcher />
 

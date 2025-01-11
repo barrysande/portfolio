@@ -38,7 +38,7 @@
 			<Card.Title>
 				<div class="text-xl tracking-wider">Fylo</div>
 			</Card.Title>
-			<Card.Description>Fylo product landing page to refine my frontend skills</Card.Description>
+			<Card.Description>A product landing page to refine my UI/UX skills.</Card.Description>
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
@@ -46,7 +46,7 @@
 					href="https://fylo-landing-page-pi-mauve.vercel.app/"
 					target="_blank"
 					rel="noopener noreferrer"
-					>Check out the live page
+					>Click here for the live product page
 				</a>
 				<Right />
 			</div>
@@ -62,13 +62,13 @@
 				<div class="text-xl tracking-wider">Age Calculator</div>
 			</Card.Title>
 			<Card.Description
-				>A web-based age calculator app. This was my first project using JavaScript</Card.Description
+				>A web-based age calculator app. This was my first project using JavaScript.</Card.Description
 			>
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
 				<a href="https://age-calculator-app-phi-six.vercel.app/" target="_blank" rel="noopener noreferrer"
-					>Check and try out the live product page here.</a
+					>Click here for the live product page</a
 				>
 				<Right />
 			</div>
@@ -83,12 +83,12 @@
 			<Card.Title>
 				<div class="text-xl tracking-widest">WorkIt</div>
 			</Card.Title>
-			<Card.Description>WorkIt product landing page to refine my frontend skills</Card.Description>
+			<Card.Description>Another product landing page to refine my frontend skills.</Card.Description>
 		</Card.Header>
 		<Card.Content>
 			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
 				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
-					>Check out the live page here
+					>Click here for the live product page
 				</a>
 				<Right />
 			</div>

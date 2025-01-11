@@ -1,9 +1,10 @@
 <nav>
 	<ul class="flex items-center justify-center gap-4">
-		<li class="underline underline-offset-4 hover:text-green-500 hover:underline">
+		<li class=" hover:text-green-500 hover:underline hover:underline-offset-4">
 			<a href="/">Home</a>
 		</li>
-		<li class="underline underline-offset-4 hover:text-green-500 hover:underline">
+		<li class="text-zinc-300">|</li>
+		<li class=" hover:text-green-500 hover:underline hover:underline-offset-4">
 			<a href="/blog">Blog</a>
 		</li>
 	</ul>

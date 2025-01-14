@@ -30,7 +30,7 @@
 				href="https://fem-dictionary-app-opal.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+				class="flex items-center gap-1 font-semibold text-zinc-600 hover:text-green-500 dark:text-zinc-300"
 				aria-label="Click here to go try out the Lexihub Web Dictionary"
 				>See it for yourself
 				<Right /></a

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Right from './Right.svelte';
+	import LexihubImg from '../assets/lexihub.jpg?enhanced';
 	const lexihubTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Node.js', 'RESTful API'];
 </script>
 
@@ -8,7 +9,7 @@
 	<ul class="flex flex-wrap items-center justify-start gap-2">
 		{#each lexihubTools as lexihubTool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
 			>
 				{lexihubTool}
 			</li>
@@ -20,27 +21,29 @@
 
 <section>
 	<div class="flex flex-col items-center gap-10 p-6 font-sans md:flex-row">
-		<img
-			src="/assets/lexihub.jpg"
-			alt="audiophile homepage screenshot"
-			class="w-64 rounded-2xl"
-		/>
+		<div class="w-full">
+			<enhanced:img src={LexihubImg} alt="audiophile homepage screenshot" class="rounded-2xl" />
+		</div>
 		<div class="flex flex-col justify-center gap-4">
+			<h3 class="text-2xl font-bold tracking-widest">Lexihub</h3>
 			<a
 				href="https://fem-dictionary-app-opal.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 hover:text-green-400"
-			>
-				<h3 class="font-bold tracking-widest md:text-xl">Lexihub Web Dictionary</h3>
+				class="flex items-center gap-1 font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+				aria-label="Click here to go try out the Lexihub Web Dictionary"
+				>See it for yourself
 				<Right /></a
 			>
 			<p class="text-zinc-600 dark:text-zinc-300">
-				A fully responsive online dictionary using on designs from
+				A fully responsive online dictionary containing pronunciation and definitions of words using
+				on designs from
 				<a
 					href="https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL"
-					class="font-semibold text-zinc-400 underline underline-offset-4 hover:text-green-500"
-					>Frontend Mentor.</a
+					class="font-semibold text-zinc-600 underline underline-offset-4 hover:text-green-500 dark:text-zinc-300"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="Click here to check out the designs on Frontend Mentor">Frontend Mentor.</a
 				>
 			</p>
 			<div class="pt-4">

@@ -10,7 +10,7 @@
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools as tool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
 			>
 				{tool}
 			</li>
@@ -22,7 +22,7 @@
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools2 as tool2}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 text-xs md:text-sm lg:text-base"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
 			>
 				{tool2}
 			</li>
@@ -38,15 +38,17 @@
 			<Card.Title>
 				<div class="text-xl tracking-wider">Fylo</div>
 			</Card.Title>
-			<Card.Description>A product landing page to refine my UI/UX skills.</Card.Description>
+			<Card.Description>A fully responsive landing page for the Fylo product.</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
+			<div
+				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+			>
 				<a
 					href="https://fylo-landing-page-pi-mauve.vercel.app/"
 					target="_blank"
 					rel="noopener noreferrer"
-					>Click here for the live product page
+					>Visit it
 				</a>
 				<Right />
 			</div>
@@ -66,10 +68,15 @@
 			>
 		</Card.Header>
 		<Card.Content>
-			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
-				<a href="https://age-calculator-app-phi-six.vercel.app/" target="_blank" rel="noopener noreferrer"
-					>Click here for the live product page</a
-				>
+			<div
+				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+			>
+				<a
+					href="https://age-calculator-app-phi-six.vercel.app/"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Click here to try it
+				</a>
 				<Right />
 			</div>
 		</Card.Content>
@@ -83,12 +90,15 @@
 			<Card.Title>
 				<div class="text-xl tracking-widest">WorkIt</div>
 			</Card.Title>
-			<Card.Description>Another product landing page to refine my frontend skills.</Card.Description>
+			<Card.Description>Another product landing page to refine my frontend skills.</Card.Description
+			>
 		</Card.Header>
 		<Card.Content>
-			<div class="flex items-center gap-1 hover:text-green-500 text-sm">
+			<div
+				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+			>
 				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
-					>Click here for the live product page
+					>Visit it
 				</a>
 				<Right />
 			</div>

@@ -1,7 +1,7 @@
 <script>
 	let {
 		color = 'currentColor',
-		size = 20,
+		size = 18,
 		strokeWidth = 2,
 		isHovered = false,
 		classes = ''

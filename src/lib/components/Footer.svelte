@@ -8,6 +8,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		class="text-gray-500 hover:text-green-500"
+		aria-label="an email icon with a link to my email address accessible by clicking on it"
 	>
 		<Mail />
 	</a>
@@ -16,6 +17,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		class="text-gray-500 hover:text-green-500"
+		aria-label="a github icon with a link to my github profile accessible by clicking on it"
 	>
 		<Github />
 	</a>
@@ -24,6 +26,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		class="text-gray-500 hover:text-green-500"
+		aria-label="a linkedin icon with a link to my linkedin profile accessible by clicking on it"
 	>
 		<Linkedin />
 	</a>

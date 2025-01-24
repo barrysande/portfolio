@@ -6,13 +6,13 @@
 	import {fade, fly} from 'svelte/transition';
 </script>
 
-<section class="pt-8 md:pt-10" >
+<section class="pt-4 md:pt-10" >
 	<h3
 		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase underline underline-offset-8 md:pb-10 md:text-3xl tracking-widest" in:fly={{x:-200, duration: 2000}} out:fade
 	>
 		Projects
 	</h3>
-	<div class=" flex flex-col gap-10">
+	<div class=" flex flex-col gap-4 md:gap-6">
 		<Card.Root>
 			<AudiophileCard />
 		</Card.Root>

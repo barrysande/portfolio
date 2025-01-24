@@ -7,7 +7,7 @@
 </script>
 
 <section
-	class="mx-6 flex flex-col items-center justify-center gap-10 p-8 subpixel-antialiased md:flex-row md:justify-start lg:mx-20"
+	class="mx-6 flex flex-col items-center justify-center gap-5 md:gap-10 p-8 subpixel-antialiased md:flex-row md:justify-start lg:mx-20"
 >
 	<div>
 		<h1 class="text-nowrap py-6 text-green-400">Hello there, I am</h1>

@@ -3,10 +3,10 @@
 	import AboutPic from '$lib/assets/AboutPic.svg';
 </script>
 
-<section class="flex flex-col items-center justify-center gap-9 md:flex-row">
+<section class="flex flex-col items-center justify-center gap-5 pb-4 md:flex-row md:gap-10">
 	<img src={AboutPic} alt="about illustration" class="w-64 md:w-80 lg:w-96" />
 
-	<div class=" flex flex-col items-center gap-6">
+	<div class=" flex flex-col items-center gap-3">
 		<h3
 			class="text-nowrap font-mono text-2xl font-bold uppercase tracking-widest underline underline-offset-8 md:text-3xl"
 			in:fly={{ x: -200, duration: 2000 }}
@@ -22,7 +22,7 @@
 				href={'#'}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="font-semibold text-zinc-600 dark:text-zinc-300 underline underline-offset-4 hover:text-green-500"
+				class="font-semibold text-zinc-600 underline underline-offset-4 hover:text-green-500 dark:text-zinc-300"
 				>Kade Inc.
 			</a> I am also a licenced lawyer/attorney/advocate in Kenya.
 		</p>

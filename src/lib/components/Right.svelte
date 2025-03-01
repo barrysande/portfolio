@@ -1,7 +1,7 @@
 <script>
 	let {
 		color = 'currentColor',
-		size = 18,
+		size = 20,
 		strokeWidth = 2,
 		isHovered = false,
 		classes = ''
@@ -9,14 +9,20 @@
 
 	function handleMouseEnter() {
 		isHovered = true;
+	}
 
-		setTimeout(() => {
-			isHovered = false;
-		}, 200);
+	function handleMouseLeave() {
+		isHovered = false;
 	}
 </script>
 
-<div class={classes} aria-label="arrow-right" role="img" onmouseenter={handleMouseEnter}>
+<div
+	class={classes}
+	aria-label="move-up-right"
+	role="img"
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width={size}
@@ -27,19 +33,29 @@
 		stroke-width={strokeWidth}
 		stroke-linecap="round"
 		stroke-linejoin="round"
+		class:animate={isHovered}
 	>
-		<path d="m12 5 7 7-7 7" class:head={isHovered} />
-		<path d="M14 12h5" class:head={isHovered} />
-		<path d="M5 12h9" />
+		<path d="M13 5h6v6" />
+		<path d="M19 5 5 19" />
 	</svg>
 </div>
 
 <style>
 	path {
-		transition: all 0.2s ease-in;
+		transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 
-	.head {
-		transform: translateX(-4px);
+	.animate {
+		animation: moveUpRight 0.5s;
+	}
+
+	@keyframes moveUpRight {
+		0%,
+		100% {
+			transform: translate(0, 0);
+		}
+		50% {
+			transform: translate(3px, -3px);
+		}
 	}
 </style>

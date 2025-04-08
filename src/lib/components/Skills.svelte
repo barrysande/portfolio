@@ -7,10 +7,7 @@
 		'JavaScript',
 		'TypeScript',
 		'Node.js',
-		'Sveltekit',
-		'Postgresql',
-		'Drizzle ORM',
-		'Supabase'
+		'Sveltekit'
 	];
 </script>
 

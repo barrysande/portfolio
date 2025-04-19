@@ -19,11 +19,11 @@
 			passion that drove me into web development. I leverage my keen eye for detail to craft
 			accessible and delightful digital experiences for people using the web. Currently, I am a
 			Front End Developer at <a
-				href={'#'}
+				href="https://teamkade.com/"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="font-semibold text-zinc-600 underline underline-offset-4 hover:text-green-500 dark:text-zinc-300"
-				>Kade Inc.
+				>Kade.
 			</a> I am also a licenced lawyer/attorney/advocate in Kenya.
 		</p>
 	</div>

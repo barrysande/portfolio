@@ -10,10 +10,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"db:push": "drizzle-kit push",
-		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"lint": "prettier --check . && eslint ."
+		
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
@@ -25,12 +23,10 @@
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "1.0.0-next.77",
 		"clsx": "^2.1.1",
-		"drizzle-kit": "^0.22.0",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
-		"mdsvex": "^0.12.3",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
@@ -50,9 +46,7 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
-		"drizzle-orm": "^0.33.0",
 		"lucide-svelte": "^0.469.0",
-		"mode-watcher": "^0.5.0",
-		"postgres": "^3.4.4"
+		"mode-watcher": "^0.5.0"
 	}
 }

@@ -13,7 +13,7 @@
 		<Mail />
 	</a>
 	<a
-		href="https://github.com/bonclairvoyante"
+		href="https://github.com/barrysande"
 		target="_blank"
 		rel="noopener noreferrer"
 		class="text-gray-500 hover:text-green-500"

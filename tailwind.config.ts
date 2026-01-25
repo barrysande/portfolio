@@ -73,7 +73,8 @@ const config: Config = {
 			fontFamily: {
 				sans: [...fontFamily.sans],
 				inter: ['Inter Variable'],
-				mono: ['Sono Variable']
+				mono: ['Sono Variable'],
+				lexend: ['"Lexend Variable"', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {

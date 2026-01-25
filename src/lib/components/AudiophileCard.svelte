@@ -4,7 +4,7 @@
 	const audiophileTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Node.js', 'Superforms'];
 </script>
 
-<!-- @snippet audiophile starts -->
+
 {#snippet audiophileSnippet()}
 	<ul class="flex flex-wrap items-center justify-start gap-2">
 		{#each audiophileTools as audiophileTool}
@@ -17,7 +17,6 @@
 	</ul>
 {/snippet}
 
-<!-- @snippet audiophile ends -->
 
 <section>
 	<div class="flex flex-col items-center gap-10 p-6 font-sans md:flex-row">
@@ -25,7 +24,7 @@
 			<enhanced:img src={AudiophileImg} alt="audiophile homepage screenshot" class="rounded-2xl" />
 		</div>
 		<div class="flex flex-col justify-center gap-4">
-			<h3 class="font-bold tracking-widest text-2xl">Audiophile</h3>
+			<h3 class="font-bold tracking-widest text-2xl font-lexend">Audiophile</h3>
 			<a
 				href="https://audiophile-topaz-seven.vercel.app/"
 				target="_blank"
@@ -36,7 +35,7 @@
 				
 				<Right /></a
 			>
-			<p class="text-zinc-600 dark:text-zinc-300">
+			<p class="text-zinc-600 dark:text-zinc-300 font-lexend">
 				A fully responsive E-commerce Web App for headphones, earphones, and speakers. It is based
 				on designs from
 				<a

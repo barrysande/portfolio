@@ -21,7 +21,7 @@
 			Barry Sande
 		</h2>
 		<p class=" pb-3 text-xl font-semibold text-zinc-600 dark:text-zinc-300">Front End Developer</p>
-		<p class="font-inter text-base font-normal text-zinc-600 dark:text-zinc-400">
+		<p class=" text-base font-normal text-zinc-600 dark:text-zinc-400">
 			I create <span class=" text-green-400">accessible</span> and
 			<span class=" text-green-400">delightful</span> digital experiences on the web using my favourite
 			technologies and tools.

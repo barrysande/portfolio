@@ -3,6 +3,8 @@
 	import '@fontsource-variable/inter';
 	// Supports weights 200-800
 	import '@fontsource-variable/sono';
+	// Supports weights 100-900
+	import '@fontsource-variable/lexend';
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import Sun from 'lucide-svelte/icons/sun';
@@ -21,7 +23,6 @@
 	<title>Barry Sande</title>
 	<meta name="description" content={details} />
 </svelte:head>
-
 
 <ModeWatcher />
 

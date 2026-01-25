@@ -6,9 +6,9 @@
 <section class="flex flex-col items-center justify-center gap-5 pb-4 md:flex-row md:gap-10">
 	<img src={AboutPic} alt="about illustration" class="w-64 md:w-80 lg:w-96" />
 
-	<div class=" flex flex-col items-center gap-3">
+	<div class=" flex flex-col items-center gap-3 ">
 		<h3
-			class="text-nowrap font-mono text-2xl font-bold uppercase tracking-widest underline underline-offset-8 md:text-3xl"
+			class="text-nowrap text-2xl font-bold font-mono uppercase tracking-widest underline underline-offset-8 md:text-3xl"
 			in:fly={{ x: -200, duration: 2000 }}
 			out:fade
 		>

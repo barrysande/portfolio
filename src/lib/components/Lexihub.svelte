@@ -25,17 +25,17 @@
 			<enhanced:img src={LexihubImg} alt="audiophile homepage screenshot" class="rounded-2xl" />
 		</div>
 		<div class="flex flex-col justify-center gap-4">
-			<h3 class="text-2xl font-bold tracking-widest">Lexihub</h3>
+			<h3 class="text-2xl font-bold tracking-widest font-lexend">Lexihub</h3>
 			<a
 				href="https://fem-dictionary-app-opal.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 font-semibold text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+				class="flex items-center gap-1 font-semibold font-lexend text-zinc-600 hover:text-green-500 dark:text-zinc-300"
 				aria-label="Click here to go try out the Lexihub Web Dictionary"
 				>See it for yourself
 				<Right /></a
 			>
-			<p class="text-zinc-600 dark:text-zinc-300">
+			<p class="text-zinc-600 dark:text-zinc-300 font-lexend">
 				A fully responsive online dictionary containing pronunciation and definitions of words using
 				on designs from
 				<a

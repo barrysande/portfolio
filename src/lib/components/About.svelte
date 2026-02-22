@@ -15,16 +15,7 @@
 			About
 		</h3>
 		<p class="text-balance pb-4 leading-8 text-zinc-600 dark:text-zinc-300">
-			I like using web applications that are not only sleek but also accessible to everyone, a
-			passion that drove me into web development. I leverage my keen eye for detail to craft
-			accessible and delightful digital experiences for people using the web. Currently, I am a
-			Front End Developer at <a
-				href="https://teamkade.com/"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="font-semibold text-zinc-600 underline underline-offset-4 hover:text-green-500 dark:text-zinc-300"
-				>Kade.
-			</a> I am also a licenced lawyer/attorney/advocate in Kenya.
+			I'm a full-stack developer and licensed advocate based in Nairobi. I build production systems end to end — from API design and database architecture to deployment and infrastructure — and I care deeply about the quality and accessibility of what I ship. My legal background shapes how I approach problems: I research thoroughly, reason carefully through tradeoffs, and take full ownership of what I build. Currently working on Hiddouts, a travel planning SaaS I designed and launched solo.
 		</p>
 	</div>
 </section>

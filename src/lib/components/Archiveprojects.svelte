@@ -30,9 +30,7 @@
 	</ul>
 {/snippet}
 
-<!-- @snippet archivedTools ends -->
-
-<div class="flex flex-col gap-4 md:flex-row">
+<div class="items flex flex-col gap-4 md:flex-row">
 	<Card.Root>
 		<Card.Header>
 			<Card.Title>
@@ -41,17 +39,14 @@
 			<Card.Description>A fully responsive landing page for the Fylo product.</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<div
-				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
-			>
-				<a
-					href="https://fylo-landing-page-pi-mauve.vercel.app/"
-					target="_blank"
-					rel="noopener noreferrer"
-					>Visit it
-				</a>
-				<Right />
-			</div>
+			<a
+				href="https://fylo-landing-page-pi-mauve.vercel.app/"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				target="_blank"
+				rel="noopener noreferrer"
+				>Visit it
+				<Right classes={'hover:text-green-500'} />
+			</a>
 		</Card.Content>
 		<Card.Footer>
 			{@render archivedSnippet?.()}
@@ -68,17 +63,14 @@
 			>
 		</Card.Header>
 		<Card.Content>
-			<div
-				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
-			>
-				<a
-					href="https://age-calculator-app-phi-six.vercel.app/"
-					target="_blank"
-					rel="noopener noreferrer"
-					>Click here to try it
-				</a>
-				<Right />
-			</div>
+			<a
+				href="https://age-calculator-app-phi-six.vercel.app/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				>Try it
+				<Right classes={'hover:text-green-500'} />
+			</a>
 		</Card.Content>
 		<Card.Footer>
 			{@render archivedSnippet2?.()}
@@ -94,14 +86,14 @@
 			>
 		</Card.Header>
 		<Card.Content>
-			<div
-				class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-green-500 dark:text-zinc-300"
-			>
-				<a href="https://workit-jet.vercel.app/" target="_blank" rel="noopener noreferrer"
-					>Visit it
-				</a>
-				<Right />
-			</div>
+			<a
+				href="https://workit-jet.vercel.app/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				>Visit it
+				<Right classes={'hover:text-green-500'} />
+			</a>
 		</Card.Content>
 		<Card.Footer>
 			{@render archivedSnippet?.()}

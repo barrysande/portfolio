@@ -7,11 +7,10 @@
 </script>
 
 <section
-	class="mx-6 flex flex-col items-center justify-center gap-5 md:gap-10 p-8 subpixel-antialiased md:flex-row md:justify-start lg:mx-20"
+	class="mx-6 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:flex-row md:justify-start md:gap-10 lg:mx-20"
 >
 	<div>
 		<h1 class="text-nowrap py-6 text-green-400">Hello there, I am</h1>
-		
 
 		<h2
 			class=" text-nowrap pb-2 text-4xl font-bold text-zinc-600 dark:text-zinc-300 md:text-5xl"
@@ -20,14 +19,13 @@
 		>
 			Barry Sande
 		</h2>
-		<p class=" pb-3 text-xl font-semibold text-zinc-600 dark:text-zinc-300">Front End Developer</p>
-		<p class=" text-base font-normal text-zinc-600 dark:text-zinc-400">
-			I create <span class=" text-green-400">accessible</span> and
-			<span class=" text-green-400">delightful</span> digital experiences on the web using my favourite
-			technologies and tools.
+		<p class=" pb-3 text-xl font-semibold text-zinc-600 dark:text-zinc-300">Full-Stack Developer</p>
+		<p class="text-base font-normal text-zinc-600 dark:text-zinc-400">
+			I build <span class="text-green-400">production systems</span> end to end — from API design and
+			infrastructure to the interfaces people actually use.
 		</p>
 	</div>
-	
+
 	<img src={Hero} alt="hero illustration" class="w-80 md:w-1/2" />
 </section>
 

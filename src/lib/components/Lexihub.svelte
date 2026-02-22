@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Right from './Right.svelte';
-	import LexihubImg from '../assets/lexihub.jpg?enhanced';
+
 	const lexihubTools = ['Sveltekit', 'Tailwind', 'Typescript', 'Node.js', 'RESTful API'];
 </script>
 
@@ -17,30 +17,34 @@
 	</ul>
 {/snippet}
 
-<!-- @snippet audiophile ends -->
-
 <section>
 	<div class="flex flex-col items-center gap-10 p-6 font-sans md:flex-row">
 		<div class="w-full">
-			<enhanced:img src={LexihubImg} alt="audiophile homepage screenshot" class="rounded-2xl" />
+			<enhanced:img
+				src="../assets/lexihub_cropped.jpg?w=747;1493"
+				alt="experience audiophile"
+				class="w-full rounded-2xl object-fill"
+				sizes="(min-width: 768px) 520px, 100vw"
+			/>
 		</div>
 		<div class="flex flex-col justify-center gap-4">
-			<h3 class="text-2xl font-bold tracking-widest font-lexend">Lexihub</h3>
+			<h3 class="font-lexend text-2xl font-bold tracking-widest">Lexihub</h3>
 			<a
 				href="https://fem-dictionary-app-opal.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 font-semibold font-lexend text-zinc-600 hover:text-green-500 dark:text-zinc-300"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
 				aria-label="Click here to go try out the Lexihub Web Dictionary"
-				>See it for yourself
+				>See it
 				<Right /></a
 			>
-			<p class="text-zinc-600 dark:text-zinc-300 font-lexend">
+
+			<p class="font-lexend text-zinc-600 dark:text-zinc-300">
 				A fully responsive online dictionary containing pronunciation and definitions of words using
 				on designs from
 				<a
 					href="https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL"
-					class="font-semibold text-zinc-600 underline underline-offset-4 hover:text-green-500 dark:text-zinc-300"
+					class="font-semibold text-green-600 underline underline-offset-4 dark:text-green-500"
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label="Click here to check out the designs on Frontend Mentor">Frontend Mentor.</a

@@ -48,11 +48,11 @@
 			>
 
 			<p class="font-lexend text-zinc-600 dark:text-zinc-300">
-				A full-stack travel planning SaaS that lets users save places they discover online, share
+				A full-stack travel cataloging and planning SaaS that lets users save places they discover online, share
 				them with groups, and plan trips together. Features include real-time group chat via
-				Socket.io, server-sent events for live notifications, JWT and session-based auth, image
-				processing with Sharp to Cloudflare R2, and subscription billing with DodoPayments. Built
-				with SvelteKit and AdonisJS on PostgreSQL.
+				Socket.io, server-sent events for live notifications, a database-backed job queue for async
+				email delivery, JWT and session-based auth, image processing with Sharp to Cloudflare R2,
+				and subscription billing with DodoPayments. Built with SvelteKit and AdonisJS on PostgreSQL.
 			</p>
 
 			<div class="pt-4">

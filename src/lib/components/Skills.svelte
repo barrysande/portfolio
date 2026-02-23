@@ -1,22 +1,24 @@
 <script>
 	const skills = [
-    'HTML',
-    'CSS',
-    'Tailwind',
-    'JavaScript',
-    'TypeScript',
-    'Node.js',
-    'SvelteKit',
-    'AdonisJS',
-    'PostgreSQL',
-    'REST APIs',
-    'WebSockets',
-    'SSE',
-    'Docker',
-    'Linux',
-    'Git',
-    'Storyblok',
-];
+		'HTML',
+		'CSS',
+		'Tailwind',
+		'JavaScript',
+		'TypeScript',
+		'Node.js',
+		'SvelteKit',
+		'React (in progress)',
+        'Solidity (in progress',
+		'AdonisJS',
+		'PostgreSQL',
+		'REST APIs',
+		'WebSockets',
+		'SSE',
+		'Docker',
+		'Linux',
+		'Git',
+		'Storyblok'
+	];
 </script>
 
 {#snippet skillsnippet()}

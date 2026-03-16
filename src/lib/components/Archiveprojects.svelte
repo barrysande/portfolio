@@ -1,16 +1,15 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Right from './Right.svelte';
-	const archivedTools = ['HTML', 'CSS', 'Bootstrap'];
-	const archivedTools2 = ['HTML', 'CSS', 'Javascript'];
+	const archivedTools = ['HTML', 'Bootstrap'];
+	const archivedTools2 = ['HTML', 'CSS', 'JavaScript'];
 </script>
 
-<!-- @snippet acrhivedTools starts -->
 {#snippet archivedSnippet()}
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools as tool}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-600 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
 			>
 				{tool}
 			</li>
@@ -22,7 +21,7 @@
 	<ul class="flex flex-wrap items-center gap-3">
 		{#each archivedTools2 as tool2}
 			<li
-				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-500 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
+				class="rounded-full bg-emerald-50 px-3 py-[0.1em] font-mono text-xs font-normal text-zinc-600 shadow-sm dark:bg-emerald-950 dark:text-emerald-400 md:text-sm lg:text-base"
 			>
 				{tool2}
 			</li>

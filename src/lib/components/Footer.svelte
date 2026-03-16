@@ -1,17 +1,9 @@
 <script lang="ts">
-	import { Mail, Github, Linkedin } from 'lucide-svelte';
+	import { Github, Linkedin } from 'lucide-svelte';
 </script>
 
 <div class="flex items-center justify-center gap-5 py-8">
-	<a
-		href="mailto:barrysandebbs@gmail.com"
-		target="_blank"
-		rel="noopener noreferrer"
-		class="text-gray-500 hover:text-green-500"
-		aria-label="an email icon with a link to my email address accessible by clicking on it"
-	>
-		<Mail />
-	</a>
+<p class=" underline underline-offset-2 ">Reach out</p>
 	<a
 		href="https://github.com/barrysande"
 		target="_blank"

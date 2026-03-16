@@ -10,7 +10,7 @@
 
 <section class="pt-4 md:pt-10">
 	<h3
-		class="text-nowrap p-2 pb-9 text-center font-mono text-2xl font-bold uppercase tracking-widest underline underline-offset-8 md:pb-10 md:text-3xl"
+		class="text-nowrap p-2 pb-3 text-center font-mono text-2xl font-bold uppercase tracking-widest md:pb-10 md:text-3xl"
 		in:fly={{ x: -200, duration: 2000 }}
 		out:fade
 	>

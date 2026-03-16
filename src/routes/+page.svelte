@@ -7,7 +7,7 @@
 </script>
 
 <section
-	class="mx-6 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:flex-row md:justify-start md:gap-10 lg:mx-20"
+	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
 >
 	<div>
 		<h1 class="text-nowrap py-6 text-green-400">Hello there, I am</h1>
@@ -29,10 +29,10 @@
 	<img src={Hero} alt="hero illustration" class="w-80 md:w-1/2" />
 </section>
 
-<section class="mx-6 flex flex-col items-center justify-center gap-3 p-8">
+<section class="mx-2 flex flex-col items-center gap-3 p-8 md:mx-6">
 	<Skills />
 </section>
-<main class="mx-6 mb-12 p-8 lg:mx-20">
+<main class="mx-2 mb-12 p-8 md:mx-6 lg:mx-20">
 	<About />
 
 	<section>

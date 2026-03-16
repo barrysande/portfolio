@@ -16,7 +16,7 @@
 
 	let { children } = $props();
 	const details: string =
-		'Barry Sande is a web developer and attorney. Barry Sande uses HTML, CSS, JavaScript, TypeScript, SvelteKit, TailwindCSS, Postgresql, Drizzle, Supabase and Node.js to create accessible and delightful digital experiences on the web.';
+		'Barry Sande is a full-stack web developer and attorney. Barry Sande uses HTML, CSS, JavaScript, TypeScript, SvelteKit, TailwindCSS, Postgresql, Node.js with AdonisJS to create accessible, modern, and scalable experiences on the web.';
 </script>
 
 <svelte:head>

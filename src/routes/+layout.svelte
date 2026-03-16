@@ -26,7 +26,7 @@
 
 <ModeWatcher />
 
-<div class="mx-6 flex justify-between p-8">
+<div class="mx-2 md:mx-6 flex justify-between p-8">
 	<Button onclick={toggleMode} variant="outline" size="icon">
 		<Sun
 			class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"

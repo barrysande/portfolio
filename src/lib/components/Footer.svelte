@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex items-center justify-center gap-5 py-8">
-<p class=" underline underline-offset-2 ">Reach out</p>
+<p class=" underline underline-offset-2 ">Find me on:</p>
 	<a
 		href="https://github.com/barrysande"
 		target="_blank"

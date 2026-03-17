@@ -2,6 +2,8 @@
     import Right from './Right.svelte';
 
     const lexihubTools = ['Sveltekit', 'TailwindCSS', 'Typescript', 'REST API'];
+
+    let isHoveredLexihub = $state(false)
 </script>
 
 {#snippet lexihubSnippet()}
@@ -32,10 +34,12 @@
                 href="https://fem-dictionary-app-opal.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex w-fit items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
                 aria-label="Click here to go try out the Lexihub Web Dictionary"
-            >
-                See it <Right />
+                class="flex w-fit items-center gap-1 font-semibold tracking-wide duration-200  hover:text-green-600"
+				onmouseenter={() => (isHoveredLexihub = true)}
+				onmouseleave={() => (isHoveredLexihub = false)}
+			>
+				See it <Right animate={isHoveredLexihub}/>
             </a>
 
             <p class="font-lexend text-zinc-600 dark:text-zinc-300">
@@ -48,7 +52,7 @@
                     rel="noopener noreferrer"
                     aria-label="Click here to check out the designs on Frontend Mentor"
                 >
-                    Frontend Mentor.
+                    Frontend Mentor.<Right />
                 </a>
             </p>
             

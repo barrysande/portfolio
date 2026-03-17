@@ -10,6 +10,8 @@
 		'Socket.io',
 		'Server-Sent-Events'
 	];
+
+	let isHoveredHiddouts = $state(false);
 </script>
 
 {#snippet hiddoutsSnippet()}
@@ -29,7 +31,7 @@
 		<enhanced:img
 			src="../assets/Hiddouts.png?w=747;1493"
 			alt="hiddouts homepage"
-			class="rounded-2xl w-full"
+			class="w-full rounded-2xl"
 			sizes="(min-width: 768px) 50vw, 100vw"
 		/>
 		<h3 class="font-lexend text-2xl font-bold tracking-widest">Hiddouts</h3>
@@ -38,9 +40,11 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="Experience Hiddouts"
-			class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500 w-fit"
-			>See it
-			<Right /></a
+			class="flex w-fit items-center gap-1 font-semibold tracking-wide duration-200 hover:text-green-600"
+			onmouseenter={() => (isHoveredHiddouts = true)}
+			onmouseleave={() => (isHoveredHiddouts = false)}
+		>
+			See it <Right animate={isHoveredHiddouts} /></a
 		>
 		<p class="font-lexend text-zinc-600 dark:text-zinc-300">
 			A travel, cataloging, and planning web app that lets users save places they discover online,

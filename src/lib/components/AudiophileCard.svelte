@@ -2,6 +2,8 @@
 	import Right from './Right.svelte';
 
 	const audiophileTools = ['Sveltekit', 'TailwindCSS', 'Typescript', 'Superforms'];
+
+	let isHoveredAudiophile = $state(false);
 </script>
 
 {#snippet audiophileSnippet()}
@@ -17,7 +19,7 @@
 {/snippet}
 
 <section>
-	<div class="flex flex-col gap-6 p-6 font-sans">
+	<div class="flex flex-col gap-6 p-4 font-sans">
 		<enhanced:img
 			src="../assets/audiophile.jpg?w=747;1493"
 			alt="audiophile homepage screenshot"
@@ -33,9 +35,11 @@
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label="Click here to go try out the Audiophile E-commerce Web App"
-				class="flex w-fit items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				class="flex w-fit items-center gap-1 font-semibold tracking-wide duration-200 hover:text-green-600"
+				onmouseenter={() => (isHoveredAudiophile = true)}
+				onmouseleave={() => (isHoveredAudiophile = false)}
 			>
-				See it <Right />
+				See it <Right animate={isHoveredAudiophile} />
 			</a>
 
 			<p class="font-lexend text-zinc-600 dark:text-zinc-300">
@@ -48,7 +52,7 @@
 					class="font-semibold text-green-600 underline underline-offset-4 dark:text-green-500"
 					aria-label="Click here to check out the designs on Frontend Mentor"
 				>
-					Frontend Mentor.
+					Frontend Mentor.<Right />
 				</a>
 			</p>
 

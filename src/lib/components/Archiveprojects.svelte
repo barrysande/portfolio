@@ -1,8 +1,13 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Right from './Right.svelte';
+
 	const archivedTools = ['HTML', 'Bootstrap'];
 	const archivedTools2 = ['HTML', 'CSS', 'JavaScript'];
+
+	let isHoveredFylo = $state(false);
+	let isHoveredAge = $state(false);
+	let isHoveredWorkit = $state(false);
 </script>
 
 {#snippet archivedSnippet()}
@@ -29,7 +34,7 @@
 	</ul>
 {/snippet}
 
-<div class="items flex flex-col gap-4 md:flex-row">
+<div class=" flex flex-col gap-4 md:flex-row">
 	<Card.Root>
 		<Card.Header>
 			<Card.Title>
@@ -40,11 +45,14 @@
 		<Card.Content>
 			<a
 				href="https://fylo-landing-page-pi-mauve.vercel.app/"
-				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:text-green-500"
 				target="_blank"
 				rel="noopener noreferrer"
-				>Visit it
-				<Right classes={'hover:text-green-500'} />
+				onmouseenter={() => (isHoveredFylo = true)}
+				onmouseleave={() => (isHoveredFylo = false)}
+			>
+				Visit it
+				<Right animate={isHoveredFylo} />
 			</a>
 		</Card.Content>
 		<Card.Footer>
@@ -66,9 +74,11 @@
 				href="https://age-calculator-app-phi-six.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:text-green-500"
+				onmouseenter={() => (isHoveredAge = true)}
+				onmouseleave={() => (isHoveredAge = false)}
 				>Try it
-				<Right classes={'hover:text-green-500'} />
+				<Right class="hover:text-green-500" animate={isHoveredAge} />
 			</a>
 		</Card.Content>
 		<Card.Footer>
@@ -89,9 +99,11 @@
 				href="https://workit-jet.vercel.app/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:scale-105 hover:text-green-500"
+				class="flex items-center gap-1 font-semibold tracking-wide duration-200 hover:text-green-500"
+				onmouseenter={() => (isHoveredWorkit = true)}
+				onmouseleave={() => (isHoveredWorkit = false)}
 				>Visit it
-				<Right classes={'hover:text-green-500'} />
+				<Right class="hover:text-green-500" animate={isHoveredWorkit} />
 			</a>
 		</Card.Content>
 		<Card.Footer>

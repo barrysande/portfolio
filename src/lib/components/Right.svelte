@@ -1,28 +1,30 @@
-<script>
+<script lang="ts">
+	interface IconProps {
+		color?: string;
+		size?: number;
+		strokeWidth?: number;
+		animate?: boolean;
+		class?: string;
+	}
+
 	let {
 		color = 'currentColor',
 		size = 20,
-		strokeWidth = 2,
-		isHovered = false,
-		classes = ''
-	} = $props();
+		strokeWidth = 1.5,
+		animate = false,
+		class: className = ''
+	}: IconProps = $props();
 
 	function handleMouseEnter() {
-		isHovered = true;
-	}
-
-	function handleMouseLeave() {
-		isHovered = false;
+		if (animate) return;
+		animate = true;
+		setTimeout(() => {
+			animate = false;
+		}, 200);
 	}
 </script>
 
-<div
-	class={classes}
-	aria-label="move-up-right"
-	role="img"
-	onmouseenter={handleMouseEnter}
-	onmouseleave={handleMouseLeave}
->
+<div class={className} aria-label="arrow-up-right" role="img" onmouseenter={handleMouseEnter}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width={size}
@@ -33,29 +35,21 @@
 		stroke-width={strokeWidth}
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		class:animate={isHovered}
 	>
-		<path d="M13 5h6v6" />
-		<path d="M19 5 5 19" />
+		<path d="M7 7h10v10" class:head={animate} />
+		<path d="M17 7 L12 12" class:head={animate} />
+		<path d="M7 17 L12 12" />
 	</svg>
 </div>
 
 <style>
+	div {
+		display: inline-block;
+	}
 	path {
-		transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all 0.2s ease-out;
 	}
-
-	.animate {
-		animation: moveUpRight 0.5s;
-	}
-
-	@keyframes moveUpRight {
-		0%,
-		100% {
-			transform: translate(0, 0);
-		}
-		50% {
-			transform: translate(3px, -3px);
-		}
+	.head {
+		transform: translate(-3px, 3px);
 	}
 </style>

@@ -10,13 +10,7 @@ importers:
     dependencies:
       '@fontsource-variable/inter':
         specifier: ^5.1.1
-        version: 5.1.1
-      '@fontsource-variable/lexend':
-        specifier: ^5.2.11
-        version: 5.2.11
-      '@fontsource-variable/sono':
-        specifier: ^5.1.1
-        version: 5.1.1
+        version: 5.2.8
       '@fontsource/cormorant-garamond':
         specifier: ^5.2.11
         version: 5.2.11
@@ -621,14 +615,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@fontsource-variable/inter@5.1.1':
-    resolution: {integrity: sha512-OpXFTmiH6tHkYijMvQTycFKBLK4X+SRV6tet1m4YOUH7SzIIlMqDja+ocDtiCA72UthBH/vF+3ZtlMr2rN/wIw==}
-
-  '@fontsource-variable/lexend@5.2.11':
-    resolution: {integrity: sha512-0hgEQ4O7Nh8fxL/WWmspJf0BErbocRkZwtLRGey/V4mUUqxfF7QUwqhcdzwpjom3NYCniY4uzQ5wYD7r9/92tQ==}
-
-  '@fontsource-variable/sono@5.1.1':
-    resolution: {integrity: sha512-909yvUDZV3iTKEJJhZX5GLvd5VT5rtWlSF6O67dyetms6FC5A0IpKqd7M0FDaLTzgglBJq3zJZFP+z4X2tWUgg==}
+  '@fontsource-variable/inter@5.2.8':
+    resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
   '@fontsource/cormorant-garamond@5.2.11':
     resolution: {integrity: sha512-5JjpN023lhA5soijgVT0BdRGzmlijm402ppjccMd6h+vRE0mX2lJnE+41UPfnlidrkV9/rCo1mf58WZlHnB0CA==}
@@ -2500,11 +2488,7 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@fontsource-variable/inter@5.1.1': {}
-
-  '@fontsource-variable/lexend@5.2.11': {}
-
-  '@fontsource-variable/sono@5.1.1': {}
+  '@fontsource-variable/inter@5.2.8': {}
 
   '@fontsource/cormorant-garamond@5.2.11': {}
 

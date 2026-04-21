@@ -4,26 +4,32 @@
 	import Projects from '$lib/components/Projects.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import Hero from '$lib/assets/hero.svg';
+	import Icon from '@iconify/svelte';
 </script>
 
 <section
 	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
 >
 	<div>
-		<p class="pb-4 font-mono text-xs font-semibold uppercase tracking-widest text-primary">
-			✦ Full-Stack Developer
+		<p
+			class="text-primary flex items-center gap-0.5 pb-3 font-mono text-xs font-semibold tracking-widest uppercase"
+		>
+			<Icon icon="solar:code-2-bold-duotone" class="size-4" /> Full-Stack Developer <Icon
+				icon="solar:code-2-bold-duotone"
+				class="size-4"
+			/>
 		</p>
 
 		<h1
-			class="pb-3 font-display text-4xl font-bold text-primary md:text-5xl lg:text-6xl"
+			class="font-display text-primary pb-3 text-4xl font-bold md:text-5xl lg:text-6xl"
 			in:fly={{ x: -200, duration: 1000 }}
 			out:fade
 		>
 			Barry Sande
 		</h1>
-		<p class="pb-4 text-base font-normal text-ink">
-			I build <span class="text-primary font-semibold">production systems</span> end to end — from API design and
-			infrastructure to the interfaces people actually use.
+		<p class="text-ink pb-4 text-base font-normal">
+			I build <span class="text-primary font-semibold">production systems</span> end to end — from API
+			design and infrastructure to the interfaces people actually use.
 		</p>
 	</div>
 

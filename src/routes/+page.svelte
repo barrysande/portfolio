@@ -10,18 +10,19 @@
 	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
 >
 	<div>
-		<h1 class="text-nowrap py-6 text-green-400">Hello there, I am</h1>
+		<p class="pb-4 font-mono text-xs font-semibold uppercase tracking-widest text-primary">
+			✦ Full-Stack Developer
+		</p>
 
-		<h2
-			class=" text-nowrap pb-2 text-4xl font-bold text-zinc-600 dark:text-zinc-300 md:text-5xl"
-			in:fly={{ x: -200, duration: 2000 }}
+		<h1
+			class="pb-3 font-display text-4xl font-bold text-primary md:text-5xl lg:text-6xl"
+			in:fly={{ x: -200, duration: 1000 }}
 			out:fade
 		>
 			Barry Sande
-		</h2>
-		<p class=" pb-3 text-xl font-semibold text-zinc-600 dark:text-zinc-300">Full-Stack Developer</p>
-		<p class="text-base font-normal text-zinc-600 dark:text-zinc-400">
-			I build <span class="text-green-400">production systems</span> end to end — from API design and
+		</h1>
+		<p class="pb-4 text-base font-normal text-ink">
+			I build <span class="text-primary font-semibold">production systems</span> end to end — from API design and
 			infrastructure to the interfaces people actually use.
 		</p>
 	</div>

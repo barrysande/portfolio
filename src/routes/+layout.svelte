@@ -1,16 +1,12 @@
 <script lang="ts">
-	// Supports weights 100-900
 	import '@fontsource-variable/inter';
-	// Supports weights 200-800
-	import '@fontsource-variable/sono';
-	// Supports weights 100-900
-	import '@fontsource-variable/lexend';
+	import '@fontsource/cormorant-garamond/400.css';
+	import '@fontsource/cormorant-garamond/600.css';
+	import '@fontsource/cormorant-garamond/700.css';
+	import '@fontsource/cormorant-garamond/400-italic.css';
+	import '@fontsource/roboto-mono/400.css';
+	import '@fontsource/roboto-mono/500.css';
 	import '../app.css';
-	import { ModeWatcher } from 'mode-watcher';
-	import Sun from 'lucide-svelte/icons/sun';
-	import Moon from 'lucide-svelte/icons/moon';
-	import { toggleMode } from 'mode-watcher';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 
@@ -24,18 +20,7 @@
 	<meta name="description" content={details} />
 </svelte:head>
 
-<ModeWatcher />
-
-<div class="mx-2 md:mx-6 flex justify-between p-8">
-	<Button onclick={toggleMode} variant="outline" size="icon">
-		<Sun
-			class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-		/>
-		<Moon
-			class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-		/>
-		<span class="sr-only">Toggle theme</span>
-	</Button>
+<div class="mx-2 md:mx-6 flex justify-end p-8">
 	<Navbar />
 </div>
 

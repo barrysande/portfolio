@@ -1,77 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
-		--destructive: 0 72.2% 50.6%;
-		--destructive-foreground: 210 40% 98%;
-		--ring: 222.2 84% 4.9%;
-		--radius: 0.5rem;
-		--sidebar-background: 0 0% 98%;
-		--sidebar-foreground: 240 5.3% 26.1%;
-		--sidebar-primary: 240 5.9% 10%;
-		--sidebar-primary-foreground: 0 0% 98%;
-		--sidebar-accent: 240 4.8% 95.9%;
-		--sidebar-accent-foreground: 240 5.9% 10%;
-		--sidebar-border: 220 13% 91%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-		--font-lexend: 'Lexend Variable', sans-serif;
-	}
+@theme {
+  /* Atelier — editorial ivory, considered ink */
+  --color-bg:          oklch(0.95 0.012 83);   /* #F4EFE6 */
+  --color-surface:     oklch(0.99 0.008 84);   /* #FFFBF2 */
+  --color-surface-alt: oklch(0.91 0.017 79);   /* #EAE3D3 */
+  --color-border:      oklch(0.79 0.032 79);   /* #CEC2A4 */
+  --color-ink:         oklch(0.15 0.010 65);   /* #1F1B15 */
+  --color-ink-muted:   oklch(0.43 0.015 70);   /* #6B6357 */
+  --color-primary:     oklch(0.41 0.050 172);  /* #2A4A3E */
+  --color-secondary:   oklch(0.50 0.072 65);   /* #8B6F47 */
+  --color-accent:      oklch(0.73 0.080 72);   /* #C9A96E */
+  --color-success:     oklch(0.56 0.065 133);  /* #6B8E5A */
+  --color-danger:      oklch(0.42 0.120 26);   /* #9B3C3C */
 
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
-		--muted: 217.2 32.6% 17.5%;
-		--muted-foreground: 215 20.2% 65.1%;
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--primary: 210 40% 98%;
-		--primary-foreground: 222.2 47.4% 11.2%;
-		--secondary: 217.2 32.6% 17.5%;
-		--secondary-foreground: 210 40% 98%;
-		--accent: 217.2 32.6% 17.5%;
-		--accent-foreground: 210 40% 98%;
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 40% 98%;
-		--ring: 212.7 26.8% 83.9%;
-		--sidebar-background: 240 5.9% 10%;
-		--sidebar-foreground: 240 4.8% 95.9%;
-		--sidebar-primary: 224.3 76.3% 48%;
-		--sidebar-primary-foreground: 0 0% 100%;
-		--sidebar-accent: 240 3.7% 15.9%;
-		--sidebar-accent-foreground: 240 4.8% 95.9%;
-		--sidebar-border: 240 3.7% 15.9%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+  --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-mono:    "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow:    0 2px 16px -6px oklch(0.15 0.010 65 / 0.12);
+  --shadow-lg: 0 20px 50px -18px oklch(0.15 0.010 65 / 0.22);
+
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.5rem;
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		font-family: 'Lexend Variable', sans-serif;	
-	}
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
 }
-

@@ -1,25 +1,31 @@
-<script lang="ts">
-	import { Github, Linkedin } from 'lucide-svelte';
-</script>
+<footer class="mt-16 border-t border-border">
+	<div class="mx-2 flex flex-col gap-4 px-8 py-6 md:mx-6 md:flex-row md:items-center md:justify-between lg:mx-20">
+		<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+			<p class="font-mono text-xs text-ink-muted">
+				© 2026 Barry Sande — all rights reserved
+			</p>
+			<div class="flex items-center gap-4">
+				<a
+					href="https://github.com/barrysande"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="font-mono text-xs text-ink-muted transition-colors hover:text-primary"
+				>
+					GitHub
+				</a>
+				<a
+					href="https://www.linkedin.com/in/barry-sande-8703b8312/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="font-mono text-xs text-ink-muted transition-colors hover:text-primary"
+				>
+					LinkedIn
+				</a>
+			</div>
+		</div>
 
-<div class="flex items-center justify-center gap-5 py-8">
-<p class=" underline underline-offset-2 ">Find me on:</p>
-	<a
-		href="https://github.com/barrysande"
-		target="_blank"
-		rel="noopener noreferrer"
-		class="text-gray-500 hover:text-green-500"
-		aria-label="a github icon with a link to my github profile accessible by clicking on it"
-	>
-		<Github />
-	</a>
-	<a
-		href="https://www.linkedin.com/in/barry-sande-8703b8312/"
-		target="_blank"
-		rel="noopener noreferrer"
-		class="text-gray-500 hover:text-green-500"
-		aria-label="a linkedin icon with a link to my linkedin profile accessible by clicking on it"
-	>
-		<Linkedin />
-	</a>
-</div>
+		<p class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+			Nairobi / Remote
+		</p>
+	</div>
+</footer>

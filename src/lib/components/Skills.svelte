@@ -15,7 +15,7 @@
 	</h3>
 
 	<ul class="flex flex-wrap items-center justify-center gap-2">
-		{#each skills as skill}
+		{#each skills as skill (skill)}
 			<li
 				class="rounded-full bg-primary px-3 py-[0.1em] font-mono text-xs font-normal text-white shadow-sm md:text-sm lg:text-base"
 			>

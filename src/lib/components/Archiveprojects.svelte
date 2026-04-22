@@ -65,7 +65,7 @@
 							</span>
 							<span class="text-sm text-ink-muted">{project.subtitle}</span>
 							<ul class="flex flex-wrap gap-2 pt-1">
-								{#each project.tools as tool}
+								{#each project.tools as tool (tool)}
 									<li
 										class="rounded-full bg-primary px-3 py-[0.1em] font-mono text-xs text-white"
 									>

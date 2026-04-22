@@ -32,8 +32,18 @@
 		</p>
 	</div>
 
-	<img src={HeroLight} alt="hero illustration" class="block w-80 md:w-1/2 dark:hidden" />
-	<img src={HeroDark} alt="hero illustration" class="hidden w-80 md:w-1/2 dark:block" />
+	<img
+		src={HeroLight}
+		alt="hero illustration"
+		fetchpriority="high"
+		class="block w-80 md:w-1/2 dark:hidden"
+	/>
+	<img
+		src={HeroDark}
+		alt="hero illustration"
+		fetchpriority="high"
+		class="hidden w-80 md:w-1/2 dark:block"
+	/>
 </section>
 
 <section class="mx-2 flex flex-col items-center gap-3 p-8 md:mx-6">

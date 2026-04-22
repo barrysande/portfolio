@@ -10,9 +10,9 @@
 </script>
 
 {#snippet skillsnippet()}
-	<h3 class="pb-3 text-center font-display text-2xl font-bold uppercase tracking-widest md:text-3xl">
+	<h2 class="pb-3 text-center font-display text-2xl font-bold uppercase tracking-widest md:text-3xl">
 		Skills and Tools
-	</h3>
+	</h2>
 
 	<ul class="flex flex-wrap items-center justify-center gap-2">
 		{#each skills as skill (skill)}

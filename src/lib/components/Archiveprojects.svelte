@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Right from './Right.svelte';
 
-	let hoveredIndex = $state<number | null>(null);
-
 	const archived = [
 		{
 			number: '05',
@@ -47,11 +45,9 @@
 	</div>
 
 	<ul>
-		{#each archived as project, i}
+		{#each archived as project (project.number)}
 			<li
 				class="group border-b border-border py-5"
-				onmouseenter={() => (hoveredIndex = i)}
-				onmouseleave={() => (hoveredIndex = null)}
 			>
 				<a
 					href={project.url}
@@ -85,7 +81,7 @@
 							{project.category}
 						</span>
 						<span class="font-mono text-xs text-ink-muted">{project.year}</span>
-						<Right animate={hoveredIndex === i} />
+						<Right />
 					</div>
 				</a>
 			</li>

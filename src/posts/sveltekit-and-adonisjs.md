@@ -146,18 +146,20 @@ With Svelte (no Kit), you would handle everything client-side like so:
 	let user = $state(null);
 	let loading = $state(true);
 
-	$effect(async () => {
-		const res = await fetch('https://api.example.com/auth/me', {
-			credentials: 'include'
-		});
+	$effect(() => {
+		return async () => {
+			const res = await fetch('https://api.example.com/auth/me', {
+				credentials: 'include'
+			});
 
-		if (!res.ok) {
-			window.location.href = '/login'; // Client-side redirect
-			return;
-		}
+			if (!res.ok) {
+				window.location.href = '/login'; // Client-side redirect
+				return;
+			}
 
-		user = await res.json();
-		loading = false;
+			user = await res.json();
+			loading = false;
+		};
 	});
 </script>
 

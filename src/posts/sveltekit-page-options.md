@@ -40,6 +40,7 @@ export const csr = false;
 SvelteKit's strength is mixing these per route: prerender your landing page, SSR your dashboard, SPA mode for a complex interactive widget.
 
 Official Docs References:
+
 [SSR Page Options](https://svelte.dev/docs/kit/page-options#ssr)
 
 [CSR Page Options](https://svelte.dev/docs/kit/page-options#csr)

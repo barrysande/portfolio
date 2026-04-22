@@ -56,8 +56,6 @@ Browser ←→ SvelteKit
 - Bring your own ORM, auth, and queue libraries
 - Less structure for large applications
 
-_Best for: small to medium web-only applications where speed of development matters most._
-
 ### Option 1B: AdonisJS + Inertia Monolith
 
 AdonisJS handles everything. Inertia.js bridges the backend to Svelte, React, or Vue components rendered on the server.
@@ -89,13 +87,13 @@ Both monolith approaches avoid the complexity of cross-service authentication. C
 
 ## Option 2: Svelte + Direct API
 
-A client-side Svelte application that talks directly to an API. No SvelteKit, no server-side rendering — just Svelte components bundled and shipped to the browser.
+A client-side Svelte application that talks directly to an API. In this set up, concepts like server-side rendering are non-existent. Its only just Svelte components bundled and shipped to the browser fetching data via `onMount` hooks or the `$effect` rune.
 
 ```text
 Browser ←→ AdonisJS API
 ```
 
-The browser makes all API calls directly. Cookies flow naturally between browser and API with `credentials: 'include'`.
+Cookies flow between the browser and API with `credentials: 'include'`.
 
 **Pros:**
 
@@ -177,6 +175,12 @@ I would like to reserve further comments on this option because I have not used 
 ## Option 3: Sveltekit SSR + API with BFF Pattern
 
 SvelteKit handles rendering and acts as a Backend-for-Frontend (BFF). A separate AdonisJS API handles business logic, database, and background jobs.
+
+<Note>
+  SSR does not mean CSR is off. SvelteKit allows using both on different routes. For more info, see my notes on it <a href="/blog/sveltekit-page-options">here</a>
+</Note>
+
+
 
 ```text
 Browser ←→ SvelteKit (BFF) ←→ AdonisJS API

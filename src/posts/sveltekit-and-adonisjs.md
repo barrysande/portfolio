@@ -128,7 +128,7 @@ export const load = async (event) => {
 		error(response.status, 'Please try again later.');
 	}
 
-	const data = response.json();
+	const data = await response.json();
 	return { data };
 };
 ```
@@ -211,18 +211,19 @@ Lastly, while the monoliths would work initially they would paint me into a corn
 
 ## Why SvelteKit
 
-I am familiar with Sveltekit.
+I am familiar with SvelteKit. It's what I reached for when learning frontend development. For this project, sticking with what I knew let me focus on the backend learning I was after.
 
 ## Why AdonisJS
 
 I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
 
-- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer.
+- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection(DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer.
 - **TypeScript-first** — Great TypeScript support and even better in version 7 with automatically generated types and transformers.
-- **Laravel-like DX** — migrations, seeders, factories, service providers.
+- **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection.
 - **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management.
 - **Adonis CLI** — well-documented and easy to use CLI with ability to create custom commands when needed.
 - **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`.
+- **Documentation** — AdonisJS documentation is great and you can rely solely on them from learning to active development. There is also a great and active AdonisJS community on Discord and resources like community packages listed on the Adonis official website.
 
 ## The Hidden Cost: You're the Middleman
 

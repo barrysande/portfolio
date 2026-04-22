@@ -11,7 +11,7 @@
 	let activeCategory = $state('All');
 	let currentPage = $state(1);
 
-	const CATEGORIES = ['All', 'Engineering', 'Legal Practice', 'Notes'];
+	const CATEGORIES = ['All', 'Engineering', 'Legal Practice', 'Notes', 'Software Design'];
 
 	const categories = $derived([
 		...CATEGORIES,

@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@fontsource-variable/plus-jakarta-sans':
+      '@fontsource-variable/dm-sans':
         specifier: ^5.2.8
         version: 5.2.8
       '@fontsource/cormorant-garamond':
@@ -665,8 +665,8 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
-  '@fontsource-variable/plus-jakarta-sans@5.2.8':
-    resolution: {integrity: sha512-iQecBizIdZxezODNHzOn4SvvRMrZL/S8k4MEXGDynCmUrImVW0VmX+tIAMqnADwH4haXlHSXqMgU6+kcfBQJdw==}
+  '@fontsource-variable/dm-sans@5.2.8':
+    resolution: {integrity: sha512-AxkvMTvNWgfrmlyjiV05vlHYJa+nRQCf1EfvIrQAPBpFJW0O9VTz7oAFr9S3lvbWdmnFoBk7yFqQL86u64nl2g==}
 
   '@fontsource/cormorant-garamond@5.2.11':
     resolution: {integrity: sha512-5JjpN023lhA5soijgVT0BdRGzmlijm402ppjccMd6h+vRE0mX2lJnE+41UPfnlidrkV9/rCo1mf58WZlHnB0CA==}
@@ -2685,7 +2685,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@fontsource-variable/plus-jakarta-sans@5.2.8': {}
+  '@fontsource-variable/dm-sans@5.2.8': {}
 
   '@fontsource/cormorant-garamond@5.2.11': {}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	// Supports weights 200-800
-	import '@fontsource-variable/plus-jakarta-sans/wght.css';
+	// Supports weights 100-900
+	import '@fontsource-variable/dm-sans/wght.css';
 	import '@fontsource/roboto-mono/400.css';
 	import '@fontsource/roboto-mono/500.css';
 	import '@fontsource/roboto-mono/700.css';

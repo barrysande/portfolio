@@ -2,10 +2,14 @@
 title: 'SvelteKit and AdonisJS: A Full-Stack Pairing'
 subtitle: 'Why I Chose SvelteKit and AdonisJS for my Backend Learning Journey'
 category: 'Engineering'
-date: '2026-03-18'
+date: '2026-04-20'
 readTime: '12 min'
 published: true
 ---
+
+<script>
+  import Note from '$lib/components/blog/Note.svelte';
+</script>
 
 Building a full-stack web application means making architectural decisions early that you'll live with for years. Here is how I landed on SvelteKit for the frontend and AdonisJS for the API, the tradeoffs I evaluated, and the hidden complexity I didn't anticipate and had to address.
 
@@ -70,7 +74,7 @@ Browser ←→ AdonisJS
 
 **Pros:**
 
-- Batteries included (ORM, auth, mail, validation,  all first party configured)
+- Batteries included (ORM, auth, mail, validation, all first party configured)
 - No cookie relay complexity
 - Strong conventions for to enforce patterns as the application grows
 - TypeScript-first
@@ -83,9 +87,9 @@ Browser ←→ AdonisJS
 
 Both monolith approaches avoid the complexity of cross-service authentication. Cookies work naturally because there's only one domain. The tradeoff is API reusability — if you need a mobile app later, you'll need to extract or duplicate API logic.
 
-## Option 2: SPA + Direct API
+## Option 2: Svelte + Direct API
 
-A client-side Svelte application that talks directly to an API. No server-side rendering.
+A client-side Svelte application that talks directly to an API. No SvelteKit, no server-side rendering — just Svelte components bundled and shipped to the browser.
 
 ```text
 Browser ←→ AdonisJS API
@@ -104,10 +108,10 @@ The browser makes all API calls directly. Cookies flow naturally between browser
 
 - No server-side rendering (poor SEO for public pages)
 - Loading states everywhere (data fetched after page loads)
-- Flash of unauthenticated content
 - API must be publicly exposed (larger attack surface)
+- No file-based routing, load functions, or form actions — you build or bring your own
 
-Let me illustrate the UX problem. With SSR:
+Let me illustrate the UX difference. With SvelteKit's SSR:
 
 ```typescript
 // SvelteKit +page.server.ts
@@ -132,14 +136,14 @@ export const load = async (event) => {
 };
 ```
 
-The redirect happens on the server. The protected page never reaches the browser until the load.
-Without SSR, in a +page.svelte file you would have something close to this:
+The redirect happens on the server. The protected page never reaches the browser.
+
+With Svelte (no Kit), you handle everything client-side:
 
 ```svelte
-<!-- +page.svelte -->
+<!-- App.svelte or Dashboard.svelte -->
 <script>
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 
 	let user = $state(null);
 	let loading = $state(true);
@@ -150,7 +154,7 @@ Without SSR, in a +page.svelte file you would have something close to this:
 		});
 
 		if (!res.ok) {
-			goto('/login'); // Redirect happens after page is visible
+			window.location.href = '/login'; // Client-side redirect
 			return;
 		}
 
@@ -166,11 +170,9 @@ Without SSR, in a +page.svelte file you would have something close to this:
 {/if}
 ```
 
-My understanding of how this approach works (no SSR) is: the page renders first with whatever static content exists, then mounts, then fetches data from the API. Anything protected or waiting for an API response has to be handled with loading states — or you end up with blank sections of the page, which isn't great for UX.
+The page loads, shows a loading state, fetches data, then either renders content or redirects. The user always sees the loading state first.
 
-However, with SSR, the load functions run on the server before any HTML is sent to the browser. Data is fetched, HTML is rendered with that data, and the complete page is delivered to the user.
-
-I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation on how to use the `onMount` lifecycle hook or the `$effect` rune for data fetching.
+I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation.
 
 ## Option 3: Sveltekit SSR + API with BFF Pattern
 

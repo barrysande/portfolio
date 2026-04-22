@@ -43,7 +43,7 @@
 
 	<!-- Category filter tabs -->
 	<nav class="border-border flex flex-wrap gap-x-6 gap-y-2 border-b pb-4">
-		{#each categories as category}
+		{#each categories as category (category)}
 			<button
 				class="cursor-pointer pb-3 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
 				class:active={activeCategory === category}
@@ -58,7 +58,7 @@
 	<!-- Post list -->
 	{#if paginated.length > 0}
 		<ul>
-			{#each paginated as post, i}
+			{#each paginated as post, i (post.slug)}
 				<li>
 					<BlogPostCard
 						slug={post.slug}
@@ -93,7 +93,7 @@
 							←
 						</Pagination.PrevButton>
 
-						{#each pages as page}
+						{#each pages as page (page.key)}
 							{#if page.type === 'page'}
 								<Pagination.Page
 									{page}

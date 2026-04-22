@@ -39,7 +39,7 @@
 						In this article
 					</p>
 					<DropdownMenu.Separator class=" mb-2 border-t" />
-					{#each visible as heading}
+					{#each visible as heading (heading.id)}
 						<DropdownMenu.Item
 							class="group cursor-pointer px-4 py-1.5 outline-none select-none"
 							onSelect={() => {

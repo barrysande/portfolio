@@ -147,19 +147,21 @@ With Svelte (no Kit), you would handle everything client-side like so:
 	let loading = $state(true);
 
 	$effect(() => {
-		return async () => {
+		async function fetchUser() {
 			const res = await fetch('https://api.example.com/auth/me', {
 				credentials: 'include'
 			});
 
 			if (!res.ok) {
-				window.location.href = '/login'; // Client-side redirect
+				window.location.href = '/login';
 				return;
 			}
 
 			user = await res.json();
 			loading = false;
-		};
+		}
+
+		fetchUser();
 	});
 </script>
 
@@ -168,6 +170,31 @@ With Svelte (no Kit), you would handle everything client-side like so:
 {:else}
 	<Dashboard {user} />
 {/if}
+```
+
+You can also use an IIFE (Immediately Invoked Function Expression)
+
+```svelte
+<script>
+	let user = $state(null);
+	let loading = $state(true);
+
+	$effect(() => {
+		(async () => {
+			const res = await fetch('https://api.example.com/auth/me', {
+				credentials: 'include'
+			});
+
+			if (!res.ok) {
+				window.location.href = '/login';
+				return;
+			}
+
+			user = await res.json();
+			loading = false;
+		})();
+	});
+</script>
 ```
 
 From the code snippet above, this the page loads, shows a loading state, fetches data, then either renders content or redirects.

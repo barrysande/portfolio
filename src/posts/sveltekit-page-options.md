@@ -1,6 +1,6 @@
 ---
 title: 'SvelteKit Rendering Modes'
-subtitle: 'Sveltekit Options'
+subtitle: 'Sveltekit Page Options'
 category: 'Notes'
 date: '2026-04-22'
 readTime: '12 min'

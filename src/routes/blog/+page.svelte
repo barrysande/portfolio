@@ -31,7 +31,7 @@
 	}
 </script>
 
-<main class="mx-2 mb-20 md:mx-6 lg:mx-20" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
+<main class="mx-2 mb-20 md:mx-6 lg:mx-20 md:px-8 px-4" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
 	<!-- Header -->
 	<div class="mb-2">
 		<p class="text-primary font-mono text-xs font-semibold tracking-widest uppercase">

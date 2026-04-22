@@ -10,7 +10,7 @@
 </script>
 
 <section
-	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
+	class="mx-2 flex flex-col items-center justify-center gap-5  md:px-8 px-4  md:flex-row md:justify-start md:gap-10 md:mx-6 lg:mx-20"
 	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
 >
 	<div>

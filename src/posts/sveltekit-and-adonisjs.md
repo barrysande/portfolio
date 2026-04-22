@@ -74,7 +74,7 @@ Browser ←→ AdonisJS
 
 - Batteries included (ORM, auth, mail, validation, all first party configured)
 - No cookie relay complexity
-- Strong conventions for to enforce patterns as the application grows
+- Enforces reliable MVC pattern that tames chaos as the application grows
 - TypeScript-first
 
 **Cons:**

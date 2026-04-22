@@ -47,11 +47,11 @@
 	</button>
 
 	<!-- Post header -->
-	<header class="border-border mb-8 border-b pb-8">
+	<header class="border-border mb-8 border-b pb-4">
 		<p class="text-primary mb-3 font-mono text-xs tracking-widest uppercase">
 			{data.meta.category}
 		</p>
-		<h1 class="font-display text-ink mb-4 text-4xl leading-tight font-bold md:text-5xl">
+		<h1 class="font-display text-ink mb-2 text-4xl leading-tight font-bold md:text-5xl">
 			{data.meta.title}
 		</h1>
 		<p class="text-primary mb-4 text-base">{data.meta.subtitle}</p>

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { fly, fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import Archiveprojects from './Archiveprojects.svelte';
 	import Right from './Right.svelte';
-
-	let hoveredIndex = $state<number | null>(null);
 
 	const projects = [
 		{
@@ -45,7 +43,7 @@
 	];
 </script>
 
-<section class="pt-4 md:pt-16" in:fly={{ y: 40, duration: 800 }} out:fade>
+<section class="pt-4 md:pt-16" in:fly={{ y: 40, duration: 800 }}>
 	<div class="mb-2 flex items-center justify-between">
 		<p class="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
 			Selected Work
@@ -58,12 +56,10 @@
 	</div>
 
 	<ul>
-		{#each projects as project, i}
+		{#each projects as project}
 			<li
 				class="group border-b border-border py-6"
-				onmouseenter={() => (hoveredIndex = i)}
-				onmouseleave={() => (hoveredIndex = null)}
-			>
+				>
 				<a
 					href={project.url}
 					target="_blank"
@@ -96,7 +92,7 @@
 							{project.category}
 						</span>
 						<span class="font-mono text-xs text-ink-muted">{project.year}</span>
-						<Right animate={hoveredIndex === i} />
+						<Right />
 					</div>
 				</a>
 			</li>

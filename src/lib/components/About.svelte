@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 </script>
 
 <section class="flex flex-col gap-5 pb-4 md:flex-row md:gap-10">
@@ -7,7 +7,6 @@
 		<h3
 			class="font-display text-2xl font-bold tracking-widest text-nowrap uppercase md:text-3xl"
 			in:fly={{ x: -200, duration: 1000 }}
-			out:fade
 		>
 			About
 		</h3>

@@ -5,7 +5,7 @@
 <footer class="border-border mx-2 mt-16 gap-4 border-t px-8 py-6 md:mx-6 lg:mx-20 pb-6">
 	<div class="items-cente flex flex-col justify-between gap-3 md:flex-row md:gap-5">
 		<div class="flex gap-0.5">
-			<Icon icon="solar:copyright-line-duotone" class=" size-3" />
+			<Icon icon="solar:copyright-line-duotone" class=" size-3 mt-0.5" />
 			<p class="text-ink-muted font-mono text-xs">2026 Barry Sande — all rights reserved</p>
 		</div>
 		<div class="flex items-center justify-between gap-4">

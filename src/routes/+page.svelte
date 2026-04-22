@@ -2,13 +2,15 @@
 	import About from '$lib/components/About.svelte';
 	import Skills from '$lib/components/Skills.svelte';
 	import Projects from '$lib/components/Projects.svelte';
-	import { fade, fly } from 'svelte/transition';
-	import Hero from '$lib/assets/hero.svg';
+	import { fly } from 'svelte/transition';
+	import HeroLight from '$lib/assets/hero.svg';
+	import HeroDark from '$lib/assets/hero_dark.svg';
 	import Icon from '@iconify/svelte';
 </script>
 
 <section
 	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
+	in:fly={{ x: -200, duration: 750 }}
 >
 	<div>
 		<p
@@ -20,11 +22,7 @@
 			/>
 		</p>
 
-		<h1
-			class="font-display text-primary pb-3 text-4xl font-bold md:text-5xl lg:text-6xl"
-			in:fly={{ x: -200, duration: 1000 }}
-			out:fade
-		>
+		<h1 class="font-display text-primary pb-3 text-4xl font-bold md:text-5xl lg:text-6xl">
 			Barry Sande
 		</h1>
 		<p class="text-ink pb-4 text-base font-normal">
@@ -33,7 +31,8 @@
 		</p>
 	</div>
 
-	<img src={Hero} alt="hero illustration" class="w-80 md:w-1/2" />
+	<img src={HeroLight} alt="hero illustration" class="block w-80 md:w-1/2 dark:hidden" />
+	<img src={HeroDark} alt="hero illustration" class="hidden w-80 md:w-1/2 dark:block" />
 </section>
 
 <section class="mx-2 flex flex-col items-center gap-3 p-8 md:mx-6">

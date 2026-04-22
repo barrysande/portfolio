@@ -20,7 +20,7 @@
 	];
 </script>
 
-<nav class="flex items-center gap-6">
+<nav class="flex items-center gap-6 mx-2 md:mx-6 lg:mx-20">
 	<ul class="flex items-center justify-center gap-4">
 		{#each navItems as navItem (navItem.id)}
 			<li

@@ -39,7 +39,7 @@
 </svelte:head>
 
 <article
-	class="mx-2 mb-20 px-2 md:mx-6 lg:mx-auto lg:max-w-2xl"
+	class="mx-2 mb-20 px-4 md:mx-6 md:px-8 lg:mx-auto lg:max-w-2xl"
 	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
 >
 	<!-- Back link -->

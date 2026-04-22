@@ -167,7 +167,11 @@ Without SSR, in a +page.svelte file you would have something close to this:
 {/if}
 ```
 
-I would like to reserve my comments on this option because I have not used it in production. These are mockups based on the Svelte Documentation on how or when to use lifecycle hooks or the `$effect` rune.
+My understanding of how this approach works (no SSR) is: the page renders first with whatever static content exists, then mounts, then fetches data from the API. Anything protected or waiting for an API response has to be handled with loading states — or you end up with blank sections of the page, which isn't great for UX.
+
+However, with SSR, the load functions run on the server before any HTML is sent to the browser. Data is fetched, HTML is rendered with that data, and the complete page is delivered to the user.
+
+I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation on how to use the `onMount` lifecycle hook or the `$effect` rune for data fetching.
 
 ## Option 3: Sveltekit SSR + API with BFF Pattern
 

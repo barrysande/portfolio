@@ -109,7 +109,7 @@ Cookies flow between the browser and API with `credentials: 'include'`.
 - No server-side rendering resulting in poor SEO for public pages
 - Loading states everywhere because data fetched after page loads
 - API must be publicly exposed creating a larger attack surface
-- You have to figure out routing, data loading, safe form handling, all of which Sveltekit offers.
+- You miss out on Sveltekit's great offerings like routing, data loading, and safe form handling. This more library stitching on key aspects of your app.
 
 Let me illustrate the difference. With SvelteKit's SSR:
 

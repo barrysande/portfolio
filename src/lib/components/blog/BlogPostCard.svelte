@@ -26,7 +26,7 @@
 
 <a
 	href="/blog/{slug}"
-	class="group flex cursor-pointer items-start gap-4 border-b border-border py-5 transition-colors md:gap-6"
+	class="group flex cursor-pointer items-center gap-4 border-b border-border py-5 transition-colors md:gap-6"
 >
 	<div
 		class="flex h-20 w-20 shrink-0 items-center justify-center rounded bg-surface-alt transition-colors duration-200 group-hover:bg-primary/10 md:h-24 md:w-24"

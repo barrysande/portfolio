@@ -11,16 +11,31 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import { ModeWatcher } from 'mode-watcher';
+	import { page } from '$app/state';
 
 	let { children } = $props();
 	let scrollY = $state(0);
 	const details: string =
-		'Barry Sande is a full-stack web developer and attorney. Barry Sande uses HTML, CSS, JavaScript, TypeScript, SvelteKit, TailwindCSS, Postgresql, Node.js with AdonisJS to create accessible, modern, and scalable experiences on the web.';
+		'Barry Sande is a full-stack web developer and attorney. Barry Sande uses HTML, CSS, JavaScript, TypeScript, SvelteKit, Postgresql, Node.js with AdonisJS to create accessible, modern, and scalable experiences on the web.';
 </script>
 
 <svelte:head>
 	<title>Barry Sande</title>
 	<meta name="description" content={details} />
+
+	<!-- Open Graph -->
+	<meta property="og:site_name" content="Barry Sande" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:title" content="Barry Sande" />
+	<meta property="og:description" content={details} />
+	<meta property="og:image" content="{page.url.origin}/assets/og.png" />
+
+	<!-- Twitter / X -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Barry Sande" />
+	<meta name="twitter:description" content={details} />
+	<meta name="twitter:image" content="{page.url.origin}/assets/og.png" />
 </svelte:head>
 
 <svelte:window bind:scrollY />

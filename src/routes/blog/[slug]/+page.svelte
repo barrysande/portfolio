@@ -1,6 +1,7 @@
 <script lang="ts">
 	import TableOfContents from '$lib/components/blog/TableOfContents.svelte';
 	import { copyCode } from '$lib/actions/copyCode';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
@@ -14,6 +15,23 @@
 		});
 	}
 </script>
+
+<svelte:head>
+	<title>{data.meta.title} — Barry Sande</title>
+	<meta name="description" content={data.meta.subtitle} />
+
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:title" content={data.meta.title} />
+	<meta property="og:description" content={data.meta.subtitle} />
+	<meta property="og:image" content="{page.url.origin}/assets/og.png" />
+	<meta property="article:published_time" content={data.meta.date} />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.meta.title} />
+	<meta name="twitter:description" content={data.meta.subtitle} />
+	<meta name="twitter:image" content="{page.url.origin}/assets/og.png" />
+</svelte:head>
 
 <article class="mx-2 mb-20 p-8 md:mx-6 lg:mx-auto lg:max-w-2xl">
 	<!-- Back link -->

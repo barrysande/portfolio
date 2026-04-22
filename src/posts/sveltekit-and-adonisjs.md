@@ -83,11 +83,11 @@ Browser ←→ AdonisJS
 - Inertia.js is an additional abstraction to learn
 - Smaller ecosystem than pure SvelteKit or Next.js
 
-Both monolith approaches avoid the complexity of cross-service authentication. Cookies work naturally because there's only one domain. The tradeoff is API reusability — if you need a mobile app later, you'll need to extract or duplicate API logic.
+Both monolith approaches avoid the complexity of cross-service authentication. Cookies work naturally because there's only one domain. The tradeoff is API reusability — i.e., in case you need a mobile app later, you'll need to extract or duplicate API logic.
 
 ## Option 2: Svelte + Direct API
 
-A client-side Svelte application that talks directly to an API. In this set up, concepts like server-side rendering are non-existent. Its only just Svelte components bundled and shipped to the browser fetching data via `onMount` hooks or the `$effect` rune.
+A client-side Svelte application that talks directly to an API. In this setup, concepts like server-side rendering are non-existent. It's just Svelte components bundled and shipped to the browser fetching data via `onMount` hooks or the `$effect` rune.
 
 ```text
 Browser ←→ AdonisJS API
@@ -141,12 +141,10 @@ With Svelte (no Kit), you handle everything client-side:
 ```svelte
 <!-- App.svelte or Dashboard.svelte -->
 <script>
-	import { onMount } from 'svelte';
-
 	let user = $state(null);
 	let loading = $state(true);
 
-	onMount(async () => {
+	$effect(async () => {
 		const res = await fetch('https://api.example.com/auth/me', {
 			credentials: 'include'
 		});
@@ -170,17 +168,15 @@ With Svelte (no Kit), you handle everything client-side:
 
 The page loads, shows a loading state, fetches data, then either renders content or redirects. The user always sees the loading state first.
 
-I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation.
+I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation. The `$effect()` rune is used here because it runs after the component has been mounted to the DOM. [See Docs](https://svelte.dev/docs/svelte/$effect#Understanding-lifecycle) for more information.
 
-## Option 3: Sveltekit SSR + API with BFF Pattern
+## Option 3: SvelteKit SSR + API with BFF Pattern
 
 SvelteKit handles rendering and acts as a Backend-for-Frontend (BFF). A separate AdonisJS API handles business logic, database, and background jobs.
 
 <Note>
   SSR does not mean CSR is off. SvelteKit allows using both on different routes. For more info, see my notes on it <a href="/blog/sveltekit-page-options">here</a>
 </Note>
-
-
 
 ```text
 Browser ←→ SvelteKit (BFF) ←→ AdonisJS API
@@ -195,11 +191,11 @@ api.example.com → AdonisJS (API)
 
 **Pros:**
 
-- Full SSR capabilities (SEO, fast initial loads, no loading flashes)
-- API is reusable (mobile and third parties)
+- Full SSR capabilities
+- API is reusable
 - API is private by default because only SvelteKit interacts with it
 - Request aggregation where SvelteKit combines multiple API calls into one response
-- Background jobs handled properly by AdonisJS
+- Background jobs handled by AdonisJS
 
 **Cons:**
 
@@ -208,7 +204,7 @@ api.example.com → AdonisJS (API)
 - Complexity in relaying data between layers
 - Cookie handling becomes your responsibility
 
-That last point is the hidden cost. More on that shortly.
+The last point is the hidden cost. More on that shortly.
 
 ## Why I Chose Option 3
 
@@ -228,7 +224,7 @@ I am familiar with SvelteKit. It's what I reached for when learning frontend dev
 
 I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
 
-- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection(DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer.
+- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection (DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer.
 - **TypeScript-first** — Great TypeScript support and even better in version 7 with automatically generated types and transformers.
 - **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection.
 - **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management.
@@ -236,7 +232,7 @@ I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
 - **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`.
 - **Documentation** — AdonisJS documentation is great and you can rely solely on them from learning to active development. There is also a great and active AdonisJS community on Discord and resources like community packages listed on the Adonis official website.
 
-## The Hidden Cost: You're the Middleman
+## The Hidden Cost: SvelteKit Becomes the Middleman
 
 When the browser talks directly to an API, cookies flow automatically:
 
@@ -259,7 +255,7 @@ SvelteKit receives `Set-Cookie` headers from the API. But those cookies are on S
 
 The same happens in reverse. When SvelteKit makes an authenticated API call, it must read cookies from its cookie jar, format them into a `Cookie` header string, and attach that header to the outgoing request.
 
-You become responsible for cookie relay. And cookies have sharp edges: domain matching, URL encoding, deletion semantics, secure flags. Things browsers handle automatically become your code.
+Your SvelteKit app is responsible for cookie relay. Cookies have sharp edges: domain matching, URL encoding, deletion semantics, secure flags. Things browsers handle automatically become your code. This was my Binding Vow, in true Jujutsu Kaisen fashion.
 
 I didn't fully appreciate this when choosing the architecture. It took debugging four separate cookie-related bugs in production before I understood the full picture.
 
@@ -291,6 +287,6 @@ I didn't fully appreciate this when choosing the architecture. It took debugging
 
 ## What Comes Next
 
-The architecture decision was just the beginning. Implementing authentication across this stack led me through a maze of cookie parsing, URL encoding issues, and framework-specific behaviours.
+Implementing authentication across this stack led me through a maze of cookie parsing, URL encoding issues, and framework-specific behaviours.
 
 In Part 2, I'll cover the cookie relay system I built, the four bugs that broke authentication in production, and the working solutions. If you're implementing session-based auth between SvelteKit and AdonisJS, that post will save you hours of debugging.

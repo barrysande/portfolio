@@ -2,6 +2,9 @@
 	import TableOfContents from '$lib/components/blog/TableOfContents.svelte';
 	import { copyCode } from '$lib/actions/copyCode';
 	import { page } from '$app/state';
+	import ChevronLeft from '$lib/components/ChevronLeft.svelte';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
 	let { data } = $props();
 
@@ -33,26 +36,27 @@
 	<meta name="twitter:image" content="{page.url.origin}/assets/og.png" />
 </svelte:head>
 
-<article class="mx-2 mb-20 p-8 md:mx-6 lg:mx-auto lg:max-w-2xl">
+<article class="mx-2 mb-20 md:mx-6 lg:mx-auto lg:max-w-2xl px-2">
 	<!-- Back link -->
-	<a
-		href="/blog"
-		class="mb-8 inline-flex cursor-pointer items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-muted transition-colors hover:text-primary"
-	>
-		← Writing
-	</a>
+	<button
+		onclick={() => {
+			goto(resolve('/blog'));
+		}}
+		class="text-ink-muted hover:text-primary mb-4 flex cursor-pointer items-center gap-2 font-mono text-xs tracking-widest uppercase transition-colors -ml-2"
+		><ChevronLeft />Writing
+	</button>
 
 	<!-- Post header -->
-	<header class="mb-8 border-b border-border pb-8">
-		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-primary">
+	<header class="border-border mb-8 border-b pb-8">
+		<p class="text-primary mb-3 font-mono text-xs tracking-widest uppercase">
 			{data.meta.category}
 		</p>
-		<h1 class="mb-4 font-display text-4xl font-bold leading-tight text-ink md:text-5xl">
+		<h1 class="font-display text-ink mb-4 text-4xl leading-tight font-bold md:text-5xl">
 			{data.meta.title}
 		</h1>
-		<p class="mb-4 text-base text-primary">{data.meta.subtitle}</p>
+		<p class="text-primary mb-4 text-base">{data.meta.subtitle}</p>
 		<div class="flex flex-wrap items-center justify-between gap-4">
-			<p class="font-mono text-xs text-ink-muted">
+			<p class="text-ink-muted font-mono text-xs">
 				{formatDate(data.meta.date)} &middot; {data.meta.readTime}
 			</p>
 			<TableOfContents headings={data.meta.headings ?? []} />
@@ -157,7 +161,9 @@
 		border-radius: 0.125rem;
 		cursor: pointer;
 		opacity: 0;
-		transition: opacity 0.15s ease, color 0.15s ease;
+		transition:
+			opacity 0.15s ease,
+			color 0.15s ease;
 	}
 
 	.prose :global(.code-wrapper:hover .copy-btn) {

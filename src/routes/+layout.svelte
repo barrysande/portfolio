@@ -1,5 +1,6 @@
 <script lang="ts">
-	import '@fontsource-variable/inter';
+	// Supports weights 200-800
+	import '@fontsource-variable/plus-jakarta-sans/wght.css';
 	import '@fontsource/roboto-mono/400.css';
 	import '@fontsource/roboto-mono/500.css';
 	import '@fontsource/roboto-mono/700.css';
@@ -9,7 +10,7 @@
 	import '../app.css';
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import { ModeWatcher } from "mode-watcher";
+	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
 	let scrollY = $state(0);
@@ -24,7 +25,12 @@
 
 <svelte:window bind:scrollY />
 
-<div class="sticky top-0 z-50 flex w-full justify-end bg-bg px-8 py-4 transition-shadow duration-200 {scrollY > 10 ? 'shadow-md' : ''}">
+<div
+	class="bg-bg sticky top-0 z-50 flex w-full justify-end px-8 py-4 transition-shadow duration-200 {scrollY >
+	10
+		? 'shadow-md'
+		: ''}"
+>
 	<Navbar />
 </div>
 

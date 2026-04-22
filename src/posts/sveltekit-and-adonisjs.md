@@ -32,7 +32,7 @@ A monolith keeps everything in one application which means that cookies travel f
 
 ### Option 1A: SvelteKit Monolith
 
-SvelteKit handles everything. It provides a way to create API routes in `+server.ts` files, database access happens directly, authentication uses a library like [Better Auth](https://better-auth.com/). You may also use [Supabase](https://supabase.com/docs/guides/auth/server-side) so that your interactions become API-like through an SDK that offers authentication, authorisation, and a Postgresql database. Another tool I have seen mentioned highly is [Convex](https://www.convex.dev/), but I haven't had any interaction with it.
+SvelteKit handles everything. It provides a way to create API routes in `+server.ts` files, database access happens directly, authentication uses a library like [Better Auth](https://better-auth.com/). You may also use [Supabase](https://supabase.com/docs/guides/auth/server-side) so that your interactions become API-like through an SDK that offers authentication, authorisation, and a Postgresql database. Another tool I have seen mentioned a lot is [Convex](https://www.convex.dev/), but I haven't had any interaction with it.
 
 ```text
 Browser ←→ SvelteKit
@@ -82,8 +82,8 @@ Browser ←→ AdonisJS
 **Cons:**
 
 - API is coupled to the monolith (mobile app needs separate routes)
-- Inertia.js is an additional abstraction to learn for me at the time
-- Smaller support for Svelte, especially Svelte + Inertia.js + AdonisJS. However, this is negligible because once you know the basics most things work.
+- Inertia.js was an additional abstraction to learn
+- Smaller support for Svelte than React and Vue's in this setup. However, this is negligible because once you know the basics most things work.
 
 Both monolith approaches avoid the complexity of cross-service authentication. Cookies work naturally because there's only one domain. The tradeoff is API reusability — i.e., in case you need a mobile app later, you'll need to extract or duplicate API logic.
 
@@ -106,12 +106,12 @@ Cookies flow between the browser and API with `credentials: 'include'`.
 
 **Cons:**
 
-- No server-side rendering (poor SEO for public pages)
-- Loading states everywhere (data fetched after page loads)
-- API must be publicly exposed (larger attack surface)
-- No file-based routing, load functions, or form actions — you build or bring your own
+- No server-side rendering resulting in poor SEO for public pages
+- Loading states everywhere because data fetched after page loads
+- API must be publicly exposed creating a larger attack surface
+- You have to figure out routing, data loading, safe form handling, all of which Sveltekit offers.
 
-Let me illustrate the UX difference. With SvelteKit's SSR:
+Let me illustrate the difference. With SvelteKit's SSR:
 
 ```typescript
 // SvelteKit +page.server.ts
@@ -136,9 +136,9 @@ export const load = async (event) => {
 };
 ```
 
-The redirect happens on the server. The protected page never reaches the browser.
+The redirect happens on Sveltekit's server.
 
-With Svelte (no Kit), you handle everything client-side:
+With Svelte (no Kit), you would handle everything client-side like so:
 
 ```svelte
 <!-- App.svelte or Dashboard.svelte -->
@@ -168,10 +168,10 @@ With Svelte (no Kit), you handle everything client-side:
 {/if}
 ```
 
-The page loads, shows a loading state, fetches data, then either renders content or redirects. The user always sees the loading state first.
+From the code snippet above, this the page loads, shows a loading state, fetches data, then either renders content or redirects.
 
 <Note>
-I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation. The `$effect()` rune is used here because it runs after the component has been mounted to the DOM. [See Docs](https://svelte.dev/docs/svelte/$effect#Understanding-lifecycle) for more information.
+I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation. The $effect rune is used here because it runs after the component has been mounted to the DOM. See the <a href="https://svelte.dev/docs/svelte/$effect#Understanding-lifecycle">docs</a> for more information.
 </Note>
 
 ## Option 3: SvelteKit SSR + API with BFF Pattern
@@ -212,7 +212,7 @@ The last point is the hidden cost. More on that shortly.
 
 ## Why I Chose Option 3
 
-My primary goal was a hands-on backend learning journey. My plan was to start with relational databases (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node.js-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
+My primary goal was a hands-on backend learning journey. My plan was to start with a relational database (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node.js-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
 
 But SvelteKit wasn't just a familiar fallback; its design makes it uniquely suited for the BFF (Backend-for-Frontend) pattern. It acts as the perfect secure intermediary to consume the AdonisJS API because of its robust server-based data loading system. Using `+page.server.ts` files and `+server.ts` endpoints, I could securely fetch data on the server before rendering the UI.
 
@@ -222,7 +222,7 @@ Lastly, this separation of concerns future-proofed the application. While the mo
 
 ## Why SvelteKit
 
-I am familiar with SvelteKit. It's what I reached for when learning frontend development. For this project, sticking with what I knew let me focus on the backend learning I was after.
+I am familiar with SvelteKit. It's what I reached for when learning frontend development. For this project, sticking with what I knew let me focus on the backend learning.
 
 ## Why AdonisJS
 

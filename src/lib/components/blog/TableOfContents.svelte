@@ -18,7 +18,7 @@
 {#if visible.length > 0}
 	<DropdownMenu.Root bind:open>
 		<DropdownMenu.Trigger
-			class=" bg-surface text-ink-muted hover:border-primary hover:text-primary flex cursor-pointer items-center gap-2 rounded border px-4 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
+			class=" bg-surface text-ink-muted border-border hover:text-primary flex cursor-pointer items-center gap-2 rounded border px-4 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
 		>
 			<Icon icon="heroicons:bars-3-bottom-left" class="size-3.5" />
 			Contents
@@ -31,7 +31,7 @@
 		{#if open}
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class=" bg-surface z-50 max-w-sm min-w-64 rounded border py-2 shadow-lg"
+					class=" bg-surface border-border z-50 max-w-sm min-w-64 rounded border py-2 shadow-lg"
 					sideOffset={6}
 					align="start"
 				>

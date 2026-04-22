@@ -197,6 +197,10 @@ You can also use an IIFE (Immediately Invoked Function Expression)
 </script>
 ```
 
+<Note>
+You will notice that in both cases, the callback passed to the $effect rune is not async, even though I am doing asynchronous operations inside. This is because an async function returns a Promise, which $effect does not expect — it expects either nothing or a cleanup function. The onMount lifecycle hook has the same behaviour: it takes a synchronous callback because its return value is reserved for cleanup logic, not promises. Matia AKA Joy of Code covers it extensively <a href="https://joyofcode.xyz/avoid-async-effects-in-svelte">here</a>
+</Note>
+
 From the code snippet above, this the page loads, shows a loading state, fetches data, then either renders content or redirects.
 
 <Note>
@@ -290,7 +294,7 @@ When SvelteKit makes an authenticated API call, it must read cookies from its co
 
 Your SvelteKit app is responsible for cookie relay. Footguns like domain matching, URL encoding and decoding, and deletion when handling cookies are the main source of bugs. Browsers are equipped to handle cookies automatically but the B-F-F approach forces you to parse the cookies. This was my Binding Vow, in true Jujutsu Kaisen fashion.
 
-I didn't fully appreciate this when choosing the architecture. It took debugging four separate cookie-related bugs in production before I understood the full picture. Shoutout to [Adocasts and Tom](https://www.youtube.com/watch?v=zvK4-suEKnM) for this video that gave me insight into how to do it.
+I didn't fully appreciate this when choosing the architecture. It took debugging four separate cookie-related bugs in production before I understood the full picture. Shoutout to Adocasts for [this video](https://www.youtube.com/watch?v=zvK4-suEKnM) that gave me insight into how to do it.
 
 ## When You Should Choose Differently
 

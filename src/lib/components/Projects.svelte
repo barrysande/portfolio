@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { quadInOut } from 'svelte/easing';
 	import Archiveprojects from './Archiveprojects.svelte';
 	import Right from './Right.svelte';
 
@@ -43,7 +44,7 @@
 	];
 </script>
 
-<section class="pt-4 md:pt-16" in:fly={{ y: 40, duration: 800 }}>
+<section class="pt-4 md:pt-16" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
 	<div class="mb-2 flex items-center justify-between">
 		<p class="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
 			Selected Work

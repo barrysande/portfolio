@@ -6,11 +6,12 @@
 	import HeroLight from '$lib/assets/hero.svg';
 	import HeroDark from '$lib/assets/hero_dark.svg';
 	import Icon from '@iconify/svelte';
+	import { quadInOut } from 'svelte/easing';
 </script>
 
 <section
 	class="mx-2 flex flex-col items-center justify-center gap-5 p-8 subpixel-antialiased md:mx-6 md:flex-row md:justify-start md:gap-10 lg:mx-20"
-	in:fly={{ x: -200, duration: 750 }}
+	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
 >
 	<div>
 		<p

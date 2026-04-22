@@ -70,10 +70,9 @@ Browser ←→ AdonisJS
 
 **Pros:**
 
-- Batteries included (ORM, auth, mail, queues all integrated)
-- Laravel-like developer experience
+- Batteries included (ORM, auth, mail, validation,  all first party configured)
 - No cookie relay complexity
-- Strong conventions for larger applications
+- Strong conventions for to enforce patterns as the application grows
 - TypeScript-first
 
 **Cons:**
@@ -207,11 +206,11 @@ That last point is the hidden cost. More on that shortly.
 
 ## Why I Chose Option 3
 
-My primary goal for this project was a hands-on backend learning journey. I wanted to dive deep into relational databases (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
+My primary goal for this project was a hands-on backend learning journey. I wanted to dive into relational databases (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
 
-But SvelteKit wasn't just a familiar fallback; its design makes it uniquely suited for the BFF (Backend-for-Frontend) pattern. It acts as the perfect secure intermediary to consume the AdonisJS API because of its robust server-based data loading system. Using +page.server.ts files and +server.ts endpoints, I could securely fetch data on the server before rendering the UI.
+But SvelteKit wasn't just a familiar fallback; its design makes it uniquely suited for the BFF (Backend-for-Frontend) pattern. It acts as the perfect secure intermediary to consume the AdonisJS API because of its robust server-based data loading system. Using `+page.server.ts` files and `+server.ts` endpoints, I could securely fetch data on the server before rendering the UI.
 
-Furthermore, SvelteKit’s native server-side form actions pair beautifully with its ecosystem of validation libraries. I could implement robust client and server form validation that integrates seamlessly with form actions and load functions, ensuring that only clean, strictly validated data is ever passed to the AdonisJS API.
+Furthermore, SvelteKit’s native server-side form actions pair perfectly with TypeScript validation ecosystems like SvelteKit Superforms and my schema library of choice, Valibot (though Zod or ArkType work just as well). This allowed me to implement robust client and server validation that integrates seamlessly with load functions and form actions. It’s the best of both worlds for UX and security: client-side validation provides immediate, onblur feedback to the user, while SvelteKit’s server-side validation acts as a strict gatekeeper, ensuring only expected data shapes reach the AdonisJS API.
 
 Lastly, this separation of concerns future-proofed the application. While the monolith approaches would have been faster to stand up initially, they would have painted me into a corner once a mobile app became necessary. The SPA approach, on the other hand, sacrificed too much on UX and SEO. The SvelteKit BFF pattern carried the highest upfront complexity—especially regarding session management—but it was the only architecture that satisfied all of the project's long-term requirements.
 

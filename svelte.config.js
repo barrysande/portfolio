@@ -25,7 +25,7 @@ function remarkExtractHeadings() {
 }
 
 const highlighter = await createHighlighter({
-	themes: ['catppuccin-mocha', 'poimandres'],
+	themes: ['monokai', 'nord'],
 	langs: ['javascript', 'typescript', 'svelte', 'bash', 'sql', 'html', 'css', 'json', 'text']
 });
 
@@ -43,7 +43,7 @@ const config = {
 					const useLang = lang && loaded.includes(lang) ? lang : 'text';
 					const html = highlighter.codeToHtml(code, {
 						lang: useLang,
-						themes: { light: 'catppuccin-mocha', dark: 'poimandres' },
+						themes: { light: 'monokai', dark: 'nord' },
 						defaultColor: false
 					});
 					// Wrap in {@html} so Svelte doesn't parse { } as expressions.

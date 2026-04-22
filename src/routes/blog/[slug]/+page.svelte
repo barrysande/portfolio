@@ -5,6 +5,8 @@
 	import ChevronLeft from '$lib/components/ChevronLeft.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { fly } from 'svelte/transition';
+	import { quadInOut } from 'svelte/easing';
 
 	let { data } = $props();
 
@@ -36,13 +38,16 @@
 	<meta name="twitter:image" content="{page.url.origin}/assets/og.png" />
 </svelte:head>
 
-<article class="mx-2 mb-20 md:mx-6 lg:mx-auto lg:max-w-2xl px-2">
+<article
+	class="mx-2 mb-20 px-2 md:mx-6 lg:mx-auto lg:max-w-2xl"
+	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
+>
 	<!-- Back link -->
 	<button
 		onclick={() => {
 			goto(resolve('/blog'));
 		}}
-		class="text-ink-muted hover:text-primary mb-4 flex cursor-pointer items-center gap-2 font-mono text-xs tracking-widest uppercase transition-colors -ml-2"
+		class="text-ink-muted hover:text-primary mb-4 -ml-2 flex cursor-pointer items-center gap-2 font-mono text-xs tracking-widest uppercase transition-colors"
 		><ChevronLeft />Writing
 	</button>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Pagination } from 'bits-ui';
 	import { fly } from 'svelte/transition';
+	import { quadInOut } from 'svelte/easing';
 	import BlogPostCard from '$lib/components/blog/BlogPostCard.svelte';
 	// import NewsletterInbox from '$lib/components/blog/NewsletterInbox.svelte';
 
@@ -30,7 +31,7 @@
 	}
 </script>
 
-<main class="mx-2 mb-20 md:mx-6 lg:mx-20" in:fly={{ x: 200, duration: 750 }}>
+<main class="mx-2 mb-20 md:mx-6 lg:mx-20" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
 	<!-- Header -->
 	<div class="mb-2">
 		<p class="text-primary font-mono text-xs font-semibold tracking-widest uppercase">

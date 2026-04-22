@@ -51,7 +51,7 @@
 		<span class="font-mono text-xs text-ink-muted">2024 – 2025</span>
 	</div>
 
-	<div class="mb-8 flex items-baseline justify-between border-b border-border pb-4">
+	<div class="flex items-baseline justify-between border-b border-border pb-4">
 		<h2 class="font-display text-3xl font-bold text-ink md:text-4xl">Recent projects.</h2>
 	</div>
 

@@ -42,15 +42,15 @@
 	</div>
 
 	<!-- Category filter tabs -->
-	<nav class="border-border mb-8 flex flex-wrap gap-x-6 gap-y-2 border-b pb-4">
-		{#each categories as cat}
+	<nav class="border-border flex flex-wrap gap-x-6 gap-y-2 border-b pb-4">
+		{#each categories as category}
 			<button
 				class="cursor-pointer pb-3 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
-				class:active={activeCategory === cat}
-				class:inactive={activeCategory !== cat}
-				onclick={() => setCategory(cat)}
+				class:active={activeCategory === category}
+				class:inactive={activeCategory !== category}
+				onclick={() => setCategory(category)}
 			>
-				{cat}
+				{category}
 			</button>
 		{/each}
 	</nav>

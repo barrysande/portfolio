@@ -285,6 +285,6 @@ I didn't fully appreciate this when choosing the architecture. It took debugging
 
 ## What Comes Next
 
-The architecture decision was just the beginning. Implementing authentication across this stack led me through a maze of cookie parsing, URL encoding issues, and framework-specific behaviors.
+The architecture decision was just the beginning. Implementing authentication across this stack led me through a maze of cookie parsing, URL encoding issues, and framework-specific behaviours.
 
 In Part 2, I'll cover the cookie relay system I built, the four bugs that broke authentication in production, and the working solutions. If you're implementing session-based auth between SvelteKit and AdonisJS, that post will save you hours of debugging.

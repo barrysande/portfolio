@@ -28,32 +28,34 @@ With these constraints, I evaluated three architectural approaches.
 
 ## Option 1: The Monolith
 
-A monolith keeps everything in one application — no separate API, no cross-service communication, no cookie relay complexity. There are two main ways to build a monolith for this stack.
+A monolith keeps everything in one application which means that cookies travel from the entity returning a database query result to the browser. There are two main ways to build a monolith for this stack.
 
 ### Option 1A: SvelteKit Monolith
 
-SvelteKit handles everything. API routes live in `+server.ts` files, database access happens directly, authentication uses a library like Lucia Auth.
+SvelteKit handles everything. It provides a way to create API routes in `+server.ts` files, database access happens directly, authentication uses a library like [Better Auth](https://better-auth.com/). You may also use [Supabase](https://supabase.com/docs/guides/auth/server-side) so that your interactions become API-like through an SDK that offers authentication, authorisation, and a Postgresql database. Another tool I have seen mentioned highly is [Convex](https://www.convex.dev/), but I haven't had any interaction with it.
 
 ```text
 Browser ←→ SvelteKit
 ├── Pages (+page.svelte)
 ├── API routes (+server.ts)
-├── Database (Knex/Prisma/Drizzle)
-└── Auth (BetterAuth)
+├── Database (Knex/Prisma/Drizzle/Supabase)
+└── Auth (BetterAuth/Supabase Auth)
 ```
 
 **Pros:**
 
 - Simplest deployment (one application)
+- Supabase is self-hostable
 - No CORS configuration
 - No cookie relay complexity
-- Type safety across the entire stack
+- Type safety across the entire stack especially with an ORM or Supabase
 - Fastest development for solo developers or small teams
+- Can easily use Backend-as-a-Service products like Supabase and Convex for auth and the database.
 
 **Cons:**
 
 - API is coupled to SvelteKit (mobile app can't reuse it without separate routes)
-- Bring your own ORM, auth, and queue libraries
+- Bring your own ORM, auth, and queue libraries - same package stitching like Express
 - Less structure for large applications
 
 ### Option 1B: AdonisJS + Inertia Monolith
@@ -80,8 +82,8 @@ Browser ←→ AdonisJS
 **Cons:**
 
 - API is coupled to the monolith (mobile app needs separate routes)
-- Inertia.js is an additional abstraction to learn
-- Smaller ecosystem than pure SvelteKit or Next.js
+- Inertia.js is an additional abstraction to learn for me at the time
+- Smaller support for Svelte, especially Svelte + Inertia.js + AdonisJS. However, this is negligible because once you know the basics most things work.
 
 Both monolith approaches avoid the complexity of cross-service authentication. Cookies work naturally because there's only one domain. The tradeoff is API reusability — i.e., in case you need a mobile app later, you'll need to extract or duplicate API logic.
 
@@ -168,7 +170,9 @@ With Svelte (no Kit), you handle everything client-side:
 
 The page loads, shows a loading state, fetches data, then either renders content or redirects. The user always sees the loading state first.
 
+<Note>
 I would like to reserve further comments on this option because I have not used it in production. The code above is a mockup based on the Svelte documentation. The `$effect()` rune is used here because it runs after the component has been mounted to the DOM. [See Docs](https://svelte.dev/docs/svelte/$effect#Understanding-lifecycle) for more information.
+</Note>
 
 ## Option 3: SvelteKit SSR + API with BFF Pattern
 
@@ -208,7 +212,7 @@ The last point is the hidden cost. More on that shortly.
 
 ## Why I Chose Option 3
 
-My primary goal for this project was a hands-on backend learning journey. I wanted to dive into relational databases (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
+My primary goal was a hands-on backend learning journey. My plan was to start with relational databases (specifically PostgreSQL), learn how to architect RESTful APIs, and explore a modern ORM. Because I already had strong foundational knowledge of Node.js and the SvelteKit ecosystem, pivoting to a structured Node.js-based framework like AdonisJS felt like a natural progression. Sticking with SvelteKit for the frontend meant I didn't have to spend mental energy re-learning UI concepts, allowing me to focus entirely on the backend architecture.
 
 But SvelteKit wasn't just a familiar fallback; its design makes it uniquely suited for the BFF (Backend-for-Frontend) pattern. It acts as the perfect secure intermediary to consume the AdonisJS API because of its robust server-based data loading system. Using `+page.server.ts` files and `+server.ts` endpoints, I could securely fetch data on the server before rendering the UI.
 
@@ -253,11 +257,11 @@ SvelteKit receives `Set-Cookie` headers from the API. But those cookies are on S
 2. Extracts cookie names, values, and attributes
 3. Sets those cookies via its `cookies.set()` API to relay them to the browser
 
-The same happens in reverse. When SvelteKit makes an authenticated API call, it must read cookies from its cookie jar, format them into a `Cookie` header string, and attach that header to the outgoing request.
+When SvelteKit makes an authenticated API call, it must read cookies from its cookie jar, format them into a `Cookie` header string, and attach that header to the outgoing request.
 
-Your SvelteKit app is responsible for cookie relay. Cookies have sharp edges: domain matching, URL encoding, deletion semantics, secure flags. Things browsers handle automatically become your code. This was my Binding Vow, in true Jujutsu Kaisen fashion.
+Your SvelteKit app is responsible for cookie relay. Footguns like domain matching, URL encoding and decoding, and deletion when handling cookies are the main source of bugs. Browsers are equipped to handle cookies automatically but the B-F-F approach forces you to parse the cookies. This was my Binding Vow, in true Jujutsu Kaisen fashion.
 
-I didn't fully appreciate this when choosing the architecture. It took debugging four separate cookie-related bugs in production before I understood the full picture.
+I didn't fully appreciate this when choosing the architecture. It took debugging four separate cookie-related bugs in production before I understood the full picture. Shoutout to [Adocasts and Tom](https://www.youtube.com/watch?v=zvK4-suEKnM) for this video that gave me insight into how to do it.
 
 ## When You Should Choose Differently
 

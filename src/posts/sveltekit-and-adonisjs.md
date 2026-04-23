@@ -3,7 +3,6 @@ title: 'SvelteKit and AdonisJS: A Full-Stack Pairing'
 subtitle: 'Why I Chose SvelteKit and AdonisJS for my Backend Learning Journey'
 category: 'Engineering'
 date: '2026-04-20'
-readTime: '12 min'
 published: true
 ---
 

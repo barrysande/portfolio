@@ -3,7 +3,6 @@ title: "Why I Always Reach for PostgreSQL"
 subtitle: "In a world of specialized databases, the boring choice keeps being the right one."
 category: "Craft"
 date: "2026-02-28"
-readTime: "4 min"
 published: true
 ---
 

@@ -6,6 +6,18 @@ import rehypeSlug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
 import GithubSlugger from 'github-slugger';
 
+function remarkReadTime() {
+	return function (tree, file) {
+		let wordCount = 0;
+		visit(tree, 'text', (node) => {
+			wordCount += node.value.trim().split(/\s+/).filter(Boolean).length;
+		});
+		const minutes = Math.ceil(wordCount / 238);
+		if (!file.data.fm) file.data.fm = {};
+		file.data.fm.readTime = `${minutes} min read`;
+	};
+}
+
 function remarkExtractHeadings() {
 	return function (tree, file) {
 		const slugger = new GithubSlugger();
@@ -35,7 +47,7 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extensions: ['.svx', '.md'],
-			remarkPlugins: [remarkExtractHeadings],
+			remarkPlugins: [remarkReadTime, remarkExtractHeadings],
 			rehypePlugins: [rehypeSlug],
 			highlight: {
 				highlighter: (code, lang) => {

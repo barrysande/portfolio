@@ -18,7 +18,7 @@ Before choosing any technology, I listed what mattered:
 
 - **Server-side rendering** — good SEO for public pages and fast initial loads
 - **Authenticated sections** — dashboard, user settings, protected resources
-- **Future mobile app** — iOS and Android would eventually need the same data
+- **Future mobile app** — native apps would eventually need the same data
 - **Real-time features** — live updates, notifications, collaborative features
 - **Background jobs** — email queues, image processing, scheduled tasks
 - **Developer experience** — type safety, good tooling, productive workflow
@@ -53,9 +53,9 @@ Browser ←→ SvelteKit
 
 **Cons:**
 
-- API is coupled to SvelteKit. Mobile apps can't use session cookies, so you'd need separate token-based auth routes. Scaling is also tricky you can't scale API and frontend independently, and API routes mixed with page routes can get messy as the app grows.
+- API is coupled to SvelteKit. Mobile apps can't use session cookies, so you'd need separate token-based auth routes. Scaling is also tricky you can't scale API and frontend independently, and API routes mixed with page routes can get messy as the app grows
 - Bring your own ORM, auth, and queue libraries - same package stitching like Express
-- Less structure for large applications
+- Less structure for large applications.
 
 ### Option 1B: AdonisJS + Inertia Monolith
 
@@ -76,7 +76,7 @@ Browser ←→ AdonisJS
 - Batteries included (ORM, auth, mail, validation, all first party configured)
 - No cookie relay complexity
 - Enforces reliable MVC pattern that tames chaos as the application grows
-- TypeScript-first
+- TypeScript-first.
 
 **Cons:**
 
@@ -101,7 +101,7 @@ Cookies flow between the browser and API with `credentials: 'include'`.
 - Simple cookie handling (browser manages everything)
 - API is fully reusable (web, mobile, third parties)
 - Clear separation of concerns
-- Can deploy frontend on a CDN
+- Can deploy frontend on a CDN.
 
 **Cons:**
 
@@ -197,7 +197,7 @@ You can also use an IIFE (Immediately Invoked Function Expression)
 ```
 
 <Note>
-You will notice that in both cases, the callback passed to the $effect rune is not async, even though I am doing asynchronous operations inside. This is because an async function returns a Promise, which $effect does not expect — it expects either nothing or a cleanup function. The onMount lifecycle hook has the same behaviour: it takes a synchronous callback because its return value is reserved for cleanup logic, not promises. Matia AKA Joy of Code covers it extensively <a href="https://joyofcode.xyz/avoid-async-effects-in-svelte">here</a>
+You will notice that in both cases, the callback passed to the $effect rune is not async, even though I am doing asynchronous operations inside. This is because an async function returns a Promise, which $effect does not expect — it expects either nothing or a cleanup function. The onMount lifecycle hook has the same behaviour: it takes a synchronous callback because its return value is reserved for cleanup logic, not promises. Matia AKA Joy of Code covers it extensively <a href="https://joyofcode.xyz/avoid-async-effects-in-svelte">here</a>.
 </Note>
 
 From the code snippet above, this the page loads, shows a loading state, fetches data, then either renders content or redirects.
@@ -211,7 +211,7 @@ I would like to reserve further comments on this option because I have not used 
 SvelteKit handles rendering and acts as a Backend-for-Frontend (BFF). A separate AdonisJS API handles business logic, database, and background jobs.
 
 <Note>
-  SSR does not mean CSR is off. SvelteKit allows using both on different routes. For more info, see my notes on it <a href="/blog/sveltekit-page-options">here</a>
+  SSR does not mean CSR is off. SvelteKit allows using both on different routes. For more info, see my notes on it <a href="/blog/sveltekit-page-options">here</a>.
 </Note>
 
 ```text
@@ -231,14 +231,14 @@ api.example.com → AdonisJS (API)
 - API is reusable
 - API is private by default because only SvelteKit interacts with it
 - Request aggregation where SvelteKit combines multiple API calls into one response
-- Background jobs handled by AdonisJS
+- Background jobs handled by AdonisJS.
 
 **Cons:**
 
 - Two applications to deploy and maintain
 - Server-to-server communication adds latency
 - Complexity in relaying data between layers
-- Cookie handling becomes your responsibility
+- Cookie handling becomes your responsibility.
 
 The last point is the hidden cost. More on that shortly.
 
@@ -260,12 +260,12 @@ I am familiar with SvelteKit. It's what I reached for when learning frontend dev
 
 I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
 
-- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection (DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer.
+- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection (DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer
 - **TypeScript-first** — Great TypeScript support and even better in version 7 with automatically generated types and transformers.
-- **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection.
-- **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management.
-- **Adonis CLI** — well-documented and easy to use CLI with ability to create custom commands when needed.
-- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`.
+- **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection
+- **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management
+- **Adonis CLI** — well-documented and easy to use CLI with ability to create custom commands when needed
+- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`
 - **Documentation** — AdonisJS documentation is great and you can rely solely on them from learning to active development. There is also a great and active AdonisJS community on Discord and resources like community packages listed on the Adonis official website.
 
 ## The Hidden Cost: SvelteKit Becomes the Middleman
@@ -287,7 +287,7 @@ SvelteKit receives `Set-Cookie` headers from the API. But those cookies are on S
 
 1. Parses the `Set-Cookie` header strings
 2. Extracts cookie names, values, and attributes
-3. Sets those cookies via its `cookies.set()` API to relay them to the browser
+3. Sets those cookies via its `cookies.set()` API to relay them to the browser.
 
 When SvelteKit makes an authenticated API call, it must read cookies from its cookie jar, format them into a `Cookie` header string, and attach that header to the outgoing request.
 
@@ -301,25 +301,25 @@ I didn't fully appreciate this when choosing the architecture. It took debugging
 
 - You'll never need a mobile app or third-party API access
 - Your team is small and wants minimal operational overhead
-- You're comfortable bringing your own ORM, auth, and queue libraries
+- You're comfortable bringing your own ORM, auth, and queue libraries.
 
 **Choose AdonisJS + Inertia if:**
 
 - You want batteries-included backend with modern frontend components
-- You don't need a separate API for mobile (or can add it later)
+- You don't need a separate API for mobile (or can add it later).
 
 **Choose SPA + direct API if:**
 
 - SEO doesn't matter (dashboard, admin panel, internal tool)
 - Loading states are acceptable
-- You want the simplest possible cookie handling
+- You want the simplest possible cookie handling.
 
 **Choose SSR + BFF if:**
 
 - You need SSR and a reusable API
 - Mobile apps are planned from the start
 - You have complex background processing needs
-- You're willing to handle the middleware complexity
+- You're willing to handle the middleware complexity.
 
 ## What Comes Next
 

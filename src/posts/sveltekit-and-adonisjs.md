@@ -54,7 +54,7 @@ Browser ←→ SvelteKit
 
 **Cons:**
 
-- API is coupled to SvelteKit (mobile app can't reuse it without separate routes)
+- API is coupled to SvelteKit. Mobile apps can't use session cookies, so you'd need separate token-based auth routes. Scaling is also tricky you can't scale API and frontend independently, and API routes mixed with page routes can get messy as the app grows.
 - Bring your own ORM, auth, and queue libraries - same package stitching like Express
 - Less structure for large applications
 
@@ -69,7 +69,7 @@ Browser ←→ AdonisJS
 ├── Svelte/React/Vue pages
 ├── Database (Lucid ORM)
 ├── Auth (@adonisjs/auth)
-└── Queues (@adonisjs/queue)
+└── Queues (custom database-backed queues using Postgresql's SKIP LOCKED AND UPDATE or BullMQ/RabbitMQ or @adonisjs/queue)
 ```
 
 **Pros:**

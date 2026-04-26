@@ -68,7 +68,7 @@ Browser ←→ AdonisJS
 ├── Svelte/React/Vue pages
 ├── Database (Lucid ORM)
 ├── Auth (@adonisjs/auth)
-└── Queues (custom database-backed queues using Postgresql's SKIP LOCKED AND UPDATE or BullMQ/RabbitMQ or @adonisjs/queue)
+└── Queues (custom database-backed queues using Postgresql's SKIP LOCKED and FOR UPDATE or BullMQ/RabbitMQ or @adonisjs/queue)
 ```
 
 **Pros:**
@@ -265,7 +265,7 @@ I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
 - **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection
 - **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management
 - **Adonis CLI** — well-documented and easy to use CLI with ability to create custom commands when needed
-- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`
+- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and FOR UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`
 - **Documentation** — AdonisJS documentation is great and you can rely solely on them from learning to active development. There is also a great and active AdonisJS community on Discord and resources like community packages listed on the Adonis official website.
 
 ## The Hidden Cost: SvelteKit Becomes the Middleman

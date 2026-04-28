@@ -1,7 +1,9 @@
 ---
 title: 'SvelteKit and AdonisJS: A Full-Stack Pairing'
 subtitle: 'Why I Chose SvelteKit and AdonisJS for my Backend Learning Journey'
-category: 'Engineering'
+type: 'article'
+topic: 'Software Engineering'
+tags: ['sveltekit', 'adonisjs', 'architecture', 'authentication']
 date: '2026-04-20'
 published: true
 ---

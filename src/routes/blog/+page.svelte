@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Pagination } from 'bits-ui';
 	import { fly } from 'svelte/transition';
-	import { quadInOut } from 'svelte/easing';
 	import BlogPostCard from '$lib/components/blog/BlogPostCard.svelte';
 	// import NewsletterInbox from '$lib/components/blog/NewsletterInbox.svelte';
 
@@ -9,52 +8,92 @@
 
 	const PER_PAGE = 10;
 
-	let activeCategory = $state('All');
+	const TYPES = ['All', 'Articles', 'Notes'];
+	const TOPICS = ['All', 'Software Engineering', 'System Design', 'Legal Practice'];
+
+	let query = $state('');
+	let activeType = $state('All');
+	let activeTopic = $state('All');
 	let currentPage = $state(1);
 
-	const CATEGORIES = ['All', 'Engineering', 'Legal Practice', 'Notes', 'Software Design'];
-
-	const categories = $derived([
-		...CATEGORIES,
-		...data.posts.map((p) => p.category).filter((c) => !CATEGORIES.includes(c))
-	]);
-
 	const filtered = $derived(
-		activeCategory === 'All' ? data.posts : data.posts.filter((p) => p.category === activeCategory)
+		data.posts.filter((p) => {
+			const matchType =
+				activeType === 'All' ||
+				(activeType === 'Articles' && p.type === 'article') ||
+				(activeType === 'Notes' && p.type === 'note');
+			const matchTopic = activeTopic === 'All' || p.topic === activeTopic;
+			const q = query.toLowerCase().trim();
+			const matchSearch =
+				!q ||
+				p.title.toLowerCase().includes(q) ||
+				p.tags.some((t) => t.toLowerCase().includes(q));
+			return matchType && matchTopic && matchSearch;
+		})
 	);
 
 	const paginated = $derived(filtered.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE));
 
-	function setCategory(cat: string) {
-		activeCategory = cat;
+	function resetPage() {
 		currentPage = 1;
 	}
 </script>
 
-<main class="mx-2 mb-20 md:mx-6 lg:mx-20 md:px-8 px-4" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
+<main class="mx-2 mb-20 p-8 md:mx-6 lg:mx-20" in:fly={{ x: 200, duration: 750 }}>
 	<!-- Header -->
 	<div class="mb-2">
-		<p class="text-primary font-mono text-xs font-semibold tracking-widest uppercase">
+		<p class="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
 			From the desk
 		</p>
 	</div>
-	<div class="border-border mb-8 border-b pb-4">
-		<h1 class="font-display text-ink text-4xl font-bold md:text-5xl">Writing.</h1>
+	<div class="mb-8 border-b border-border pb-4">
+		<h1 class="font-display text-4xl font-bold text-ink md:text-5xl">Writing.</h1>
 	</div>
 
-	<!-- Category filter tabs -->
-	<nav class="border-border flex flex-wrap gap-x-6 gap-y-2 border-b pb-4">
-		{#each categories as category (category)}
-			<button
-				class="cursor-pointer pb-3 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
-				class:active={activeCategory === category}
-				class:inactive={activeCategory !== category}
-				onclick={() => setCategory(category)}
-			>
-				{category}
-			</button>
-		{/each}
-	</nav>
+	<!-- Search -->
+	<div class="mb-4">
+		<input
+			type="search"
+			bind:value={query}
+			oninput={resetPage}
+			placeholder="Search by title or tag..."
+			class="w-full rounded shadow-sm dark:shadow bg-surface px-4 py-2 font-mono text-sm text-ink placeholder:text-ink-muted focus:border-primary focus:outline-none"
+		/>
+	</div>
+
+	<!-- Type filter -->
+	<div class="mb-4 flex items-center gap-1">
+		<span class="mr-2 font-mono text-xs uppercase tracking-widest text-ink-muted">Type:</span>
+		<nav class="flex gap-x-4">
+			{#each TYPES as t (t)}
+				<button
+					class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
+					class:active={activeType === t}
+					class:inactive={activeType !== t}
+					onclick={() => { activeType = t; resetPage(); }}
+				>
+					{t}
+				</button>
+			{/each}
+		</nav>
+	</div>
+
+	<!-- Topic filter -->
+	<div class="mb- flex items-center gap-1 border-b border-border pb-4">
+		<span class="mr-2 font-mono text-xs uppercase tracking-widest text-ink-muted">Topic:</span>
+		<nav class="flex flex-wrap gap-x-4 gap-y-1">
+			{#each TOPICS as topic (topic)}
+				<button
+					class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
+					class:active={activeTopic === topic}
+					class:inactive={activeTopic !== topic}
+					onclick={() => { activeTopic = topic; resetPage(); }}
+				>
+					{topic}
+				</button>
+			{/each}
+		</nav>
+	</div>
 
 	<!-- Post list -->
 	{#if paginated.length > 0}
@@ -65,7 +104,9 @@
 						slug={post.slug}
 						title={post.title}
 						subtitle={post.subtitle}
-						category={post.category}
+						type={post.type}
+						topic={post.topic}
+						tags={post.tags}
 						date={post.date}
 						readTime={post.readTime}
 						index={(currentPage - 1) * PER_PAGE + i}
@@ -74,7 +115,7 @@
 			{/each}
 		</ul>
 	{:else}
-		<p class="text-ink-muted py-16 text-center font-mono text-sm">No posts in this category yet.</p>
+		<p class="py-16 text-center font-mono text-sm text-ink-muted">Nothing found.</p>
 	{/if}
 
 	<!-- Pagination -->
@@ -89,7 +130,7 @@
 				{#snippet children({ pages })}
 					<div class="flex items-center gap-1">
 						<Pagination.PrevButton
-							class="text-ink-muted hover:bg-surface-alt hover:text-ink flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+							class="flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm text-ink-muted transition-colors hover:bg-surface-alt hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
 						>
 							←
 						</Pagination.PrevButton>
@@ -98,20 +139,19 @@
 							{#if page.type === 'page'}
 								<Pagination.Page
 									{page}
-									class="page-btn hover:bg-surface-alt flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors"
+									class="page-btn flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors hover:bg-surface-alt"
 								>
 									{page.value}
 								</Pagination.Page>
 							{:else}
-								<span
-									class="text-ink-muted flex h-8 w-8 items-center justify-center font-mono text-sm"
+								<span class="flex h-8 w-8 items-center justify-center font-mono text-sm text-ink-muted"
 									>…</span
 								>
 							{/if}
 						{/each}
 
 						<Pagination.NextButton
-							class="text-ink-muted hover:bg-surface-alt hover:text-ink flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+							class="flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm text-ink-muted transition-colors hover:bg-surface-alt hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
 						>
 							→
 						</Pagination.NextButton>

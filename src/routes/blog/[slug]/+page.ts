@@ -9,7 +9,9 @@ export const load: PageLoad = async ({ params }) => {
 			meta: post.metadata as {
 				title: string;
 				subtitle: string;
-				category: string;
+				type: 'article' | 'note';
+				topic: string;
+				tags: string[];
 				date: string;
 				readTime: string;
 				headings?: Array<{ id: string; text: string; level: number }>;

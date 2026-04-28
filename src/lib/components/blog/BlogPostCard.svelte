@@ -5,13 +5,15 @@
 		slug: string;
 		title: string;
 		subtitle: string;
-		category: string;
+		type: 'article' | 'note';
+		topic: string;
+		tags: string[];
 		date: string;
 		readTime: string;
 		index: number;
 	}
 
-	let { slug, title, subtitle, category, date, readTime, index }: Props = $props();
+	let { slug, title, subtitle, type, topic, tags, date, readTime, index }: Props = $props();
 
 	const num = $derived(String(index + 1).padStart(2, '0'));
 
@@ -26,23 +28,34 @@
 
 <a
 	href="/blog/{slug}"
-	class="group flex cursor-pointer items-center gap-4 border-b border-border py-5 transition-colors md:gap-6"
+	class="group border-border flex cursor-pointer items-center gap-4 border-b py-5 transition-colors md:gap-6"
 >
 	<div
-		class="flex h-20 w-20 shrink-0 items-center justify-center rounded bg-surface-alt transition-colors duration-200 group-hover:bg-primary/10 md:h-24 md:w-24"
+		class="bg-surface-alt group-hover:bg-primary/10 flex h-20 w-20 shrink-0 items-center justify-center rounded transition-colors duration-200 md:h-24 md:w-24"
 	>
-		<span class="font-mono text-lg font-medium text-ink-muted group-hover:text-primary">{num}</span>
+		<span class="text-ink-muted group-hover:text-primary font-mono text-lg font-medium">{num}</span>
 	</div>
 
 	<div class="flex min-w-0 flex-1 flex-col gap-1.5 pt-1">
-		<span class="font-mono text-xs uppercase tracking-widest text-primary">{category}</span>
+		<span class="text-primary font-mono text-xs tracking-widest uppercase">
+			{type} &middot; {topic}
+		</span>
 		<span
-			class="font-display text-xl font-semibold text-primary transition-colors duration-200 group-hover:text-accent md:text-2xl"
+			class="font-display text-primary group-hover:text-accent text-xl font-semibold transition-colors duration-200 md:text-2xl"
 		>
 			{title}
 		</span>
-		<span class="line-clamp-2 text-sm text-ink-muted">{subtitle}</span>
-		<span class="mt-1 font-mono text-xs text-ink-muted">
+		<span class="text-ink-muted line-clamp-2 text-sm">{subtitle}</span>
+		{#if tags.length}
+			<ul class="flex flex-wrap items-center gap-1.5">
+				{#each tags as tag (tag)}
+					<li class="bg-surface-alt text-ink-muted rounded-full px-2.5 pb-0.5 font-mono text-xs flex items-center">
+						#{tag}
+					</li>
+				{/each}
+			</ul>
+		{/if}
+		<span class="text-ink-muted mt-1 font-mono text-xs">
 			{formatDate(date)} &middot; {readTime}
 		</span>
 	</div>

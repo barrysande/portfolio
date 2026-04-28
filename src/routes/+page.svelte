@@ -10,12 +10,11 @@
 </script>
 
 <section
-	class="mx-2 flex flex-col items-center justify-center gap-5  md:px-8 px-4  md:flex-row md:justify-start md:gap-10 md:mx-6 lg:mx-20"
-	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
+	class="mx-2 flex flex-col items-center justify-center gap-5 px-4 md:mx-6 md:flex-row md:justify-start md:gap-10 md:px-8 lg:mx-20"
 >
 	<div>
 		<p
-			class="text-primary flex items-center gap-0.5 pb-3 font-mono text-xs font-semibold tracking-widest uppercase"
+			class="text-primary flex items-center gap-0.5 pb-2 font-mono text-xs font-semibold tracking-widest uppercase"
 		>
 			<Icon icon="solar:code-2-bold-duotone" class="size-4" /> Full-Stack Developer <Icon
 				icon="solar:code-2-bold-duotone"
@@ -23,7 +22,10 @@
 			/>
 		</p>
 
-		<h1 class="font-display text-primary pb-3 text-4xl font-bold md:text-5xl lg:text-6xl">
+		<h1
+			class="font-display text-primary pb-4 text-4xl font-bold md:text-5xl lg:text-6xl"
+			in:fly={{ x: -200, easing: quadInOut, duration: 500 }}
+		>
 			Barry Sande
 		</h1>
 		<p class="text-ink pb-4 text-base font-normal">

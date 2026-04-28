@@ -3,11 +3,11 @@
 	import { quadInOut } from 'svelte/easing';
 </script>
 
-<section class="flex flex-col gap-5 pb-4 md:flex-row md:gap-10" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
+<section class="flex flex-col gap-5 pb-4 md:flex-row md:gap-10">
 	<div class="flex flex-col items-center gap-3">
 		<h2
 			class="font-display text-2xl font-bold tracking-widest text-nowrap uppercase md:text-3xl"
-			
+			in:fly={{ x: 200, easing: quadInOut, duration: 500 }}
 		>
 			About
 		</h2>

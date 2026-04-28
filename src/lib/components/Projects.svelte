@@ -44,23 +44,26 @@
 	];
 </script>
 
-<section class="pt-4 md:pt-16" in:fly={{ x: 200, easing: quadInOut, duration: 750 }}>
+<section class="pt-4 md:pt-8">
 	<div class="mb-2 flex items-center justify-between">
-		<p class="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
+		<p class="text-primary font-mono text-xs font-semibold tracking-widest uppercase">
 			Selected Work
 		</p>
-		<span class="font-mono text-xs text-ink-muted">2024 – 2025</span>
+		<span class="text-ink-muted font-mono text-xs">2024 – 2025</span>
 	</div>
 
-	<div class="flex items-baseline justify-between border-b border-border pb-4">
-		<h2 class="font-display text-3xl font-bold text-ink md:text-4xl">Recent projects.</h2>
+	<div class="border-border mb-2 flex items-baseline justify-between border-b pb-4">
+		<h2
+			class="font-display text-ink text-3xl font-bold md:text-4xl"
+			in:fly={{ x: 200, easing: quadInOut, duration: 500 }}
+		>
+			Recent projects.
+		</h2>
 	</div>
 
 	<ul>
 		{#each projects as project (project.number)}
-			<li
-				class="group border-b border-border py-6"
-				>
+			<li class="group border-border border-b py-6">
 				<a
 					href={project.url}
 					target="_blank"
@@ -68,19 +71,17 @@
 					class="flex items-start justify-between gap-4"
 				>
 					<div class="flex items-start gap-4 md:gap-6">
-						<span class="mt-1 font-mono text-xs text-ink-muted">{project.number}</span>
+						<span class="text-ink-muted mt-1 font-mono text-xs">{project.number}</span>
 						<div class="flex flex-col gap-2">
 							<span
-								class="font-display text-xl font-semibold text-primary transition-colors duration-200 group-hover:text-accent md:text-2xl"
+								class="font-display text-primary group-hover:text-accent text-xl font-semibold transition-colors duration-200 md:text-2xl"
 							>
 								{project.name}
 							</span>
-							<span class="text-sm text-ink-muted">{project.subtitle}</span>
+							<span class="text-ink-muted text-sm">{project.subtitle}</span>
 							<ul class="flex flex-wrap gap-2 pt-1">
 								{#each project.tools as tool (tool)}
-									<li
-										class="rounded-full bg-primary px-3 py-[0.1em] font-mono text-xs text-white"
-									>
+									<li class="bg-primary rounded-full px-3 py-0.5 font-mono text-xs text-white">
 										{tool}
 									</li>
 								{/each}
@@ -89,10 +90,12 @@
 					</div>
 
 					<div class="flex shrink-0 items-center gap-3 pt-1">
-						<span class="hidden font-mono text-xs uppercase tracking-widest text-ink-muted md:block">
+						<span
+							class="text-ink-muted hidden font-mono text-xs tracking-widest uppercase md:block"
+						>
 							{project.category}
 						</span>
-						<span class="font-mono text-xs text-ink-muted">{project.year}</span>
+						<span class="text-ink-muted font-mono text-xs">{project.year}</span>
 						<Right />
 					</div>
 				</a>

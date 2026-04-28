@@ -38,25 +38,22 @@
 	<meta name="twitter:image" content="{page.url.origin}/assets/og.png" />
 </svelte:head>
 
-<article
-	class="mx-2 mb-20 px-4 md:mx-6 md:px-8 lg:mx-auto lg:max-w-2xl"
-	in:fly={{ x: -200, easing: quadInOut, duration: 750 }}
->
+<article class="mx-2 mb-20 px-4 md:mx-6 md:px-8 lg:mx-auto lg:max-w-2xl">
 	<!-- Back link -->
 	<button
 		onclick={() => {
 			goto(resolve('/blog'));
 		}}
-		class="text-ink-muted hover:text-primary mb-4 -ml-2 flex cursor-pointer items-center gap-2 font-mono text-xs tracking-widest uppercase transition-colors"
+		class="text-ink-muted hover:text-primary mb-6 -ml-2 flex cursor-pointer items-center gap-2 font-mono text-xs tracking-widest uppercase transition-colors"
 		><ChevronLeft />Writing
 	</button>
 
 	<!-- Post header -->
-	<header class="border-border mb-8 border-b pb-4">
-		<p class="text-primary mb-3 font-mono text-xs tracking-widest uppercase">
+	<header class="border-border mb-8 border-b pb-6">
+		<p class="text-primary mb-2 font-mono text-xs tracking-widest uppercase">
 			{data.meta.type} &middot; {data.meta.topic}
 		</p>
-		<h1 class="font-display text-ink mb-2 text-4xl leading-tight font-bold md:text-5xl">
+		<h1 class="font-display text-ink mb-3 text-4xl leading-tight font-bold md:text-5xl" in:fly={{ x: -200, easing: quadInOut, duration: 750 }}>
 			{data.meta.title}
 		</h1>
 		<p class="text-primary mb-4 text-base">{data.meta.subtitle}</p>

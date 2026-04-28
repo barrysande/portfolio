@@ -37,7 +37,7 @@
 	}
 </script>
 
-<main class="mx-2 mb-20 p-8 md:mx-6 lg:mx-20">
+<main class="mx-2 mb-20 px-4 md:px-8 md:mx-6 lg:mx-20">
 	<!-- Page header -->
 	<p class="text-primary mb-2 font-mono text-xs font-semibold tracking-widest uppercase">
 		From the desk

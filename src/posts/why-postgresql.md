@@ -1,9 +1,11 @@
-<!-- ---
+---
 title: "Why I Always Reach for PostgreSQL"
 subtitle: "In a world of specialized databases, the boring choice keeps being the right one."
-category: "Craft"
+type: 'article'
+topic: 'Software Engineering'
+tags: ['postgresql', 'databases']
 date: "2026-02-28"
-published: true
+published: false
 ---
 
 Every few months a new database gets traction on the timeline. Graph databases, document stores, edge-native SQLite derivatives, multi-region distributed SQL. Some of them are genuinely impressive. I've read the docs, run the benchmarks, watched the conference talks.
@@ -38,4 +40,4 @@ Specialized databases introduce specialized operational knowledge. That cost is 
 
 I'll use Redis for caching and pub/sub at higher throughput than `pg_notify` can handle. I'll use a dedicated search service if the full-text requirements are complex enough. I'll consider a time-series database for metrics pipelines.
 
-But for the core application data — users, sessions, content, transactions — PostgreSQL earns its place on every project. -->
+But for the core application data — users, sessions, content, transactions — PostgreSQL earns its place on every project.

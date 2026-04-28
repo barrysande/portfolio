@@ -54,7 +54,7 @@
 	<!-- Post header -->
 	<header class="border-border mb-8 border-b pb-4">
 		<p class="text-primary mb-3 font-mono text-xs tracking-widest uppercase">
-			{data.meta.category}
+			{data.meta.type} &middot; {data.meta.topic}
 		</p>
 		<h1 class="font-display text-ink mb-2 text-4xl leading-tight font-bold md:text-5xl">
 			{data.meta.title}
@@ -66,6 +66,15 @@
 			</p>
 			<TableOfContents headings={data.meta.headings ?? []} />
 		</div>
+		{#if data.meta.tags?.length}
+			<ul class="mt-3 flex flex-wrap gap-2">
+				{#each data.meta.tags as tag (tag)}
+					<li class="rounded-full bg-surface-alt px-2.5 pt-0.5 pb-1 font-mono text-xs text-ink-muted">
+						#{tag}
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</header>
 
 	<!-- Post body -->

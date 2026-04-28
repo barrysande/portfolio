@@ -3,7 +3,9 @@ import type { PageLoad } from './$types';
 interface PostMeta {
 	title: string;
 	subtitle: string;
-	category: string;
+	type: 'article' | 'note';
+	topic: string;
+	tags: string[];
 	date: string;
 	readTime: string;
 	published: boolean;

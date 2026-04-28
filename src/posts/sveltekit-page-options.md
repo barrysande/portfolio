@@ -1,7 +1,9 @@
 ---
 title: 'SvelteKit Rendering Modes'
 subtitle: 'Sveltekit Page Options'
-category: 'Notes'
+type: 'note'
+topic: 'Software Engineering'
+tags: ['sveltekit', 'ssr', 'csr', 'rendering']
 date: '2026-04-22'
 published: true
 ---

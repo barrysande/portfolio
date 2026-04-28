@@ -25,9 +25,7 @@
 			const matchTopic = activeTopic === 'All' || p.topic === activeTopic;
 			const q = query.toLowerCase().trim();
 			const matchSearch =
-				!q ||
-				p.title.toLowerCase().includes(q) ||
-				p.tags.some((t) => t.toLowerCase().includes(q));
+				!q || p.title.toLowerCase().includes(q) || p.tags.some((t) => t.toLowerCase().includes(q));
 			return matchType && matchTopic && matchSearch;
 		})
 	);
@@ -39,15 +37,18 @@
 	}
 </script>
 
-<main class="mx-2 mb-20 p-8 md:mx-6 lg:mx-20" in:fly={{ x: 200, duration: 750 }}>
-	<!-- Header -->
-	<div class="mb-2">
-		<p class="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
-			From the desk
-		</p>
-	</div>
-	<div class="mb-8 border-b border-border pb-4">
-		<h1 class="font-display text-4xl font-bold text-ink md:text-5xl">Writing.</h1>
+<main class="mx-2 mb-20 p-8 md:mx-6 lg:mx-20">
+	<!-- Page header -->
+	<p class="text-primary mb-2 font-mono text-xs font-semibold tracking-widest uppercase">
+		From the desk
+	</p>
+	<div class="border-border mb-8 border-b pb-4">
+		<h1
+			class="font-display text-ink text-4xl font-bold md:text-5xl"
+			in:fly={{ x: 200, duration: 500 }}
+		>
+			Writing.
+		</h1>
 	</div>
 
 	<!-- Search -->
@@ -57,42 +58,52 @@
 			bind:value={query}
 			oninput={resetPage}
 			placeholder="Search by title or tag..."
-			class="w-full rounded shadow-sm dark:shadow bg-surface px-4 py-2 font-mono text-sm text-ink placeholder:text-ink-muted focus:border-primary focus:outline-none"
+			class="border-border bg-surface text-ink placeholder:text-ink-muted focus:border-primary w-full rounded border px-4 py-2 font-mono text-sm shadow-sm focus:outline-none dark:shadow"
 		/>
 	</div>
 
-	<!-- Type filter -->
-	<div class="mb-4 flex items-center gap-1">
-		<span class="mr-2 font-mono text-xs uppercase tracking-widest text-ink-muted">Type:</span>
-		<nav class="flex gap-x-4">
-			{#each TYPES as t (t)}
-				<button
-					class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
-					class:active={activeType === t}
-					class:inactive={activeType !== t}
-					onclick={() => { activeType = t; resetPage(); }}
-				>
-					{t}
-				</button>
-			{/each}
-		</nav>
-	</div>
+	<div class="border-border mb-4 space-y-3 border-b pb-4">
+		<div class="flex items-center gap-4">
+			<span class="text-ink-muted w-12 shrink-0 font-mono text-xs tracking-widest uppercase"
+				>Type</span
+			>
+			<nav class="flex flex-wrap gap-x-5 gap-y-1">
+				{#each TYPES as t (t)}
+					<button
+						class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
+						class:active={activeType === t}
+						class:inactive={activeType !== t}
+						onclick={() => {
+							activeType = t;
+							resetPage();
+						}}
+					>
+						{t}
+					</button>
+				{/each}
+			</nav>
+		</div>
 
-	<!-- Topic filter -->
-	<div class="mb- flex items-center gap-1 border-b border-border pb-4">
-		<span class="mr-2 font-mono text-xs uppercase tracking-widest text-ink-muted">Topic:</span>
-		<nav class="flex flex-wrap gap-x-4 gap-y-1">
-			{#each TOPICS as topic (topic)}
-				<button
-					class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
-					class:active={activeTopic === topic}
-					class:inactive={activeTopic !== topic}
-					onclick={() => { activeTopic = topic; resetPage(); }}
-				>
-					{topic}
-				</button>
-			{/each}
-		</nav>
+		<div class="flex items-center gap-4">
+			<span class="text-ink-muted w-12 shrink-0 font-mono text-xs tracking-widest uppercase"
+				>Topic</span
+			>
+			<nav class="flex flex-wrap gap-x-5 gap-y-1">
+				{#each TOPICS as topic (topic)}
+					<button
+						class="cursor-pointer pb-1 font-mono text-xs tracking-widest uppercase transition-colors duration-150"
+						class:active={activeTopic === topic}
+						class:inactive={activeTopic !== topic}
+						onclick={() => {
+							activeTopic = topic;
+							resetPage();
+						}}
+					>
+						{topic}
+					</button>
+				{/each}
+			</nav>
+		</div>
 	</div>
 
 	<!-- Post list -->
@@ -115,7 +126,7 @@
 			{/each}
 		</ul>
 	{:else}
-		<p class="py-16 text-center font-mono text-sm text-ink-muted">Nothing found.</p>
+		<p class="text-ink-muted py-16 text-center font-mono text-sm">Nothing found.</p>
 	{/if}
 
 	<!-- Pagination -->
@@ -130,7 +141,7 @@
 				{#snippet children({ pages })}
 					<div class="flex items-center gap-1">
 						<Pagination.PrevButton
-							class="flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm text-ink-muted transition-colors hover:bg-surface-alt hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
+							class="text-ink-muted hover:bg-surface-alt hover:text-ink flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						>
 							←
 						</Pagination.PrevButton>
@@ -139,19 +150,20 @@
 							{#if page.type === 'page'}
 								<Pagination.Page
 									{page}
-									class="page-btn flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors hover:bg-surface-alt"
+									class="page-btn hover:bg-surface-alt flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors"
 								>
 									{page.value}
 								</Pagination.Page>
 							{:else}
-								<span class="flex h-8 w-8 items-center justify-center font-mono text-sm text-ink-muted"
+								<span
+									class="text-ink-muted flex h-8 w-8 items-center justify-center font-mono text-sm"
 									>…</span
 								>
 							{/if}
 						{/each}
 
 						<Pagination.NextButton
-							class="flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm text-ink-muted transition-colors hover:bg-surface-alt hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
+							class="text-ink-muted hover:bg-surface-alt hover:text-ink flex h-8 w-8 cursor-pointer items-center justify-center rounded font-mono text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						>
 							→
 						</Pagination.NextButton>

@@ -40,7 +40,7 @@
 		<span class="font-mono text-xs text-ink-muted">2023</span>
 	</div>
 
-	<div class="mb-0 border-b border-border pb-4">
+	<div class="mb-2 border-b border-border pb-4">
 		<h2 class="font-display text-2xl font-bold text-ink md:text-3xl">Archive.</h2>
 	</div>
 
@@ -67,7 +67,7 @@
 							<ul class="flex flex-wrap gap-2 pt-1">
 								{#each project.tools as tool (tool)}
 									<li
-										class="rounded-full bg-primary px-3 py-[0.1em] font-mono text-xs text-white"
+										class="rounded-full bg-primary px-3 py-0.5 font-mono text-xs text-white"
 									>
 										{tool}
 									</li>

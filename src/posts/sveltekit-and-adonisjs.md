@@ -56,7 +56,7 @@ Browser ←→ SvelteKit
 **Cons:**
 
 - API is coupled to SvelteKit. Mobile apps can't use session cookies, so you'd need separate token-based auth routes. Scaling is also tricky you can't scale API and frontend independently, and API routes mixed with page routes can get messy as the app grows
-- Bring your own ORM, auth, and queue libraries - same package stitching like Express
+- Bring your own ORM, auth, and queue libraries - same package stitching like Express.js
 - Less structure for large applications.
 
 ### Option 1B: AdonisJS + Inertia Monolith
@@ -142,8 +142,10 @@ The redirect happens on Sveltekit's server.
 With Svelte (no Kit), you would handle everything client-side like so:
 
 ```svelte
-<!-- App.svelte or Dashboard.svelte -->
+<!-- page.svelte -->
 <script>
+	import Dashboard from '$lib/components/Dashboard.svelte';
+
 	let user = $state(null);
 	let loading = $state(true);
 
@@ -177,6 +179,8 @@ You can also use an IIFE (Immediately Invoked Function Expression)
 
 ```svelte
 <script>
+	import Dashboard from '$lib/components/Dashboard.svelte';
+
 	let user = $state(null);
 	let loading = $state(true);
 
@@ -196,6 +200,12 @@ You can also use an IIFE (Immediately Invoked Function Expression)
 		})();
 	});
 </script>
+
+{#if loading}
+	<p>Loading...</p>
+{:else}
+	<Dashboard {user} />
+{/if}
 ```
 
 <Note>
@@ -260,14 +270,14 @@ I am familiar with SvelteKit. It's what I reached for when learning frontend dev
 
 ## Why AdonisJS
 
-I evaluated AdonisJS 6, NestJS, and Express. AdonisJS won because:
+I evaluated AdonisJS 6, NestJS, and Express.js. AdonisJS won because:
 
-- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection (DI) patterns, great configuration that is mostly automated — all built-in and designed to work together. Unlike Express that lacks a unified system of packages that leaves maintenance and usage footguns to the developer
+- **Batteries included** — It has an ORM (Lucid), authentication, mail, validation via VineJS, great Dependency Injection (DI) patterns, great configuration that is mostly automated because they are all first-party from the AdonisJS team, hence designed to work together. Unlike Express.js that lacks a unified system of packages which leaves maintenance and usage footguns to the developer
 - **TypeScript-first** — Great TypeScript support and even better in version 7 with automatically generated types and transformers.
-- **Structured MVC Pattern** — migrations, seeders, factories, service providers, controllers, and dependency injection
+- **Structured MVC Pattern** — migrations, seeders, models, views, factories, service providers, controllers, and dependency injection
 - **Session-based auth out of the box** — the `@adonisjs/auth` package with the session guard and access token guard handles login, logout, remember-me tokens, and session management
 - **Adonis CLI** — well-documented and easy to use CLI with ability to create custom commands when needed
-- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's SKIP LOCKED and FOR UPDATE to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`
+- **Background jobs** — as of the time of writing this post, I used a combination of Postgresql's `SKIP LOCKED` and `FOR UPDATE` to create a custom queue together with a cron scheduler to run adonis CLI commands. AdonisJS 7 ships with an experimental `@adonisjs/queue`
 - **Documentation** — AdonisJS documentation is great and you can rely solely on them from learning to active development. There is also a great and active AdonisJS community on Discord and resources like community packages listed on the Adonis official website.
 
 ## The Hidden Cost: SvelteKit Becomes the Middleman

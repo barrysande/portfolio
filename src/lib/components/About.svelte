@@ -12,9 +12,9 @@
 			About
 		</h2>
 		<p class="text-ink pb-4 text-center leading-8">
-			A full-stack developer and licensed advocate based in Nairobi. I build production systems end
-			to end — from API design and database architecture to deployment and infrastructure. I care
-			deeply about the quality and accessibility of what I ship.
+			A full-stack developer based in Nairobi. I build production systems end
+			to end, APIs, user interfaces(UIs), and hanlde deployment and infrastructure. I also care
+			deeply about the quality and accessibility of the products I ship.
 		</p>
 	</div>
 </section>

@@ -3,28 +3,61 @@
 	import { quadInOut } from 'svelte/easing';
 	import Archiveprojects from './Archiveprojects.svelte';
 	import Right from './Right.svelte';
+	import { showCurrentYear } from '$lib/utils';
 
 	const projects = [
 		{
 			number: '01',
-			name: 'Hiddouts',
-			subtitle: 'Travel, cataloging, and planning web app',
-			category: 'FULL-STACK',
-			year: '2025',
-			url: 'https://hiddouts.com',
-			tools: ['Sveltekit', 'Typescript', 'AdonisJS', 'Postgresql', 'Redis', 'Socket.io', 'SSE']
+			name: 'Monde Des Parfum®',
+			subtitle:
+				'Version 2 fullstack app for the Kenyan luxury candle and fragrance brand, Monde Des Parfum®.',
+			category: 'FULLSTACK E-COMMERCE',
+			year: '2026',
+			url: 'https://www.mondedesparfum.com/',
+			tools: [
+				'Sveltekit',
+				'Typescript',
+				'NodeJS(AdonisJS)',
+				'Postgresql',
+				'Redis',
+				'SSE',
+				'Docker',
+				'Traefik',
+				'Linux Server'
+			]
 		},
 		{
 			number: '02',
-			name: 'Monde Des Parfum',
-			subtitle: 'Kenyan luxury candle and fragrance brand',
-			category: 'E-COMMERCE',
-			year: '2025',
-			url: 'https://www.mondedesparfum.com/',
-			tools: ['Sveltekit', 'TailwindCSS', 'Typescript', 'Django']
+			name: 'Hiddouts',
+			subtitle: 'Travel, cataloging, and planning web app',
+			category: 'FULL-STACK',
+			year: '2025-2026',
+			url: 'https://hiddouts.com',
+			tools: [
+				'Sveltekit',
+				'Typescript',
+				'AdonisJS',
+				'Postgresql',
+				'Redis',
+				'Socket.io',
+				'SSE',
+				'Docker',
+				'Traefik',
+				'Linux Server'
+			]
 		},
 		{
 			number: '03',
+			name: 'Monde Des Parfum®',
+			subtitle:
+				'Version 1 storefront for the Kenyan luxury candle and fragrance brand, Monde Des Parfum®',
+			category: 'E-COMMERCE',
+			year: '2025',
+			url: 'https://github.com/barrysande/monde-des-parfum',
+			tools: ['Sveltekit', 'TailwindCSS', 'Typescript']
+		},
+		{
+			number: '04',
 			name: 'Audiophile',
 			subtitle: 'E-commerce for headphones, earphones, and speakers',
 			category: 'E-COMMERCE',
@@ -33,10 +66,10 @@
 			tools: ['Sveltekit', 'TailwindCSS', 'Typescript']
 		},
 		{
-			number: '04',
+			number: '05',
 			name: 'Lexihub',
 			subtitle: 'Online dictionary with pronunciation and definitions',
-			category: 'WEB APP',
+			category: 'WEB DICTIONARY',
 			year: '2024',
 			url: 'https://fem-dictionary-app-opal.vercel.app/',
 			tools: ['Sveltekit', 'TailwindCSS', 'Typescript', 'REST API']
@@ -49,7 +82,7 @@
 		<p class="text-primary font-mono text-xs font-semibold tracking-widest uppercase">
 			Selected Work
 		</p>
-		<span class="text-ink-muted font-mono text-xs">2024 – 2025</span>
+		<span class="text-ink-muted font-mono text-xs">2024 – {showCurrentYear()}</span>
 	</div>
 
 	<div class="border-border mb-2 flex items-baseline justify-between border-b pb-4">

@@ -15,15 +15,15 @@
 			year: '2026',
 			url: 'https://www.mondedesparfum.com/',
 			tools: [
-				'Sveltekit',
 				'Typescript',
+				'Sveltekit',
 				'NodeJS(AdonisJS)',
 				'Postgresql',
 				'Redis',
 				'SSE',
 				'Docker',
 				'Traefik',
-				'Linux Server'
+				'Linux'
 			]
 		},
 		{
@@ -34,16 +34,16 @@
 			year: '2025-2026',
 			url: 'https://hiddouts.com',
 			tools: [
-				'Sveltekit',
 				'Typescript',
-				'AdonisJS',
+				'Sveltekit',
+				'NodeJS(AdonisJS)',
 				'Postgresql',
 				'Redis',
 				'Socket.io',
 				'SSE',
 				'Docker',
 				'Traefik',
-				'Linux Server'
+				'Linux'
 			]
 		},
 		{
@@ -54,7 +54,7 @@
 			category: 'E-COMMERCE',
 			year: '2025',
 			url: 'https://github.com/barrysande/monde-des-parfum',
-			tools: ['Sveltekit', 'TailwindCSS', 'Typescript']
+			tools: ['Typescript', 'Sveltekit', 'TailwindCSS']
 		},
 		{
 			number: '04',
@@ -63,7 +63,7 @@
 			category: 'E-COMMERCE',
 			year: '2024',
 			url: 'https://audiophile-topaz-seven.vercel.app/',
-			tools: ['Sveltekit', 'TailwindCSS', 'Typescript']
+			tools: ['TailwindCSS', 'Typescript', 'Sveltekit']
 		},
 		{
 			number: '05',
@@ -72,7 +72,7 @@
 			category: 'WEB DICTIONARY',
 			year: '2024',
 			url: 'https://fem-dictionary-app-opal.vercel.app/',
-			tools: ['Sveltekit', 'TailwindCSS', 'Typescript', 'REST API']
+			tools: ['TailwindCSS', 'Typescript', 'Sveltekit', 'REST API']
 		}
 	];
 </script>

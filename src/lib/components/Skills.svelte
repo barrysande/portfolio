@@ -2,9 +2,9 @@
 	const skills = [
 		'JavaScript',
 		'TypeScript',
+		'Svelte',
+		'NodeJS(AdonisJS)',
 		'SvelteKit',
-		'Node.js',
-		'AdonisJS',
 		'PostgreSQL',
 		'Docker',
 		'Traefik',

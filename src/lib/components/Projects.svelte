@@ -150,7 +150,7 @@
 												href={collaborator.link}
 												target="_blank"
 												rel="noopener noreferrer"
-												class="hover:text-primary underline underline-offset-2 transition-colors"
+												class="hover:text-primary underline underline-offset-4 transition-colors"
 											>
 												{collaborator.name}
 											</a>

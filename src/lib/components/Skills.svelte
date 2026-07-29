@@ -16,7 +16,12 @@
 	<h2
 		class="font-display pb-3 text-center text-2xl font-bold tracking-widest uppercase md:text-3xl"
 	>
-		Skills and Tools
+		<a
+			href="#skills"
+			class="hover:text-accent focus-visible:outline-accent cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+		>
+			Skills and Tools
+		</a>
 	</h2>
 
 	<ul class="flex flex-wrap items-center justify-center gap-2">
@@ -29,6 +34,6 @@
 		{/each}
 	</ul>
 {/snippet}
-<div>
+<div id="skills" class="scroll-mt-20">
 	{@render skillsnippet?.()}
 </div>

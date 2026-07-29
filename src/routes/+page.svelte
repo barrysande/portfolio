@@ -10,7 +10,8 @@
 </script>
 
 <section
-	class="mx-2 flex flex-col items-center justify-center gap-5 px-4 md:mx-6 md:flex-row md:justify-start md:gap-10 md:px-8 lg:mx-20"
+	id="home"
+	class="mx-2 flex scroll-mt-20 flex-col items-center justify-center gap-5 px-4 md:mx-6 md:flex-row md:justify-start md:gap-10 md:px-8 lg:mx-20"
 >
 	<div>
 		<p
@@ -26,7 +27,12 @@
 			class="font-display text-primary pb-4 text-4xl font-bold md:text-5xl lg:text-6xl"
 			in:fly={{ x: -200, easing: quadInOut, duration: 500 }}
 		>
-			Barry Sande
+			<a
+				href="#home"
+				class="hover:text-accent focus-visible:outline-accent cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+			>
+				Barry Sande
+			</a>
 		</h1>
 		<p class="text-ink pb-4 text-base font-normal">
 			I build <span class="text-primary font-semibold">production systems</span> end to end — from API

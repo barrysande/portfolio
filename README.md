@@ -22,9 +22,6 @@ The light **Atelier** theme and dark **Blueprint** theme were generated with the
 [Dehlya Studio Theme Studio](https://www.dehlya-studio.ch/theme-studio). Dehlya Studio also
 offers more theme variants there for free if you want a starting point for your own site.
 
-The theme tokens and site-specific adaptations live in [`src/app.css`](src/app.css). The original
-generated values are documented in [`design-details.md`](design-details.md).
-
 ## Local development
 
 ### Requirements
@@ -35,7 +32,7 @@ generated values are documented in [`design-details.md`](design-details.md).
 Clone the repository, install its dependencies, and start the development server:
 
 ```bash
-git clone https://github.com/barrysande/portfolio.git
+git clone <HTTPS or SSH>
 cd portfolio
 pnpm install
 pnpm dev
@@ -45,25 +42,11 @@ Open the local URL printed by Vite, usually `http://localhost:5173`.
 
 ## Commands
 
-| Command            | Purpose                                        |
-| ------------------ | ---------------------------------------------- |
-| `pnpm dev`         | Start the local development server             |
-| `pnpm build`       | Create a production build                      |
-| `pnpm preview`     | Preview the production build locally           |
-| `pnpm check`       | Run Svelte and TypeScript checks               |
-| `pnpm check:watch` | Run Svelte and TypeScript checks in watch mode |
-| `pnpm lint`        | Check formatting and run ESLint                |
-| `pnpm format`      | Format the codebase with Prettier              |
-
-## Project structure
-
-```text
-src/
-├── lib/          Reusable components and utilities
-├── posts/        Markdown articles
-├── routes/       SvelteKit pages and layouts
-└── app.css       Global styles and theme tokens
-static/           Static assets
-```
-
-This repository is publicly available for anyone interested in how the site is built.
+| Command           | Purpose                                     |
+| ----------------- | ------------------------------------------- |
+| `pnpm dev --open` | Start local development server and open tab |
+| `pnpm build`      | Create a production build                   |
+| `pnpm preview`    | Preview the production build locally        |
+| `pnpm check`      | Run Svelte and TypeScript checks            |
+| `pnpm lint`       | Check formatting and run ESLint             |
+| `pnpm format`     | Format the codebase with Prettier           |

@@ -1,5 +1,5 @@
 ---
-title: 'Notifications using Server Sent Events'
+title: 'Notifications using Server-Sent Events'
 subtitle: 'Lessons I learnt from implementing a notification feature'
 type: 'article'
 topic: 'Software Engineering'
@@ -8,19 +8,38 @@ date: '2026-08-31'
 published: true
 ---
 
+<script>
+  import Note from '$lib/components/blog/Note.svelte';
+</script>
+
 ## Preliminaries
 
-For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE).
+For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE). I mention the Backend for Frontend (BFF) pattern. If you are unfamiliar with it, please check out this earlier [piece](/src/posts/sveltekit-and-adonisjs.md) I wrote about it.
 
 My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKit](https://svelte.dev/docs) for the web application because those are the tools I work with. You should check them out, by the way ;-)
 
 ## The Journey
 
-AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, broadcasting, and the authentication and authorization needed for private subscriptions.
+AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides a way to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level, as shown below:
+
+```typescript
+transmit.registerRoutes((route) => {
+	route.middleware(middleware.auth({ guards: ['web'] }));
+});
+```
+
+<Note>
+ `registerRoutes` registers the three routes needed to establish the SSE connection, subscribe the client to a channel, and unsubscribe the client from a channel.
+ Unauthenticated users cannot connect to the channels.
+</Note>
 
 In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the people affected by that change.
 
-I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run only after the transaction committed. This order of steps ensures that if any operation fails and the transaction rolls back, the notification is neither saved nor a live signal sent for it. Therefore, the notification record is the source of truth, while SSE provides a live signal that the notification state may have changed. Here is a code snippet showing how I did it:
+I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run only after the transaction committed. This order of steps ensures that rolled-back transactions cannot transmit a live notification to the client.
+
+Another failure point is that the database transaction can commit but the live notification transmission can fail.
+
+Here is a code snippet showing how I do it in the service:
 
 ```typescript
 import { DateTime } from 'luxon'
@@ -36,7 +55,7 @@ import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
 export default class NotificationService {
 
   private signalChange(accountId: string) {
-    void transmit.broadcast(`accounts/${accountId}/notifications`, NOTIFICATION_CHANGED_EVENT)
+    void transmit.broadcast(`some-route/${accountId}/notifications`, NOTIFICATION_CHANGED_EVENT)
   }
 
   async create(
@@ -65,30 +84,29 @@ export default class NotificationService {
 
 On the client, Transmit provides a browser library for connecting to the API’s SSE routes and subscribing to notification channels.
 
-My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. These ordinary requests would work over HTTP(S) depending on the environment. For live notifications, feature, I wanted a notification counter feature that increments notification as they come in. I initially sent the complete notification through SSE, appended it to a client-side notification list, displayed that list as state, and updated the counter.
-
-However, I started noticing the following problems from this setup
+My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. These ordinary requests would work over HTTP(S) depending on the environment. For the live notifications feature, I wanted a notification counter that incremented as notifications arrived. I initially sent the complete notification through SSE, appended it to a client-side notification list, displayed that list as state, and updated the counter.
+However, I encountered the following problems during implementation:
 
 ### 1. The live connection belongs in the browser
 
-SvelteKit provides server-side route files such as `+server.ts`, `+page.server.ts`, and `+layout.server.ts`. In my setup, these files are useful for enforcing authentication and authorization before making ordinary API read and write requests.
+SvelteKit provides server-side route files such as `+server.ts`, `+page.server.ts`, and `+layout.server.ts`. In my setup, these files are useful for enforcing authentication and authorisation before making ordinary API read and write requests.
 
-However, SSE is a server-to-client connection, so the browser needs to connect directly to the AdonisJS Transmit routes.
+SSE is a server-to-client connection, so a direct server-to-client setup is ideal. However, with SvelteKit, you could proxy the SSE via a `+server.ts` API endpoint and then have the page call the proxy endpoint from the component. I initially attempted this approach to maintain my server-to-server HTTP(S) pattern but ended up fighting native browser behaviour with little benefit. Besides, the three registered Transmit routes are the only ones exposed in the browser's DevTools, while the channel remains private.
 
 I therefore created the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
 
 This creates two authentication points:
 
 - SvelteKit protects normal page loads, form actions, and its server routes.
-- AdonisJS protects the Transmit routes and authorizes the user’s private notification channel.
+- AdonisJS protects the Transmit routes and authorises the user’s private notification channel.
 
 The second point matters because SvelteKit’s server-side checks do not protect a connection made from the browser directly to AdonisJS.
 
-The browser already holds the user’s session cookie. With the correct cookie and CORS configuration, it includes that cookie in the Transmit subscription request. AdonisJS then authenticates the request and checks whether that user may subscribe to the requested notification channel.
+The Transmit client includes the session cookie, if available, in the subscription request, which AdonisJS uses to authenticate that subscription request. In my case, the `NotificationService.create` method creates a channel for each user, so no authorisation is needed.
 
-### 2. API and client state synchronization
+### 2. API and client state synchronisation
 
-I realized that my initial implementation naively assumed that receiving a new live event was the only cause of change in the notification list.
+I realised that my initial implementation naively assumed that receiving a new live event was the only cause of change in the notification list.
 
 Other events can also make that list stale:
 
@@ -101,11 +119,11 @@ Other events can also make that list stale:
 
 These events quickly make a client-managed notification list complicated. The client would need to append new notifications, remove read ones, prevent duplicates, maintain the unread count, resolve event ordering, and recover anything missed while disconnected.
 
-I needed a way to reduce that client complexity without introducing another synchronization system.
+I needed a way to reduce that client complexity without introducing another synchronisation system.
 
-### 3. Eureka
+### 3. Solution: SSE as an invalidation signal/event
 
-After a while, I realized I could use Transmit as a signal instead of a carrier for the data. The database notification is persistent but SSE delivery is not. A signal may be missed because the browser is disconnected, the user has changed tabs, or the live connection has failed.
+Once I realised I could use Transmit as a signal instead of a carrier for the data, the design became simpler. The database notification is persistent but SSE delivery is not. A signal may be missed because the browser is disconnected, the user has changed tabs, or the live connection has failed.
 
 The signal is still linked to the database record because the API sends it only after the transaction commits. I therefore stopped sending complete notification details through Transmit. Instead, the API sends a small signal whenever notification state changes:
 
@@ -115,9 +133,9 @@ When the signal arrives, the client requests the latest unread notifications fro
 
 This moved notification-list management back to the API. The client no longer needs to merge messages, prevent duplicates, resolve event ordering, or repair missed events.
 
-The tradeoff is one additional HTTP request after each live signal. For my notification volume, that was a much better tradeoff than maintaining two sources of client state.
+The trade-off is one additional HTTP request after each live signal. For my notification volume, that was a much better trade-off than maintaining two sources of client state. This improves reliability in two ways: if the database transaction preceding the live notification rolls back, the user receives no notification; if the transaction commits but the transmission fails, the database record still exists.
 
-The result still feels live to the user, but the data comes from the API, therefore reliable.
+The result still feels live to the user, but the notification data is reconciled from the database record.
 
 ### 4. Manageable client-side complexity
 
@@ -131,8 +149,6 @@ When the client receives that signal, it requests the latest unread notification
 - Transmit reconnects.
 - A notification is marked as read.
 - The user manually retries a failed request.
-
-All these events use the same refresh function so any user features based on this can be implemented from this baseline using events like `onfocus` or `ononline`.
 
 However, another problem appears when several events happen close together. For example, an SSE signal may arrive while a refresh request is already running. Starting another request immediately would create racing requests, while ignoring the signal could leave the client with stale data.
 
@@ -161,7 +177,7 @@ If loading notifications fails, the client cannot confirm the latest state. In t
 
 If the live connection fails, previously loaded notifications are still valid. The user has only lost immediate updates. The client can recover by refreshing when the browser reconnects, the window regains focus, the tab becomes visible, or the page is reloaded.
 
-In case of a failed mark-as-read request, the notification remains in the unread list, and the user receives an error message.
+If a mark-as-read request fails, the notification remains in the unread list, and the user receives an error message.
 
 The component must also clean up after itself. When it is destroyed, it:
 

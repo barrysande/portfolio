@@ -122,18 +122,18 @@ import { PRIVATE_BASE_API_URL } from '$env/static/private';
 const apiEndpoint = `${PRIVATE_BASE_API_URL}/some-endpoint`;
 
 export const load = async (event) => {
-	if (!event.locals.user) {
-		redirect(302, '/login');
-	}
+ if (!event.locals.user) {
+  redirect(302, '/login');
+ }
 
-	const response = await event.fetch(apiEndpoint);
+ const response = await event.fetch(apiEndpoint);
 
-	if (!response.ok) {
-		error(response.status, 'Please try again later.');
-	}
+ if (!response.ok) {
+  error(response.status, 'Please try again later.');
+ }
 
-	const data = await response.json();
-	return { data };
+ const data = await response.json();
+ return { data };
 };
 ```
 
@@ -144,34 +144,34 @@ With Svelte (no Kit), you would handle everything client-side like so:
 ```svelte
 <!-- page.svelte -->
 <script>
-	import Dashboard from '$lib/components/Dashboard.svelte';
+ import Dashboard from '$lib/components/Dashboard.svelte';
 
-	let user = $state(null);
-	let loading = $state(true);
+ let user = $state(null);
+ let loading = $state(true);
 
-	$effect(() => {
-		async function fetchUser() {
-			const res = await fetch('https://api.example.com/auth/me', {
-				credentials: 'include'
-			});
+ $effect(() => {
+  async function fetchUser() {
+   const res = await fetch('https://api.example.com/auth/me', {
+    credentials: 'include'
+   });
 
-			if (!res.ok) {
-				window.location.href = '/login';
-				return;
-			}
+   if (!res.ok) {
+    window.location.href = '/login';
+    return;
+   }
 
-			user = await res.json();
-			loading = false;
-		}
+   user = await res.json();
+   loading = false;
+  }
 
-		fetchUser();
-	});
+  fetchUser();
+ });
 </script>
 
 {#if loading}
-	<p>Loading...</p>
+ <p>Loading...</p>
 {:else}
-	<Dashboard {user} />
+ <Dashboard {user} />
 {/if}
 ```
 
@@ -179,37 +179,37 @@ You can also use an IIFE (Immediately Invoked Function Expression)
 
 ```svelte
 <script>
-	import Dashboard from '$lib/components/Dashboard.svelte';
+ import Dashboard from '$lib/components/Dashboard.svelte';
 
-	let user = $state(null);
-	let loading = $state(true);
+ let user = $state(null);
+ let loading = $state(true);
 
-	$effect(() => {
-		(async () => {
-			const res = await fetch('https://api.example.com/auth/me', {
-				credentials: 'include'
-			});
+ $effect(() => {
+  (async () => {
+   const res = await fetch('https://api.example.com/auth/me', {
+    credentials: 'include'
+   });
 
-			if (!res.ok) {
-				window.location.href = '/login';
-				return;
-			}
+   if (!res.ok) {
+    window.location.href = '/login';
+    return;
+   }
 
-			user = await res.json();
-			loading = false;
-		})();
-	});
+   user = await res.json();
+   loading = false;
+  })();
+ });
 </script>
 
 {#if loading}
-	<p>Loading...</p>
+ <p>Loading...</p>
 {:else}
-	<Dashboard {user} />
+ <Dashboard {user} />
 {/if}
 ```
 
 <Note>
-You will notice that in both cases, the callback passed to the $effect rune is not async, even though I am doing asynchronous operations inside. This is because an async function returns a Promise, which $effect does not expect — it expects either nothing or a cleanup function. The onMount lifecycle hook has the same behaviour: it takes a synchronous callback because its return value is reserved for cleanup logic, not promises. Matia AKA Joy of Code covers it extensively <a href="https://joyofcode.xyz/avoid-async-effects-in-svelte">here</a>.
+You will notice that in both cases, the callback passed to the $effect rune is not async, even though I am doing asynchronous operations inside. This is because an async function returns a Promise, which $effect does not expect — it expects either nothing or a cleanup function. The onMount lifecycle hook has the same behaviour: it takes a synchronous callback because its return value is reserved for cleanup logic. Matia AKA Joy of Code covers it extensively <a href="https://joyofcode.xyz/avoid-async-effects-in-svelte">here</a>.
 </Note>
 
 From the code snippet above, this the page loads, shows a loading state, fetches data, then either renders content or redirects.

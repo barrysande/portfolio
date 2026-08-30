@@ -113,7 +113,9 @@ This creates two authentication points:
 
 The second point matters because SvelteKit’s server-side checks do not protect a connection made from the browser directly to AdonisJS.
 
-The Transmit client includes the session cookie, if available, in the subscription request, which AdonisJS uses to authenticate that subscription request. In my case, the `NotificationService.create` method creates a channel for each user, so no authorisation is needed.
+The Transmit client includes the session cookie, if available, in the subscription request, which AdonisJS uses to authenticate that subscription request.
+
+`
 
 ### 2. API and client state synchronisation
 

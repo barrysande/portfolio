@@ -8,10 +8,6 @@ date: '2026-08-31'
 published: true
 ---
 
-<script>
-  import Note from '$lib/components/blog/Note.svelte';
-</script>
-
 ## Preliminaries
 
 For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE).

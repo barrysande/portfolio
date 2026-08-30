@@ -77,12 +77,12 @@ However, SSE is a server-to-client connection, so the browser needs to connect d
 
 I therefore created the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
 
-This creates two authentication boundaries:
+This creates two authentication points:
 
 - SvelteKit protects normal page loads, form actions, and its server routes.
 - AdonisJS protects the Transmit routes and authorizes the user’s private notification channel.
 
-The second boundary matters because SvelteKit’s server-side checks do not automatically protect a browser connection made directly to AdonisJS.
+The second point matters because SvelteKit’s server-side checks do not protect a connection made from the browser directly to AdonisJS.
 
 The browser already holds the user’s session cookie. With the correct cookie and CORS configuration, it includes that cookie in the Transmit subscription request. AdonisJS then authenticates the request and checks whether that user may subscribe to the requested notification channel.
 

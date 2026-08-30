@@ -4,7 +4,7 @@ subtitle: 'Lessons I learnt as I implemented a notification feature'
 type: 'article'
 topic: 'Software Engineering'
 tags: ['notifications', 'server sent events', 'architecture', 'typescript', 'node.js']
-date: '2026-09-03'
+date: '2026-08-31'
 published: true
 ---
 

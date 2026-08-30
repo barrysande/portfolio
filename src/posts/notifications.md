@@ -1,9 +1,9 @@
 ---
 title: 'Notifications using Server Sent Events'
-subtitle: 'Lessons I learnt as I implemented a notification feature'
+subtitle: 'Lessons I learnt from implementing a notification feature'
 type: 'article'
 topic: 'Software Engineering'
-tags: ['notifications', 'server sent events', 'architecture', 'typescript', 'node.js']
+tags: ['notifications', 'server sent events', 'architecture', 'typescript']
 date: '2026-08-31'
 published: true
 ---
@@ -16,7 +16,7 @@ My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKi
 
 ## The Journey
 
-I found the API side more straightforward than the client side because AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events). Transmit handles the SSE routes, channels, broadcasting, and the authentication and authorization needed for private subscriptions.
+AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, broadcasting, and the authentication and authorization needed for private subscriptions.
 
 In my application, I create notifications as part of the same database transaction as the flows that produce them. For example, I may need to record a change that other parts of the application depend on and inform the people affected by that change.
 

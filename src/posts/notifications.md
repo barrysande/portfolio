@@ -44,9 +44,9 @@ transmit.authorize<{ accountId: string }>(
  Unauthenticated users cannot connect to the channels.
 </Note>
 
-In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the people affected by that change.
+In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the users affected by that change.
 
-I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run only after the transaction committed. This order of steps ensures that rolled-back transactions cannot transmit a live notification to the client.
+I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run once the transaction committed. This order of steps ensures that rolled-back transactions cannot transmit a live notification to the client.
 
 Another failure point is that the database transaction can commit but the live notification transmission can fail.
 
@@ -136,9 +136,9 @@ I needed a way to reduce that client complexity without introducing another sync
 
 ### 3. Solution: SSE as an invalidation signal/event
 
-Once I realised I could use Transmit as a signal instead of a carrier for the data, the design became simpler. The database notification is persistent but SSE delivery is not. A signal may be missed because the browser is disconnected, the user has changed tabs, or the live connection has failed.
+The AdonisJS docs examples under SSE [Channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea, I could use Transmit as a signal instead of a carrier for the data, the design became simpler. The database notification is persistent but SSE delivery is not. A signal may be missed because the browser is disconnected, the user has changed tabs, or the live connection has failed.
 
-The signal is still linked to the database record because the API sends it only after the transaction commits. I therefore stopped sending complete notification details through Transmit. Instead, the API sends a small signal whenever notification state changes:
+The signal is still linked to the database record because the API sends it once the transaction commits. I therefore stopped sending complete notification details through Transmit. Instead, the API sends a small signal whenever notification state changes:
 
 `{ type: 'notifications.changed' }`
 

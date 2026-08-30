@@ -8,6 +8,10 @@ date: '2026-08-31'
 published: true
 ---
 
+<script>
+  import Note from '$lib/components/blog/Note.svelte';
+</script>
+
 ## Preliminaries
 
 For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE).
@@ -23,6 +27,16 @@ In my application, I created notifications as part of the same database transact
 I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run only after the transaction committed. This order of steps ensures that if any operation fails and the transaction rolls back, the notification is neither saved nor a live signal sent for it. Therefore, the notification record is the source of truth, while SSE provides a live signal that the notification state may have changed. Here is a code snippet showing how I did it:
 
 ```typescript
+import { DateTime } from 'luxon'
+import transmit from '@adonisjs/transmit/services/main'
+import db from '@adonisjs/lucid/services/db'
+import Notification from '#models/notification/message'
+import { NOTIFICATION_CHANGED_EVENT } from '#types/notification_event'
+import type {
+  NotificationInput
+} from '#types/notification'
+import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
+
 export default class NotificationService {
 
   private signalChange(accountId: string) {
@@ -30,18 +44,7 @@ export default class NotificationService {
   }
 
   async create(
-    input: {
-      actionPath?: string | null
-      kind: NotificationKind
-      message: string
-      recipientAccountId: string
-      reportGenerationId?: string | null
-      severity: NotificationSeverity
-      stockMovementId?: string | null
-      stockRequestId?: string | null
-      stockTransactionId?: string | null
-      title: string
-    },
+    input: NotificationInput,
     trx: TransactionClientContract
   ) {
     const notification = await Notification.create(
@@ -66,7 +69,7 @@ export default class NotificationService {
 
 On the client, Transmit provides a browser library for connecting to the API’s SSE routes and subscribing to notification channels.
 
-My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. These ordinary requests would work over HTTP(S) depending on the environment. For live notifications, I sent the complete notification through SSE, appended it to a client-side notification list, and displayed that list as state.
+My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. These ordinary requests would work over HTTP(S) depending on the environment. For live notifications, feature, I wanted a notification counter feature that increments notification as they come in. I initially sent the complete notification through SSE, appended it to a client-side notification list, displayed that list as state, and updated the counter.
 
 However, I started noticing the following problems from this setup
 
@@ -74,7 +77,7 @@ However, I started noticing the following problems from this setup
 
 SvelteKit provides server-side route files such as `+server.ts`, `+page.server.ts`, and `+layout.server.ts`. In my setup, these files are useful for enforcing authentication and authorization before making ordinary API read and write requests.
 
-However, the live connection is different. SSE is a server-to-client connection, so the browser needs to connect directly to the AdonisJS Transmit routes.
+However, SSE is a server-to-client connection, so the browser needs to connect directly to the AdonisJS Transmit routes.
 
 I therefore created the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
 
@@ -172,6 +175,6 @@ The component must also clean up after itself. When it is destroyed, it:
 - Cancels unfinished notification requests.
 - Prevents completed requests from updating a component that no longer exists.
 
-This separation also helps when investigating problems. If live delivery fails but a later refresh retrieves the notification, the problem is in the live connection. If a successful API refresh does not contain the expected notification, the investigation can move to notification creation, recipient selection, or API query handling.
+This separation also helps when debugging. If live delivery fails but a page refresh retrieves the notification, the problem is in the live connection. If a successful API refresh does not contain the expected notification, the investigation can move to notification creation, recipient selection, or API query handling.
 
 The user may temporarily miss a live update, but they do not lose the notification itself because the saved API state will be displayed eventually.

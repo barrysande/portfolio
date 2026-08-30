@@ -10,7 +10,7 @@ published: true
 
 ## Preliminaries
 
-For this piece, I will mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE).
+For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE).
 
 My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKit](https://svelte.dev/docs) for the web application because those are the tools I work with. You should check them out, by the way ;-)
 
@@ -18,9 +18,9 @@ My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKi
 
 AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, broadcasting, and the authentication and authorization needed for private subscriptions.
 
-In my application, I create notifications as part of the same database transaction as the flows that produce them. For example, I may need to record a change that other parts of the application depend on and inform the people affected by that change.
+In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the people affected by that change.
 
-I wrap all the processes that should succeed or fail together in a database transaction, including saving the notification. I then register the Transmit signal to run only after the transaction commits. This order of steps ensures that if any operation fails and the transaction rolls back, the notification is neither saved nor a live signal sent for it. Therefore, the notification record is the source of truth, while SSE provides a live signal that the notification state may have changed. Here is a code snippet showing how I did it:
+I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run only after the transaction committed. This order of steps ensures that if any operation fails and the transaction rolls back, the notification is neither saved nor a live signal sent for it. Therefore, the notification record is the source of truth, while SSE provides a live signal that the notification state may have changed. Here is a code snippet showing how I did it:
 
 ```typescript
 export default class NotificationService {
@@ -76,7 +76,7 @@ SvelteKit provides server-side route files such as `+server.ts`, `+page.server.t
 
 However, the live connection is different. SSE is a server-to-client connection, so the browser needs to connect directly to the AdonisJS Transmit routes.
 
-I therefore create the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
+I therefore created the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
 
 This creates two authentication boundaries:
 
@@ -172,6 +172,6 @@ The component must also clean up after itself. When it is destroyed, it:
 - Cancels unfinished notification requests.
 - Prevents completed requests from updating a component that no longer exists.
 
-This separation also helps when investigating problems. If live delivery fails but a later refresh retrieves the notification, the problem was in the live connection. If a successful API refresh does not contain the expected notification, the investigation can move to notification creation, recipient selection, or API query handling.
+This separation also helps when investigating problems. If live delivery fails but a later refresh retrieves the notification, the problem is in the live connection. If a successful API refresh does not contain the expected notification, the investigation can move to notification creation, recipient selection, or API query handling.
 
 The user may temporarily miss a live update, but they do not lose the notification itself because the saved API state will be displayed eventually.

@@ -20,16 +20,27 @@ My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKi
 
 ## The Journey
 
-AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides a way to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level, as shown below:
+AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides ways to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level and Transmit channel authorization to ensure users only subscribe to their channels as shown below:
 
 ```typescript
+//Authentication in start/routes.ts
 transmit.registerRoutes((route) => {
 	route.middleware(middleware.auth({ guards: ['web'] }));
 });
 ```
 
+```typescript
+//Authorization in start/transmit.ts
+import transmit from '@adonisjs/transmit/services/main';
+
+transmit.authorize<{ accountId: string }>(
+	'accounts/:accountId/notifications',
+	(ctx, { accountId }) => ctx.auth.user?.id === accountId
+);
+```
+
 <Note>
- `registerRoutes` registers the three routes needed to establish the SSE connection, subscribe the client to a channel, and unsubscribe the client from a channel.
+ `transmit.registerRoutes` registers the three routes needed to establish the SSE connection, subscribe the client to a channel, and unsubscribe the client from a channel.
  Unauthenticated users cannot connect to the channels.
 </Note>
 

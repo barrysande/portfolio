@@ -65,10 +65,6 @@ import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
 
 export default class NotificationService {
 
-  private signalChange(accountId: string) {
-    void transmit.broadcast(`some-route/${accountId}/notifications`, NOTIFICATION_CHANGED_EVENT)
-  }
-
   async create(
     input: NotificationInput,
     trx: TransactionClientContract
@@ -86,7 +82,12 @@ export default class NotificationService {
       { client: trx }
     )
 
-    trx.on('commit', () => this.signalChange(notification.recipientAccountId))
+    trx.on('commit', () =>
+      transmit.broadcast(
+        `accounts/${notification.recipientAccountId}/notifications`,
+        NOTIFICATION_CHANGED_EVENT
+      )
+    )
 
     return notification
   }

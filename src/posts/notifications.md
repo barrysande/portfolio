@@ -50,14 +50,13 @@ I wrapped all the processes that should succeed or fail together in a database t
 
 Another failure point is that the database transaction can commit but the live notification transmission can fail.
 
-Here is a code snippet showing how I do it in the service:
+Here is a code snippet showing how I did it:
 
 ```typescript
 import { DateTime } from 'luxon'
 import transmit from '@adonisjs/transmit/services/main'
 import db from '@adonisjs/lucid/services/db'
 import Notification from '#models/notification/message'
-import { NOTIFICATION_CHANGED_EVENT } from '#types/notification_event'
 import type {
   NotificationInput
 } from '#types/notification'
@@ -72,11 +71,6 @@ export default class NotificationService {
     const notification = await Notification.create(
       {
         ...input,
-        actionPath: input.actionPath ?? null,
-        reportGenerationId: input.reportGenerationId ?? null,
-        stockMovementId: input.stockMovementId ?? null,
-        stockRequestId: input.stockRequestId ?? null,
-        stockTransactionId: input.stockTransactionId ?? null,
         createdAt: DateTime.now(),
       },
       { client: trx }
@@ -85,7 +79,7 @@ export default class NotificationService {
     trx.on('commit', () =>
       transmit.broadcast(
         `accounts/${notification.recipientAccountId}/notifications`,
-        NOTIFICATION_CHANGED_EVENT
+        notification
       )
     )
 
@@ -137,13 +131,17 @@ I needed a way to reduce that client complexity without introducing another sync
 
 ### 3. Solution: SSE as an invalidation signal/event
 
-The AdonisJS docs examples under SSE [Channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea, I could use Transmit as a signal instead of a carrier for the data, the design became simpler. The database notification is persistent but SSE delivery is not. A signal may be missed because the browser is disconnected, the user has changed tabs, or the live connection has failed.
+The AdonisJS docs examples under SSE [Channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea, I could use Transmit as a signal instead of a carrier for the notification data, thereby simplifying the Frontend design. Instead of the API does this once the transaction commits:
 
-The signal is still linked to the database record because the API sends it once the transaction commits. I therefore stopped sending complete notification details through Transmit. Instead, the API sends a small signal whenever notification state changes:
+```typescript
+trx.on('commit', () =>
+	transmit.broadcast(`accounts/${notification.recipientAccountId}/notifications`, {
+		type: 'notifications.changed'
+	})
+);
+```
 
-`{ type: 'notifications.changed' }`
-
-When the signal arrives, the client requests the latest unread notifications from the API and replaces its displayed state with the response.
+When the signal arrives, the client requests the latest unread notifications from the API and replaces its displayed data with the response.
 
 This moved notification-list management back to the API. The client no longer needs to merge messages, prevent duplicates, resolve event ordering, or repair missed events.
 

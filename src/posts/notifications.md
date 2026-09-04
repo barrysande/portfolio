@@ -18,6 +18,14 @@ For this piece, I mostly focus on the steps, decisions, and core concepts involv
 
 My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKit](https://svelte.dev/docs) for the web application because those are the tools I work with. You should check them out, by the way ;-)
 
+## Feature Needs
+
+1. Live notifications counter
+2. A notifications center accessible on any page for latest notifications (paginated) with actions like mark read and open
+3. A notifications page
+
+A notifications center, usually a sidebar triggered to open on the sides, top, or bottom, is a UX feature that provides quick access to notifications from any page a user is located. It avoids an additional click i.e. to a dedicated notifications page to review and act on a notification. Also redirecting to a dedicated notifications page just to act on it meant that users had to filter first by unread or go through that list manually. I therefore prefered a notifications center as the primary feature that shows unread messages in descending order, with action buttons on each to open, mark each or all as read, and navigate to the notifications page. The notifications page becomes a supporting page for more features like filter, search, view all notifications and mark one or all as read.
+
 ## The Journey
 
 AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides ways to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level and Transmit channel authorization to ensure users only subscribe to their channels as shown below:
@@ -90,14 +98,19 @@ export default class NotificationService {
 
 On the client, Transmit provides a browser library for connecting to the API’s SSE routes and subscribing to notification channels.
 
-My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. These ordinary requests would work over HTTP(S) depending on the environment. For the live notifications feature, I wanted a notification counter that incremented as notifications arrived. I initially sent the complete notification through SSE, appended it to a client-side notification list, displayed that list as state, and updated the counter.
-However, I encountered the following problems during implementation:
+## Initial Solution
+
+My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. The API sent the complete notification through SSE i.e. the message and metadata, appended it to a client-side notification list, displayed that list as state i.e unread messages, and updated the counter. This also allowed the notifications page to adhere to my feature requirement.
+
+## Problems
+
+I encountered the following problems during implementation:
 
 ### 1. The live connection belongs in the browser
 
 SvelteKit provides server-side route files such as `+server.ts`, `+page.server.ts`, and `+layout.server.ts`. In my setup, these files are useful for enforcing authentication and authorisation before making ordinary API read and write requests.
 
-SSE is a server-to-client connection, so a direct server-to-client setup is ideal. However, with SvelteKit, you could proxy the SSE via a `+server.ts` API endpoint and then have the page call the proxy endpoint from the component. I initially attempted this approach to maintain my server-to-server HTTP(S) pattern but ended up fighting native browser behaviour with little benefit. Besides, the three registered Transmit routes are the only ones exposed in the browser's DevTools, while the channel remains private.
+SSE is a server-to-client connection, so a direct server-to-client setup is ideal. With SvelteKit, you could proxy the SSE via a `+server.ts` API endpoint and then have the page call the proxy endpoint from the component. I initially attempted this approach to maintain my server-to-server HTTP(S) pattern but ended up fighting native browser behaviour with little benefit. Besides, the three registered Transmit routes are the only ones exposed in the browser's DevTools, while the channel remains private.
 
 I therefore created the Transmit client inside a Svelte component. The component subscribes to the user’s notification channel, listens for signals, and closes the subscription when it is destroyed.
 

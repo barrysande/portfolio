@@ -47,7 +47,7 @@ transmit.authorize<{ accountId: string }>(
 
 <Note>
  `transmit.registerRoutes` registers the three routes needed to establish the SSE connection, subscribe the client to a channel, and unsubscribe the client from a channel.
- Unauthenticated users cannot connect to the channels.
+ Therefore, unauthenticated users cannot connect to the channels.
 </Note>
 
 In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the users affected by that change. To achieve this, I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run once the transaction committed. This sequence accounts for the following failure scenarios:

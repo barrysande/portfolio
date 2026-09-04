@@ -140,7 +140,7 @@ These events quickly make a client-managed notification list complicated. The cl
 
 I needed a way to reduce that client complexity without introducing another synchronisation system.
 
-### 3. Solution: SSE as an invalidation signal/event
+## Solution: SSE as an invalidation signal/event
 
 The AdonisJS docs examples under SSE [Channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea, I could use Transmit as a signal instead of a carrier for the notification data, thereby simplifying the Frontend design. Instead of the API does this once the transaction commits:
 
@@ -160,7 +160,7 @@ The trade-off is one additional HTTP request after each live signal. For my noti
 
 The result still feels live to the user, but the notification data is reconciled from the database record.
 
-### 4. Manageable client-side complexity
+## Manageable client-side complexity
 
 Eliminating client state coordination based on SSE messages made it easier to handle the other notification state-invalidating events I pointed out earlier.
 
@@ -192,7 +192,7 @@ This prevents competing requests without losing changes that happen during an ac
 
 Marking a notification as read uses the same flow. After the API records the read state, the client refreshes the unread list. This removes the notification that was marked as read while also retrieving any new notifications created during that time.
 
-### 5. Failure handling and cleanup
+## Failure handling and cleanup
 
 Treating SSE as a signal also made failure handling clearer because notification-loading failures and live-connection failures can be debugged separately without worrying whether one fix will break another.
 

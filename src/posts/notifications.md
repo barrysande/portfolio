@@ -14,9 +14,7 @@ published: true
 
 ## Preliminaries
 
-For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE). I mention the Backend for Frontend (BFF) pattern. If you are unfamiliar with it, please check out this earlier [piece](https://barrysande.com/blog/sveltekit-and-adonisjs) I wrote about it.
-
-My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKit](https://svelte.dev/docs) for the web application because those are the tools I work with. You should check them out, by the way ;-)
+For this piece, I mostly focus on the steps, decisions, and core concepts involved in building a reliable notification system with Server-Sent Events (SSE). My examples use [AdonisJS](https://docs.adonisjs.com/) for the API and [SvelteKit](https://svelte.dev/docs) for the web application because those are the tools I work with. You should check them out, by the way ;-)
 
 ## Feature Needs
 

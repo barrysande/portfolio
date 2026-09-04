@@ -123,8 +123,6 @@ The second point matters because SvelteKit’s server-side checks do not protect
 
 The Transmit client includes the session cookie, if available, in the subscription request, which AdonisJS uses to authenticate that subscription request.
 
-`
-
 ### 2. API and client state synchronisation
 
 I realised that my initial implementation naively assumed that receiving a new live event was the only cause of change in the notification list.

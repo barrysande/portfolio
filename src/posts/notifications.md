@@ -3,7 +3,7 @@ title: 'Notifications using Server-Sent Events'
 subtitle: 'Lessons I learnt from implementing a notification feature'
 type: 'article'
 topic: 'Software Engineering'
-tags: ['notifications', 'server sent events', 'architecture', 'typescript']
+tags: ['notifications', 'server-sent events', 'architecture', 'typescript']
 date: '2026-08-31'
 published: true
 ---
@@ -18,25 +18,25 @@ For this piece, I mostly focus on the steps, decisions, and core concepts involv
 
 ## Feature Needs
 
-1. Live notifications counter
-2. A notifications center accessible on any page for latest notifications (paginated) with actions like mark read and open
+1. A live notification counter
+2. A notification centre accessible from any page, showing the latest notifications (paginated) with actions such as marking them as read and opening them
 3. A notifications page
 
-A notifications center, usually a sidebar triggered to open on the sides, top, or bottom, is a key UI feature that improves user experience by providing quick access to notifications from any page a user is located. This smoothens the user experience because it eliminates the extra click to a dedicated notifications page to review and act on a notification. Also redirecting to a dedicated notifications page just to act on it meant that users had to filter first by unread or go through that list manually. I therefore opted for a notifications center as the primary feature that shows unread messages in descending order, with action buttons on each to open, mark each or all as read, and navigate to the notifications page. The notifications page becomes a supporting page for more features like filter, search, view all notifications and mark one or all as read.
+A notification centre, usually a sidebar that opens from the side, top, or bottom, is a key UI feature that improves the user experience by providing quick access to notifications from any page. It streamlines the user experience by eliminating the extra click required to visit a dedicated notifications page to review and act on a notification. Also, redirecting users to a dedicated notifications page just to act on a notification meant that they first had to filter for unread notifications or go through the list manually. I therefore opted for a notification centre as the primary feature. It shows unread messages in descending order, with action buttons for opening a notification, marking one or all notifications as read, and navigating to the notifications page. The notifications page serves as a supporting page for more features, such as filtering, searching, viewing all notifications, and marking one or all as read.
 
 ## The Journey
 
-AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides ways to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level and Transmit channel authorization to ensure users only subscribe to their channels as shown below:
+AdonisJS offers the [Transmit package](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events), which simplifies SSE implementation on the server and client. Transmit handles the SSE routes, channels, and broadcasting and provides ways to authenticate and authorise users for private subscriptions. In my case, I use the application's usual authentication middleware at the Transmit route level and Transmit channel authorisation to ensure users only subscribe to their channels as shown below:
 
 ```typescript
-//Authentication in start/routes.ts
+// Authentication in start/routes.ts
 transmit.registerRoutes((route) => {
 	route.middleware(middleware.auth({ guards: ['web'] }));
 });
 ```
 
 ```typescript
-//Authorization in start/transmit.ts
+// Authorisation in start/transmit.ts
 import transmit from '@adonisjs/transmit/services/main';
 
 transmit.authorize<{ accountId: string }>(
@@ -50,9 +50,10 @@ transmit.authorize<{ accountId: string }>(
  Unauthenticated users cannot connect to the channels.
 </Note>
 
-In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the users affected by that change.
+In my application, I created notifications as part of the same database transaction as the flows that produced them. For example, I sometimes needed to record a change that other parts of the application depended on and inform the users affected by that change. To achieve this, I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run once the transaction committed. This sequence accounts for the following failure scenarios:
 
-I wrapped all the processes that should succeed or fail together in a database transaction, including saving the notification. I then registered the Transmit signal to run once the transaction committed. This order of steps ensures that rolled-back transactions cannot transmit a live notification to the client.
+1. Rolled-back transactions cannot transmit a live notification to the client.
+2. A failed SSE transmission does not prevent notification persistence, as it could if the transmission occurred within the transaction.
 
 Another failure point is that the database transaction can commit but the live notification transmission can fail.
 
@@ -91,6 +92,7 @@ export default class NotificationService {
 
     return notification
   }
+}
 
 ```
 
@@ -98,7 +100,7 @@ On the client, Transmit provides a browser library for connecting to the API’s
 
 ## Initial Solution
 
-My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. The API sent the complete notification through SSE i.e. the message and metadata, appended it to a client-side notification list, displayed that list as state i.e unread messages, and updated the counter. This also allowed the notifications page to adhere to my feature requirement.
+My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. The API sent the complete notification through SSE—that is, the message and metadata—and the client appended it to a notification list, displayed the unread messages, and updated the counter. This also allowed the notifications page to meet my feature requirements.
 
 ## Problems
 
@@ -119,7 +121,7 @@ This creates two authentication points:
 
 The second point matters because SvelteKit’s server-side checks do not protect a connection made from the browser directly to AdonisJS.
 
-The Transmit client includes the session cookie, if available, in the subscription request, which AdonisJS uses to authenticate that subscription request.
+The Transmit client includes the session cookie, if available, in the subscription request. AdonisJS uses this cookie to authenticate the request.
 
 ### 2. API and client state synchronisation
 
@@ -140,7 +142,7 @@ I needed a way to reduce that client complexity without introducing another sync
 
 ## Solution: SSE as an invalidation signal/event
 
-The AdonisJS docs examples under SSE [Channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea, I could use Transmit as a signal instead of a carrier for the notification data, thereby simplifying the Frontend design. Instead of the API does this once the transaction commits:
+The examples in the AdonisJS documentation on SSE [channels](https://docs.adonisjs.com/guides/digging-deeper/server-sent-events#channels) gave me an idea: I could use Transmit as a signal instead of a carrier for the notification data, thereby simplifying the frontend design. The API does the following once the transaction commits:
 
 ```typescript
 trx.on('commit', () =>
@@ -156,7 +158,7 @@ This moved notification-list management back to the API. The client no longer ne
 
 The trade-off is one additional HTTP request after each live signal. For my notification volume, that was a much better trade-off than maintaining two sources of client state. This improves reliability in two ways: if the database transaction preceding the live notification rolls back, the user receives no notification; if the transaction commits but the transmission fails, the database record still exists.
 
-The result still feels live to the user, but the notification data is reconciled from the database record.
+The result still feels live to the user, but the notification data is reconciled with the database record.
 
 ## Manageable client-side complexity
 

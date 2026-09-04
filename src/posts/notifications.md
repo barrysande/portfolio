@@ -55,45 +55,33 @@ In my application, I created notifications as part of the same database transact
 1. Rolled-back transactions cannot transmit a live notification to the client.
 2. A failed SSE transmission does not prevent notification persistence, as it could if the transmission occurred within the transaction.
 
-Another failure point is that the database transaction can commit but the live notification transmission can fail.
-
 Here is a code snippet showing how I did it:
 
 ```typescript
-import { DateTime } from 'luxon'
-import transmit from '@adonisjs/transmit/services/main'
-import db from '@adonisjs/lucid/services/db'
-import Notification from '#models/notification/message'
-import type {
-  NotificationInput
-} from '#types/notification'
-import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
+import { DateTime } from 'luxon';
+import transmit from '@adonisjs/transmit/services/main';
+import db from '@adonisjs/lucid/services/db';
+import Notification from '#models/notification/message';
+import type { NotificationInput } from '#types/notification';
+import type { TransactionClientContract } from '@adonisjs/lucid/types/database';
 
 export default class NotificationService {
+	async create(input: NotificationInput, trx: TransactionClientContract) {
+		const notification = await Notification.create(
+			{
+				...input,
+				createdAt: DateTime.now()
+			},
+			{ client: trx }
+		);
 
-  async create(
-    input: NotificationInput,
-    trx: TransactionClientContract
-  ) {
-    const notification = await Notification.create(
-      {
-        ...input,
-        createdAt: DateTime.now(),
-      },
-      { client: trx }
-    )
+		trx.on('commit', () =>
+			transmit.broadcast(`accounts/${notification.recipientAccountId}/notifications`, notification)
+		);
 
-    trx.on('commit', () =>
-      transmit.broadcast(
-        `accounts/${notification.recipientAccountId}/notifications`,
-        notification
-      )
-    )
-
-    return notification
-  }
+		return notification;
+	}
 }
-
 ```
 
 On the client, Transmit provides a browser library for connecting to the API’s SSE routes and subscribing to notification channels.

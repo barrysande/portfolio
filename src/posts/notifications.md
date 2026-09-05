@@ -22,7 +22,9 @@ For this piece, I mostly focus on the steps, decisions, and core concepts involv
 2. A notification centre accessible from any page, showing the latest notifications (paginated) with actions such as marking them as read and opening them
 3. A notifications page
 
-A notification centre, usually a sidebar that opens from the side, top, or bottom, is a key UI feature that improves the user experience by providing quick access to notifications from any page. It streamlines the user experience by eliminating the extra click required to visit a dedicated notifications page to review and act on a notification. Also, redirecting users to a dedicated notifications page just to act on a notification meant that they first had to filter for unread notifications or go through the list manually. I therefore opted for a notification centre as the primary feature. It shows unread messages in descending order, with action buttons for opening a notification, marking one or all notifications as read, and navigating to the notifications page. The notifications page serves as a supporting page for more features, such as filtering, searching, viewing all notifications, and marking one or all as read.
+A notification centre, usually a sidebar that opens from the side, top, or bottom, is a key UI feature that improves the user experience by providing quick access to notifications from any page. It streamlines the user experience by eliminating the extra click required to visit a dedicated notifications page to review and act on a notification.
+
+Additionally, redirecting users to a dedicated notifications page just to act on a notification meant that they first had to filter for unread notifications or go through the list manually. I therefore opted for a notification centre as the primary feature. It shows unread messages in descending order, with action buttons for opening a notification, marking one or all notifications as read, and navigating to the notifications page. The notifications page serves as a supporting page for more features, such as filtering, searching, viewing all notifications, and marking one or all as read.
 
 ## The Journey
 
@@ -88,7 +90,7 @@ On the client, Transmit provides a browser library for connecting to the API’s
 
 ## Initial Solution
 
-My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. The API sent the complete notification through SSE—that is, the message and metadata—and the client appended it to a notification list, displayed the unread messages, and updated the counter. This also allowed the notifications page to meet my feature requirements.
+My initial mental model was to have a notifications route that loaded data through SvelteKit's load functions and updated it through form actions. The API sent the complete notification through SSE, that is, the message and metadata. The client then appended it to a notification list, displayed the unread messages, and updated the counter. This approach also allowed the notifications page to meet my feature requirements.
 
 ## Problems
 

@@ -16,7 +16,7 @@
 	let { children } = $props();
 	let scrollY = $state(0);
 	const details: string =
-		'Barry Sande is a full-stack web developer and attorney. Barry Sande uses HTML, CSS, JavaScript, TypeScript, SvelteKit, Postgresql, Node.js with AdonisJS to create accessible, modern, and scalable experiences on the web.';
+		'Barry Sande is a full-stack software engineer and attorney.';
 </script>
 
 <svelte:head>

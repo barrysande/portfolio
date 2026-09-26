@@ -17,9 +17,7 @@
 			</a>
 		</h2>
 		<p class="text-ink test-start pb-4 leading-8 md:text-center">
-			A full-stack developer based in Nairobi. I build production systems end to end, APIs, user
-			interfaces(UIs), and handle deployment and infrastructure. I also care deeply about the
-			quality and accessibility of the products I ship.
+			I enjoy working with computers and the law but suit jackets should be abolished. 
 		</p>
 	</div>
 </section>

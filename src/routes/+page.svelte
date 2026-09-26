@@ -35,8 +35,7 @@
 			</a>
 		</h1>
 		<p class="text-ink pb-4 text-base font-normal">
-			I build <span class="text-primary font-semibold">production systems</span> end to end — from API
-			design and infrastructure to the interfaces people actually use.
+			I enjoy working with computers and the law but I think suit jackets should be abolished. 
 		</p>
 	</div>
 

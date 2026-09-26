@@ -17,7 +17,8 @@
 			</a>
 		</h2>
 		<p class="text-ink test-start pb-4 leading-8 md:text-center">
-			I enjoy working with computers and the law but suit jackets should be abolished. 
+			A full-stack developer and Advocate of the High Court of Kenya. I like to build things, talk
+			endlessly about them. Sometimes I argue in courts of law.
 		</p>
 	</div>
 </section>

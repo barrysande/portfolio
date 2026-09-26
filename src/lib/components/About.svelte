@@ -4,7 +4,7 @@
 </script>
 
 <section id="about" class="flex scroll-mt-20 flex-col gap-5 pb-4 md:flex-row md:gap-10">
-	<div class="flex flex-col items-start gap-3 md:items-center">
+	<div class="flex w-full flex-col items-start gap-3 md:items-center">
 		<h2
 			class="font-display text-2xl font-bold tracking-widest text-nowrap uppercase md:text-3xl"
 			in:fly={{ x: 200, easing: quadInOut, duration: 500 }}
@@ -16,7 +16,7 @@
 				About
 			</a>
 		</h2>
-		<p class="text-ink test-start pb-4 leading-8 md:text-center">
+		<p class="text-ink pb-4 text-start leading-8 md:text-center">
 			A full-stack developer and Advocate of the High Court of Kenya. I like to build things, talk
 			endlessly about them. Sometimes I argue in courts of law.
 		</p>

@@ -35,7 +35,7 @@
 			</a>
 		</h1>
 		<p class="text-ink pb-4 text-base font-normal">
-			I enjoy working with computers and the law but I think suit jackets should be abolished. 
+			I enjoy working with computers and the law but I think suit jackets should be abolished.
 		</p>
 	</div>
 
@@ -53,7 +53,7 @@
 	/>
 </section>
 
-<section class="mx-2 flex flex-col items-center gap-3 p-8 md:mx-6">
+<section class="mx-2 flex flex-col items-start gap-3 p-8 md:mx-6 md:items-center">
 	<Skills />
 </section>
 <main class="mx-2 mb-12 p-8 md:mx-6 lg:mx-20">
